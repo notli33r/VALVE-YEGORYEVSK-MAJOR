@@ -1068,12 +1068,18 @@ async function renderNewsFeed(){
     const dateStr=date.toLocaleDateString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
     const canDelete=isAdmin||(currentPlayer&&currentPlayer.nickname===n.author_name);
     // find player's team logo
+    const isSystem = n.author_name === 'Система';
     const authorPlayer=players.find(p=>p.name===n.author_name);
     const authorTeam=authorPlayer?teams[authorPlayer.team]:null;
-    const avatarHtml=authorTeam
-      ? teamLogoHtml(authorTeam,36,8)
-      : `<div style="width:36px;height:36px;border-radius:50%;background:rgba(232,53,53,.2);border:1px solid rgba(232,53,53,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--red);flex-shrink:0">${n.author_name.substring(0,2).toUpperCase()}</div>`;
-    return`<div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid var(--border-glass);border-radius:16px;padding:18px;margin-bottom:12px;backdrop-filter:blur(20px);position:relative">
+    const avatarHtml= isSystem
+      ? `<div style="width:36px;height:36px;border-radius:50%;background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏆</div>`
+      : authorTeam
+        ? teamLogoHtml(authorTeam,36,8)
+        : `<div style="width:36px;height:36px;border-radius:50%;background:rgba(232,53,53,.2);border:1px solid rgba(232,53,53,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--red);flex-shrink:0">${n.author_name.substring(0,2).toUpperCase()}</div>`;
+    const cardBg = isSystem
+      ? 'linear-gradient(135deg,rgba(240,165,0,.12),rgba(240,165,0,.05))'
+      : 'linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04))';
+    return`<div style="background:${cardBg};border:1px solid ${isSystem?'rgba(240,165,0,.25)':'var(--border-glass)'};border-radius:16px;padding:18px;margin-bottom:12px;backdrop-filter:blur(20px);position:relative">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px">
         <div style="display:flex;align-items:center;gap:10px">
           ${avatarHtml}
@@ -1402,9 +1408,41 @@ function saveMapStat(mi,ki,pid,field,val){
 
 function setMap(mi,ki,field,val){
   if(!matches[mi].maps[ki])return;
+  const wasFinished = isMatchFinished(matches[mi]);
   if(field==='map'||field==='pick')matches[mi].maps[ki][field]=val;
   else{const n=parseInt(val);matches[mi].maps[ki][field]=isNaN(n)?null:Math.max(0,n);}
   saveData();renderGroup();renderMatches();
+  // auto-publish result post when match just finished
+  if(!wasFinished && isMatchFinished(matches[mi])){
+    autoPostMatchResult(mi);
+  }
+}
+
+async function autoPostMatchResult(mi){
+  const m = matches[mi];
+  const t1 = teams[m.t1], t2 = teams[m.t2];
+  const {s1,s2} = matchScore(m);
+  const winner = s1>s2?t1:t2;
+  const loser = s1>s2?t2:t1;
+  const ws = s1>s2?s1:s2, ls = s1>s2?s2:s1;
+
+  // build map results line
+  const mapLines = m.maps.filter(mp=>mapFinished(mp)&&mp.map).map(mp=>{
+    const mw1=mp.r1>mp.r2;
+    return`${mp.map}: ${mp.r1}:${mp.r2} (${mw1?t1.name:t2.name})`;
+  }).join('\n');
+
+  const mvp = getMatchMVP(mi);
+  const mvpLine = mvp ? `\n\n⭐ MVP матча: ${mvp.name} (${teams[mvp.team].name})` : '';
+  const content = `🏆 ${winner.name} побеждает ${loser.name} со счётом ${ws}:${ls}!\n\n${mapLines}${mvpLine}`;
+
+  await sbPostNews('Система', content, null);
+
+  // refresh feed if news tab is open
+  const newsSec = document.getElementById('sec-news');
+  if(newsSec && newsSec.classList.contains('active')){
+    renderNewsFeed();
+  }
 }
 
 function getMapMVP(mi, ki) {
