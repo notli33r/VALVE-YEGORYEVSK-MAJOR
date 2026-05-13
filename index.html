@@ -690,11 +690,18 @@ async function loadData(){
 function kd(p){return p.deaths>0?p.kills/p.deaths:p.kills>0?p.kills:0;}
 function mapFinished(mp){
   if(mp.r1===null||mp.r2===null)return false;
-  const max=Math.max(mp.r1,mp.r2), min=Math.min(mp.r1,mp.r2);
-  // стандартная победа: 13+ раундов и отрыв 2+
-  // овертайм: после 12:12 побеждает тот кто первый наберёт на 2 больше
+  const r1=mp.r1, r2=mp.r2;
+  const max=Math.max(r1,r2), min=Math.min(r1,r2);
   if(max<13)return false;
-  return max-min>=2;
+  // стандартная победа: 13 и выше с отрывом 2+, но не в ничейной ситуации
+  // при 12:12 начинается овертайм — нужно 16, 19, 22... (каждые +3) с отрывом 2
+  if(max===13&&min<=11)return true; // обычная победа без овертайма
+  // овертаймы: победный счёт 16, 19, 22, 25... (т.е. (max-13)%3===0 после 12:12)
+  if(max>=16){
+    // проверяем что это корректный овертаймовый счёт: (max-13)%3 === 0
+    if((max-13)%3===0&&max-min>=2)return true;
+  }
+  return false;
 }
 
 function matchScore(m){
