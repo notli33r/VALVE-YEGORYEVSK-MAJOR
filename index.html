@@ -353,7 +353,9 @@ tbody tr:last-child td{border-bottom:none}
 .btn-cancel-m:active{background:rgba(255,255,255,.12);color:var(--text)}
 
 /* READONLY */
-body.readonly .stat-in,body.readonly .map-sc,body.readonly .map-sel{pointer-events:none;opacity:.35}
+body.readonly .stat-in{pointer-events:none;opacity:.35}
+body.readonly .map-sel{pointer-events:none;opacity:.35}
+body.readonly .map-sc{pointer-events:none;opacity:.35}
 body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1}
 
 ::-webkit-scrollbar{width:5px;height:5px}
@@ -801,13 +803,13 @@ function renderMatches(){
         <div style="display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:10px">
           <div class="map-num">Карта ${k+1}</div>
           <div style="display:flex;flex-direction:column;gap:4px">
-            <select class="map-sel" onchange="setMap(${i},${k},'map',this.value)"><option value="">— карта —</option>${opts}</select>
-            ${isDecider?'':`<select class="map-sel" style="font-size:11px;height:24px;opacity:${isAdmin?1:.6};pointer-events:${isAdmin?'auto':'none'}" onchange="setMap(${i},${k},'pick',this.value)">${pickOpts}</select>`}
+            <select class="map-sel" onclick="event.stopPropagation()" onchange="setMap(${i},${k},'map',this.value)"><option value="">— карта —</option>${opts}</select>
+            ${isDecider?'':`<select class="map-sel" onclick="event.stopPropagation()" style="font-size:11px;height:24px;opacity:${isAdmin?1:.6};pointer-events:${isAdmin?'auto':'none'}" onchange="setMap(${i},${k},'pick',this.value)">${pickOpts}</select>`}
           </div>
           <div class="map-score-box">
-            <input class="map-sc ${mw1?'winner':mw2?'loser':''}" type="number" min="0" max="30" value="${mp.r1!==null?mp.r1:''}" placeholder="0" onchange="setMap(${i},${k},'r1',this.value)">
+            <input class="map-sc ${mw1?'winner':mw2?'loser':''}" type="number" min="0" max="30" value="${mp.r1!==null?mp.r1:''}" placeholder="0" onclick="event.stopPropagation()" onchange="setMap(${i},${k},'r1',this.value)">
             <span style="color:var(--text3);font-size:11px;font-weight:700">:</span>
-            <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onchange="setMap(${i},${k},'r2',this.value)">
+            <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onclick="event.stopPropagation()" onchange="setMap(${i},${k},'r2',this.value)">
           </div>
         </div>
         <div style="padding-left:64px;display:flex;align-items:center;gap:8px;min-height:16px">
