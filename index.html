@@ -1280,13 +1280,26 @@ function showTeam(teamId){
 
   const totalKills=tp.reduce((s,p)=>s+p.kills,0);
   const totalDeaths=tp.reduce((s,p)=>s+p.deaths,0);
-  const totalAssists=tp.reduce((s,p)=>s+p.assists,0);
+
+  // место в турнире
+  const allSt = standings();
+  const place = allSt.findIndex(x=>x.id===teamId)+1;
+  const placeLabel = ['🥇 1-е место','🥈 2-е место','🥉 3-е место','4-е место'][place-1]||'—';
+  const placeColor = ['var(--gold)','#b0b8c8','#cd7f32','var(--red2)'][place-1]||'var(--text2)';
+
+  // лучший игрок по KD
+  const topPlayer = tp.length ? [...tp].sort((a,b)=>kd(b)-kd(a))[0] : null;
+
+  // процент побед на картах
+  const totalMapsPlayed = Object.values(mapsPlayed).reduce((s,v)=>s+v,0);
+  const totalMapsWon = Object.values(mapsWon).reduce((s,v)=>s+v,0);
+  const mapWinPct = totalMapsPlayed>0 ? Math.round(totalMapsWon/totalMapsPlayed*100) : null;
 
   const mapsHtml = Object.keys(mapsPlayed).length
     ? Object.keys(mapsPlayed).map(map=>{
         const w=mapsWon[map]||0, total=mapsPlayed[map];
         const pct=Math.round(w/total*100);
-        return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+        return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08)">
           <span style="font-weight:600">${map}</span>
           <div style="display:flex;align-items:center;gap:12px">
             <span style="font-size:12px;color:var(--text2)">${w}/${total} карт</span>
@@ -1298,16 +1311,17 @@ function showTeam(teamId){
 
   const playersHtml = tp.sort((a,b)=>kd(b)-kd(a)).map((p,i)=>{
     const kdv=kd(p);
-    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+    const medals=['🥇','🥈','🥉'];
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)">
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="color:var(--text3);font-size:12px;width:16px">${i+1}</span>
+        <span style="font-size:14px;width:20px">${medals[i]||i+1}</span>
         <span style="font-weight:600">${p.name}</span>
       </div>
-      <div style="display:flex;gap:16px;font-size:13px">
+      <div style="display:flex;gap:14px;font-size:13px">
         <span style="color:var(--text2)">K: <b style="color:var(--text)">${p.kills}</b></span>
         <span style="color:var(--text2)">D: <b style="color:var(--text)">${p.deaths}</b></span>
         <span style="color:var(--text2)">A: <b style="color:var(--text)">${p.assists}</b></span>
-        <span style="font-weight:700;color:${kdv>=1.2?'var(--green)':kdv<1.0?'var(--red2)':'var(--text)'}">${kdv.toFixed(2)}</span>
+        <span style="font-weight:700;color:${kdv>=1.2?'var(--green)':kdv<1.0&&p.deaths>0?'var(--red2)':'var(--text)'};min-width:36px;text-align:right">${kdv.toFixed(2)}</span>
       </div>
     </div>`;
   }).join('');
@@ -1316,16 +1330,16 @@ function showTeam(teamId){
     const opp = teams[m.t1===teamId?m.t2:m.t1];
     const {s1,s2}=matchScore(m);
     const ts = m.t1===teamId?s1:s2, os = m.t1===teamId?s2:s1;
-    const hasScore=m.maps.some(mp=>mp.r1!==null||mp.r2!==null);
-    const won=hasScore&&ts>os, lost=hasScore&&ts<os;
-    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+    const finished=isMatchFinished(m);
+    const won=finished&&ts>os, lost=finished&&ts<os;
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)">
       <div style="display:flex;align-items:center;gap:8px">
         ${teamLogoHtml(opp,26,6)}
         <span style="font-weight:600">${opp.name}</span>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:18px;font-weight:800;color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${hasScore?ts+':'+os:'—'}</span>
-        ${hasScore?`<span style="font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700;background:${won?'rgba(62,207,122,.15)':lost?'rgba(232,53,53,.12)':'rgba(255,255,255,.06)'};color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${won?'WIN':lost?'LOSS':'DRAW'}</span>`:''}
+        <span style="font-size:18px;font-weight:800;color:${finished?(won?'var(--green)':lost?'var(--red2)':'var(--text2)'):'var(--text3)'}">${s1+s2>0?ts+':'+os:'—'}</span>
+        ${finished?`<span style="font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700;background:${won?'rgba(74,222,128,.15)':lost?'rgba(232,53,53,.12)':'rgba(255,255,255,.06)'};color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${won?'WIN':lost?'LOSS':'DRAW'}</span>`:''}
       </div>
     </div>`;
   }).join('');
@@ -1336,7 +1350,7 @@ function showTeam(teamId){
       Назад
     </button>
 
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
       ${teamLogoHtml(t,64,12)}
       <div>
         <div style="font-size:22px;font-weight:800">${t.name}</div>
@@ -1345,32 +1359,33 @@ function showTeam(teamId){
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
-        <div style="font-size:24px;font-weight:800;color:var(--green)">${totalKills}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Kills</div>
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        <div style="font-size:22px;font-weight:800;color:${placeColor}">${placeLabel}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Место в турнире</div>
       </div>
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
-        <div style="font-size:24px;font-weight:800;color:var(--red2)">${totalDeaths}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Deaths</div>
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        <div style="font-size:22px;font-weight:800;color:${mapWinPct===null?'var(--text3)':mapWinPct>=50?'var(--green)':'var(--red2)'}">${mapWinPct!==null?mapWinPct+'%':'—'}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Побед на картах</div>
       </div>
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
-        <div style="font-size:24px;font-weight:800;color:var(--blue)">${totalAssists}</div>
-        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Assists</div>
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        ${topPlayer?`<div style="font-size:15px;font-weight:800;color:var(--gold)">⭐ ${topPlayer.name}</div><div style="font-size:18px;font-weight:800;color:var(--text);margin-top:2px">${kd(topPlayer).toFixed(2)}</div>`:
+        `<div style="font-size:22px;font-weight:800;color:var(--text3)">—</div>`}
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Лучший игрок</div>
       </div>
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Игроки</div>
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Игроки</div>
       ${playersHtml}
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Матчи</div>
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Матчи</div>
       ${matchesHtml||'<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>'}
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px">
-      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Карты</div>
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Карты</div>
       ${mapsHtml}
     </div>`;
 
