@@ -690,7 +690,13 @@ async function loadData(){
 function kd(p){return p.deaths>0?p.kills/p.deaths:p.kills>0?p.kills:0;}
 function matchScore(m){
   let s1=0,s2=0,rw1=0,rw2=0;
-  m.maps.forEach(mp=>{if(mp.r1===null||mp.r2===null)return;rw1+=mp.r1;rw2+=mp.r2;if(mp.r1>mp.r2)s1++;else if(mp.r2>mp.r1)s2++;});
+  m.maps.forEach(mp=>{
+    if(mp.r1===null||mp.r2===null)return;
+    rw1+=mp.r1;rw2+=mp.r2;
+    // карта завершена только если победитель набрал ≥13 раундов
+    if(mp.r1>mp.r2&&mp.r1>=13)s1++;
+    else if(mp.r2>mp.r1&&mp.r2>=13)s2++;
+  });
   return{s1,s2,rw1,rw2};
 }
 function isMatchFinished(m){
