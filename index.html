@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -17,37 +18,37 @@
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;font-size:14px;min-height:100vh;overflow-x:hidden}
 
 /* LOADER */
-#loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s,visibility .5s}
+#loader{position:fixed;inset:0;z-index:9999;background:var(–bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s,visibility .5s}
 #loader.hide{opacity:0;visibility:hidden;pointer-events:none}
-.loader-icon{width:62px;height:62px;background:linear-gradient(135deg,var(--red),#c42020);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:white;box-shadow:0 0 40px rgba(232,53,53,.5);animation:lpulse 1.2s ease-in-out infinite}
+.loader-icon{width:62px;height:62px;background:linear-gradient(135deg,var(–red),#c42020);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:white;box-shadow:0 0 40px rgba(232,53,53,.5);animation:lpulse 1.2s ease-in-out infinite}
 @keyframes lpulse{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(232,53,53,.5)}50%{transform:scale(1.06);box-shadow:0 0 70px rgba(232,53,53,.8)}}
-.loader-bar{width:200px;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
-.loader-bar-inner{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff8c00);border-radius:2px;animation:lbar 1.8s ease-out forwards}
+.loader-bar{width:200px;height:3px;background:var(–bg4);border-radius:2px;overflow:hidden}
+.loader-bar-inner{height:100%;width:0;background:linear-gradient(90deg,var(–red),#ff8c00);border-radius:2px;animation:lbar 1.8s ease-out forwards}
 @keyframes lbar{0%{width:0}50%{width:60%}100%{width:100%}}
-.loader-text{font-size:11px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase}
+.loader-text{font-size:11px;color:var(–text3);letter-spacing:.18em;text-transform:uppercase}
 
 /* HERO */
-.hero{position:relative;overflow:hidden;background:var(--bg2);border-bottom:1px solid var(--border)}
+.hero{position:relative;overflow:hidden;background:var(–bg2);border-bottom:1px solid var(–border)}
 .hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 120% at 50% -30%,rgba(232,53,53,.2) 0%,transparent 65%),radial-gradient(ellipse 50% 80% at 10% 60%,rgba(74,158,255,.08) 0%,transparent 55%),radial-gradient(ellipse 50% 80% at 90% 60%,rgba(240,165,0,.07) 0%,transparent 55%);pointer-events:none}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.8) 40%,rgba(0,0,0,.8) 70%,transparent);pointer-events:none}
 .hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:36px 24px 0}
 .hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap}
 .hero-brand{display:flex;align-items:center;gap:14px}
-.hero-logo{width:50px;height:50px;background:linear-gradient(135deg,var(--red) 0%,#a81010 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:white;box-shadow:0 6px 24px rgba(232,53,53,.45),inset 0 1px 0 rgba(255,255,255,.15);flex-shrink:0}
+.hero-logo{width:50px;height:50px;background:linear-gradient(135deg,var(–red) 0%,#a81010 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;color:white;box-shadow:0 6px 24px rgba(232,53,53,.45),inset 0 1px 0 rgba(255,255,255,.15);flex-shrink:0}
 .hero-title{font-size:21px;font-weight:800;letter-spacing:.03em}
-.hero-sub{font-size:11px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.hero-sub{font-size:11px;color:var(–text2);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
 .hero-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.hero-badge{background:rgba(232,53,53,.12);border:1px solid rgba(232,53,53,.28);border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--red);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
-.admin-btn{display:flex;align-items:center;gap:6px;padding:7px 16px;font-size:12px;font-weight:600;background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:20px;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
-.admin-btn:hover{background:rgba(255,255,255,.1);color:var(--text)}
-.admin-btn.active{background:rgba(62,207,122,.1);border-color:rgba(62,207,122,.35);color:var(--green)}
+.hero-badge{background:rgba(232,53,53,.12);border:1px solid rgba(232,53,53,.28);border-radius:20px;padding:6px 16px;font-size:11px;font-weight:700;color:var(–red);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.admin-btn{display:flex;align-items:center;gap:6px;padding:7px 16px;font-size:12px;font-weight:600;background:rgba(255,255,255,.05);border:1px solid var(–border2);border-radius:20px;color:var(–text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.admin-btn:hover{background:rgba(255,255,255,.1);color:var(–text)}
+.admin-btn.active{background:rgba(62,207,122,.1);border-color:rgba(62,207,122,.35);color:var(–green)}
 
 /* NAV */
-nav{position:relative;z-index:1;display:flex;border-top:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav{position:relative;z-index:1;display:flex;border-top:1px solid var(–border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 nav::-webkit-scrollbar{display:none}
-.nav-btn{padding:14px 22px;font-size:13px;font-weight:600;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
-.nav-btn:hover{color:var(--text)}
-.nav-btn.active{color:var(--red2);border-bottom-color:var(--red2)}
+.nav-btn{padding:14px 22px;font-size:13px;font-weight:600;color:var(–text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
+.nav-btn:hover{color:var(–text)}
+.nav-btn.active{color:var(–red2);border-bottom-color:var(–red2)}
 
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:28px 20px}
@@ -55,81 +56,81 @@ main{max-width:1100px;margin:0 auto;padding:28px 20px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .sec-title{font-size:19px;font-weight:800;letter-spacing:.02em;margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.sec-title::before{content:'';width:3px;height:20px;background:linear-gradient(180deg,var(--red),rgba(232,53,53,0));border-radius:2px;flex-shrink:0}
+.sec-title::before{content:’’;width:3px;height:20px;background:linear-gradient(180deg,var(–red),rgba(232,53,53,0));border-radius:2px;flex-shrink:0}
 
 /* TABLE */
-.table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.5)}
+.table-wrap{background:var(–bg2);border:1px solid var(–border);border-radius:12px;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.5)}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
-thead th{padding:11px 14px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;background:var(--bg3);border-bottom:1px solid var(--border);text-align:left}
+thead th{padding:11px 14px;font-size:10px;font-weight:700;color:var(–text3);text-transform:uppercase;letter-spacing:.1em;background:var(–bg3);border-bottom:1px solid var(–border);text-align:left}
 .tc{text-align:center!important}
 tbody tr{transition:background .1s}
 tbody tr:hover{background:rgba(255,255,255,.025)}
-tbody td{padding:13px 14px;border-bottom:1px solid var(--border);color:var(--text)}
+tbody td{padding:13px 14px;border-bottom:1px solid var(–border);color:var(–text)}
 tbody tr:last-child td{border-bottom:none}
 .team-cell{display:flex;align-items:center;gap:10px;font-weight:600}
 .place-badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
-.p1{background:rgba(240,165,0,.14);color:var(--gold);border:1px solid rgba(240,165,0,.22)}
-.p2{background:rgba(74,158,255,.11);color:var(--blue);border:1px solid rgba(74,158,255,.18)}
-.p3{background:rgba(255,255,255,.05);color:var(--text2);border:1px solid var(--border)}
+.p1{background:rgba(240,165,0,.14);color:var(–gold);border:1px solid rgba(240,165,0,.22)}
+.p2{background:rgba(74,158,255,.11);color:var(–blue);border:1px solid rgba(74,158,255,.18)}
+.p3{background:rgba(255,255,255,.05);color:var(–text2);border:1px solid var(–border)}
 .p4{background:rgba(232,53,53,.09);color:#e8605a;border:1px solid rgba(232,53,53,.18)}
-.diff-pos{color:var(--green);font-weight:700}.diff-neg{color:var(--red2);font-weight:700}.diff-zero{color:var(--text3)}
+.diff-pos{color:var(–green);font-weight:700}.diff-neg{color:var(–red2);font-weight:700}.diff-zero{color:var(–text3)}
 
 /* MATCHES */
-.round-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
-.round-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.round-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(–text3);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.round-label::after{content:’’;flex:1;height:1px;background:var(–border)}
 .round-label:first-child{margin-top:0}
-.match-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;transition:all .2s;box-shadow:0 2px 14px rgba(0,0,0,.35);margin-bottom:10px}
-.match-card:hover{border-color:var(--border2);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.match-card{background:var(–bg2);border:1px solid var(–border);border-radius:14px;padding:18px 20px;transition:all .2s;box-shadow:0 2px 14px rgba(0,0,0,.35);margin-bottom:10px}
+.match-card:hover{border-color:var(–border2);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,.5)}
 .match-layout{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
 .match-team{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700}
 .match-team.right{flex-direction:row-reverse}
-.win-tag{font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(62,207,122,.14);color:var(--green);font-weight:700;letter-spacing:.05em;border:1px solid rgba(62,207,122,.22)}
+.win-tag{font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(62,207,122,.14);color:var(–green);font-weight:700;letter-spacing:.05em;border:1px solid rgba(62,207,122,.22)}
 .score-center{text-align:center}
 .score-big{font-size:32px;font-weight:900;line-height:1;letter-spacing:.02em}
-.score-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
+.score-label{font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
 
 /* MAPS */
-.map-row{margin-top:14px;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:7px}
-.map-entry{display:grid;grid-template-columns:54px 1fr auto 1fr;align-items:center;gap:10px;background:var(--bg3);border-radius:8px;padding:8px 12px;border:1px solid var(--border)}
-.map-num{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
-.map-sel{height:28px;padding:0 8px;font-size:12px;font-weight:500;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;color:var(--text2);cursor:pointer;transition:border-color .15s}
-.map-sel:focus{outline:none;border-color:var(--red);color:var(--text)}
+.map-row{margin-top:14px;border-top:1px solid var(–border);padding-top:12px;display:flex;flex-direction:column;gap:7px}
+.map-entry{display:grid;grid-template-columns:54px 1fr auto 1fr;align-items:center;gap:10px;background:var(–bg3);border-radius:8px;padding:8px 12px;border:1px solid var(–border)}
+.map-num{font-size:10px;font-weight:700;color:var(–text3);text-transform:uppercase;letter-spacing:.07em}
+.map-sel{height:28px;padding:0 8px;font-size:12px;font-weight:500;background:var(–bg4);border:1px solid var(–border2);border-radius:6px;color:var(–text2);cursor:pointer;transition:border-color .15s}
+.map-sel:focus{outline:none;border-color:var(–red);color:var(–text)}
 .map-score-box{display:flex;align-items:center;gap:6px;justify-content:center}
-.map-sc{width:42px;height:30px;text-align:center;font-size:14px;font-weight:700;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;color:var(--text);transition:all .15s}
-.map-sc:focus{outline:none;border-color:var(--red)}
-.map-sc.winner{border-color:rgba(62,207,122,.5);color:var(--green);background:rgba(62,207,122,.08)}
-.map-sc.loser{color:var(--text3)}
+.map-sc{width:42px;height:30px;text-align:center;font-size:14px;font-weight:700;background:var(–bg4);border:1px solid var(–border2);border-radius:6px;color:var(–text);transition:all .15s}
+.map-sc:focus{outline:none;border-color:var(–red)}
+.map-sc.winner{border-color:rgba(62,207,122,.5);color:var(–green);background:rgba(62,207,122,.08)}
+.map-sc.loser{color:var(–text3)}
 .map-result{font-size:11px;font-weight:600;text-align:right}
 
 /* STATS */
 .stats-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
-.filter-sel{padding:7px 12px;font-size:13px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;color:var(--text);cursor:pointer}
-.filter-sel:focus{outline:none;border-color:var(--red)}
-.sep-text{font-size:12px;color:var(--text3)}
-.sort-pill{padding:6px 14px;font-size:12px;font-weight:600;background:var(--bg2);border:1px solid var(--border);border-radius:20px;color:var(--text2);cursor:pointer;transition:all .15s}
-.sort-pill:hover{border-color:var(--border2);color:var(--text)}
-.sort-pill.active{background:var(--red);border-color:var(--red);color:white;box-shadow:0 2px 12px rgba(232,53,53,.4)}
+.filter-sel{padding:7px 12px;font-size:13px;background:var(–bg2);border:1px solid var(–border2);border-radius:8px;color:var(–text);cursor:pointer}
+.filter-sel:focus{outline:none;border-color:var(–red)}
+.sep-text{font-size:12px;color:var(–text3)}
+.sort-pill{padding:6px 14px;font-size:12px;font-weight:600;background:var(–bg2);border:1px solid var(–border);border-radius:20px;color:var(–text2);cursor:pointer;transition:all .15s}
+.sort-pill:hover{border-color:var(–border2);color:var(–text)}
+.sort-pill.active{background:var(–red);border-color:var(–red);color:white;box-shadow:0 2px 12px rgba(232,53,53,.4)}
 .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
-.stat-in{width:58px;height:30px;text-align:center;font-size:13px;font-weight:600;background:var(--bg4);border:1px solid var(--border);border-radius:6px;color:var(--text);transition:border-color .15s}
-.stat-in:focus{outline:none;border-color:var(--red)}
-.kd-good{color:var(--green);font-weight:700}.kd-bad{color:var(--red2);font-weight:700}
+.stat-in{width:58px;height:30px;text-align:center;font-size:13px;font-weight:600;background:var(–bg4);border:1px solid var(–border);border-radius:6px;color:var(–text);transition:border-color .15s}
+.stat-in:focus{outline:none;border-color:var(–red)}
+.kd-good{color:var(–green);font-weight:700}.kd-bad{color:var(–red2);font-weight:700}
 
 /* SETTINGS */
-.settings-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px}
-.settings-card-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.settings-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.settings-card{background:var(–bg2);border:1px solid var(–border);border-radius:12px;padding:18px}
+.settings-card-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px solid var(–border)}
+.settings-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(–border)}
 .settings-row:last-child{border-bottom:none}
-.settings-in{flex:1;height:34px;padding:0 10px;font-size:13px;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;color:var(--text);transition:border-color .15s}
-.settings-in:focus{outline:none;border-color:var(--red)}
-.full-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
-.full-card-title{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.settings-in{flex:1;height:34px;padding:0 10px;font-size:13px;background:var(–bg4);border:1px solid var(–border2);border-radius:8px;color:var(–text);transition:border-color .15s}
+.settings-in:focus{outline:none;border-color:var(–red)}
+.full-card{background:var(–bg2);border:1px solid var(–border);border-radius:12px;padding:20px;margin-bottom:20px}
+.full-card-title{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(–border);display:flex;align-items:center;gap:8px}
 .players-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
 /* LOGO UPLOAD */
 .team-logo-wrap{position:relative;cursor:pointer;flex-shrink:0}
 .team-logo-wrap input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .team-logo{display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid;transition:border-color .15s;position:relative}
-.team-logo-wrap:hover .team-logo{border-color:var(--red)!important}
+.team-logo-wrap:hover .team-logo{border-color:var(–red)!important}
 .team-logo img{width:100%;height:100%;object-fit:cover}
 .team-logo-overlay{position:absolute;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:10px;color:white;font-weight:700;letter-spacing:.06em;pointer-events:none}
 .team-logo-wrap:hover .team-logo-overlay{opacity:1}
@@ -137,60 +138,61 @@ tbody tr:last-child td{border-bottom:none}
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:200;align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
-.modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:28px;width:340px;box-shadow:0 24px 70px rgba(0,0,0,.8)}
+.modal-box{background:var(–bg2);border:1px solid var(–border2);border-radius:16px;padding:28px;width:340px;box-shadow:0 24px 70px rgba(0,0,0,.8)}
 .modal-box h3{font-size:18px;font-weight:800;margin-bottom:6px}
-.modal-box p{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.5}
-.modal-input{width:100%;height:44px;padding:0 14px;font-size:14px;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;color:var(--text);margin-bottom:10px;transition:border-color .15s}
-.modal-input:focus{outline:none;border-color:var(--red)}
-.modal-err{font-size:12px;color:var(--red2);margin-bottom:10px;min-height:18px}
+.modal-box p{font-size:13px;color:var(–text2);margin-bottom:18px;line-height:1.5}
+.modal-input{width:100%;height:44px;padding:0 14px;font-size:14px;background:var(–bg4);border:1px solid var(–border2);border-radius:10px;color:var(–text);margin-bottom:10px;transition:border-color .15s}
+.modal-input:focus{outline:none;border-color:var(–red)}
+.modal-err{font-size:12px;color:var(–red2);margin-bottom:10px;min-height:18px}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end}
-.btn-confirm{padding:10px 22px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(--red),#b01010);border:none;border-radius:8px;color:white;cursor:pointer;box-shadow:0 4px 16px rgba(232,53,53,.4);transition:all .15s}
+.btn-confirm{padding:10px 22px;font-size:13px;font-weight:700;background:linear-gradient(135deg,var(–red),#b01010);border:none;border-radius:8px;color:white;cursor:pointer;box-shadow:0 4px 16px rgba(232,53,53,.4);transition:all .15s}
 .btn-confirm:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,53,53,.5)}
-.btn-cancel-m{padding:10px 16px;font-size:13px;background:none;border:1px solid var(--border2);border-radius:8px;color:var(--text2);cursor:pointer;transition:all .15s}
-.btn-cancel-m:hover{background:rgba(255,255,255,.06);color:var(--text)}
+.btn-cancel-m{padding:10px 16px;font-size:13px;background:none;border:1px solid var(–border2);border-radius:8px;color:var(–text2);cursor:pointer;transition:all .15s}
+.btn-cancel-m:hover{background:rgba(255,255,255,.06);color:var(–text)}
 
 /* READONLY */
 body.readonly .stat-in,body.readonly .map-sc,body.readonly .map-sel{pointer-events:none;opacity:.4}
 body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1}
 
 ::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+::-webkit-scrollbar-track{background:var(–bg)}
+::-webkit-scrollbar-thumb{background:var(–bg5);border-radius:3px}
 
 /* MOBILE */
 @media(max-width:600px){
-  .hero-inner{padding:22px 14px 0}
-  .hero-logo{width:40px;height:40px;font-size:15px;border-radius:10px}
-  .hero-title{font-size:15px}
-  .hero-sub{display:none}
-  .hero-badge{display:none}
-  .admin-btn{padding:6px 12px;font-size:11px}
-  .hero-top{margin-bottom:18px}
-  .nav-btn{padding:12px 14px;font-size:12px}
-  main{padding:16px 10px}
-  .sec-title{font-size:16px;margin-bottom:14px}
-  .col-hide{display:none}
-  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  thead th{padding:9px 8px;font-size:9px}
-  tbody td{padding:10px 8px;font-size:12px}
-  .team-cell{gap:7px}
-  .place-badge{font-size:10px;padding:3px 7px}
-  .match-card{padding:12px 14px}
-  .match-layout{gap:8px}
-  .match-team{font-size:12px;gap:6px}
-  .score-big{font-size:24px}
-  .map-entry{grid-template-columns:42px 1fr auto;gap:6px}
-  .map-entry .map-result{grid-column:1/-1;font-size:10px}
-  .map-sel{font-size:11px;height:26px}
-  .map-sc{width:36px;height:28px;font-size:13px}
-  .stat-in{width:48px;height:27px;font-size:12px}
-  .avatar{width:26px!important;height:26px!important;font-size:10px!important}
-  .players-grid{grid-template-columns:1fr}
-  .settings-card{padding:14px}
-  .full-card{padding:14px}
-  .modal-box{width:calc(100vw - 24px);padding:20px}
+.hero-inner{padding:22px 14px 0}
+.hero-logo{width:40px;height:40px;font-size:15px;border-radius:10px}
+.hero-title{font-size:15px}
+.hero-sub{display:none}
+.hero-badge{display:none}
+.admin-btn{padding:6px 12px;font-size:11px}
+.hero-top{margin-bottom:18px}
+.nav-btn{padding:12px 14px;font-size:12px}
+main{padding:16px 10px}
+.sec-title{font-size:16px;margin-bottom:14px}
+.col-hide{display:none}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+thead th{padding:9px 8px;font-size:9px}
+tbody td{padding:10px 8px;font-size:12px}
+.team-cell{gap:7px}
+.place-badge{font-size:10px;padding:3px 7px}
+.match-card{padding:12px 14px}
+.match-layout{gap:8px}
+.match-team{font-size:12px;gap:6px}
+.score-big{font-size:24px}
+.map-entry{grid-template-columns:42px 1fr auto;gap:6px}
+.map-entry .map-result{grid-column:1/-1;font-size:10px}
+.map-sel{font-size:11px;height:26px}
+.map-sc{width:36px;height:28px;font-size:13px}
+.stat-in{width:48px;height:27px;font-size:12px}
+.avatar{width:26px!important;height:26px!important;font-size:10px!important}
+.players-grid{grid-template-columns:1fr}
+.settings-card{padding:14px}
+.full-card{padding:14px}
+.modal-box{width:calc(100vw - 24px);padding:20px}
 }
 </style>
+
 </head>
 <body>
 
@@ -219,7 +221,12 @@ body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1
   <div class="hero-inner">
     <div class="hero-top">
       <div class="hero-brand">
-        <div class="hero-logo">CS</div>
+        <label id="hero-logo-wrap" style="cursor:default;flex-shrink:0;position:relative;display:block;width:50px;height:50px">
+          <div id="hero-logo" class="hero-logo" style="width:50px;height:50px;overflow:hidden;position:relative">CS
+            <div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>
+          </div>
+          <input type="file" id="hero-logo-input" accept="image/*" style="display:none" onchange="uploadHeroLogo(this)">
+        </label>
         <div>
           <div class="hero-title">VALVE YEGORYEVSK MAJOR</div>
           <div class="hero-sub">Групповой этап · 4 команды · 2026</div>
@@ -301,6 +308,19 @@ body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1
   </div>
   <div class="full-card">
     <div class="full-card-title">Логотипы и названия команд</div>
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);margin-bottom:14px">
+      <label class="team-logo-wrap" style="width:60px;height:60px">
+        <div class="team-logo" id="settings-hero-logo" style="width:60px;height:60px;border-radius:10px;background:var(--red);color:white;font-weight:900;font-size:18px;border-color:var(--red)">
+          CS<div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>
+        </div>
+        <input type="file" accept="image/*" onchange="uploadHeroLogoFromSettings(this)">
+      </label>
+      <div>
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px">Логотип турнира</div>
+        <div style="font-size:11px;color:var(--text2);margin-bottom:8px">Отображается в шапке сайта</div>
+        <button onclick="removeHeroLogo();renderSettings()" style="background:none;border:1px solid var(--border2);border-radius:6px;color:var(--text3);cursor:pointer;padding:4px 10px;font-size:11px;font-weight:600">✕ Сбросить</button>
+      </div>
+    </div>
     <div id="team-name-settings"></div>
   </div>
   <div class="sec-title" style="margin-bottom:14px;font-size:16px">Ники игроков</div>
@@ -348,6 +368,7 @@ async function submitPwd(){
       document.getElementById('admin-btn').classList.add('active');
       document.getElementById('admin-label').textContent='Выйти';
       document.getElementById('nav-settings').style.display='';
+      setHeroLogoClickable(true);
     }else{
       document.getElementById('pwd-err').textContent='Неверный пароль';
       document.getElementById('pwd-input').focus();
@@ -360,6 +381,7 @@ function logoutAdmin(){
   document.getElementById('admin-btn').classList.remove('active');
   document.getElementById('admin-label').textContent='Войти';
   document.getElementById('nav-settings').style.display='none';
+  setHeroLogoClickable(false);
   if(document.getElementById('sec-settings').classList.contains('active')){
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -392,16 +414,27 @@ let sortKey='kills';
 
 function saveData(){
   try{
-    localStorage.setItem('ym_teams',JSON.stringify(teams));
-    localStorage.setItem('ym_players',JSON.stringify(players));
-    localStorage.setItem('ym_matches',JSON.stringify(matches));
-    sbSet('ym_teams',JSON.stringify(teams));
-    sbSet('ym_players',JSON.stringify(players));
-    sbSet('ym_matches',JSON.stringify(matches));
+    // Logos are large (base64) — save only in localStorage
+    const logos = teams.map(t=>({id:t.id, logo:t.logo}));
+    localStorage.setItem('ym_logos', JSON.stringify(logos));
+    const heroLogo = document.getElementById('hero-logo').dataset.img || null;
+    if(heroLogo) localStorage.setItem('ym_hero_logo', heroLogo);
+    else localStorage.removeItem('ym_hero_logo');
+
+    // Save teams WITHOUT logos to Supabase (small payload)
+    const teamsNoLogos = teams.map(t=>({id:t.id, name:t.name, logo:null}));
+    localStorage.setItem('ym_teams', JSON.stringify(teamsNoLogos));
+    localStorage.setItem('ym_players', JSON.stringify(players));
+    localStorage.setItem('ym_matches', JSON.stringify(matches));
+    sbSet('ym_teams', JSON.stringify(teamsNoLogos));
+    sbSet('ym_players', JSON.stringify(players));
+    sbSet('ym_matches', JSON.stringify(matches));
+
     const ind=document.getElementById('save-indicator');
     if(ind){ind.style.opacity='1';clearTimeout(ind._t);ind._t=setTimeout(()=>ind.style.opacity='0',1800);}
   }catch(e){}
 }
+
 async function loadData(){
   try{
     const[rt,rp,rm]=await Promise.all([sbGet('ym_teams'),sbGet('ym_players'),sbGet('ym_matches')]);
@@ -416,6 +449,13 @@ async function loadData(){
       const m=localStorage.getItem('ym_matches');if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?o:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
     }catch(e2){}
   }
+  // Always restore logos from localStorage (device-local)
+  try{
+    const logos=JSON.parse(localStorage.getItem('ym_logos')||'[]');
+    logos.forEach(l=>{ const t=teams.find(x=>x.id===l.id); if(t)t.logo=l.logo; });
+    const heroLogo=localStorage.getItem('ym_hero_logo');
+    if(heroLogo) applyHeroLogo(heroLogo);
+  }catch(e){}
 }
 
 function kd(p){return p.deaths>0?p.kills/p.deaths:p.kills>0?p.kills:0;}
@@ -535,6 +575,16 @@ function updateStat(id,field,val){
 }
 
 function renderSettings(){
+  // Sync settings hero logo preview
+  const heroSrc = document.getElementById('hero-logo').dataset.img;
+  const shl = document.getElementById('settings-hero-logo');
+  if(shl && heroSrc){
+    shl.innerHTML=`<img src="${heroSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:9px"><div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
+    shl.style.background='transparent';shl.style.borderColor='var(--border2)';
+  } else if(shl){
+    shl.innerHTML=`CS<div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
+    shl.style.background='var(--red)';shl.style.borderColor='var(--red)';
+  }
   document.getElementById('team-name-settings').innerHTML=`
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px">
     ${teams.map(t=>`
@@ -562,8 +612,50 @@ function renderSettings(){
     </div>`;
   }).join('');
 }
+function applyHeroLogo(src){
+  const el=document.getElementById('hero-logo');
+  el.dataset.img=src;
+  el.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"><div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>`;
+}
+function uploadHeroLogo(input){
+  if(!isAdmin||!input.files[0])return;
+  loadImage(input.files[0],url=>{
+    applyHeroLogo(url);
+    saveData();
+  });
+}
+function removeHeroLogo(){
+  const el=document.getElementById('hero-logo');
+  el.dataset.img='';
+  el.innerHTML='CS<div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>';
+  localStorage.removeItem('ym_hero_logo');
+  saveData();
+}
+function setHeroLogoClickable(on){
+  const wrap=document.getElementById('hero-logo-wrap');
+  const overlay=document.getElementById('hero-logo-overlay');
+  if(on){
+    wrap.style.cursor='pointer';
+    document.getElementById('hero-logo-input').style.display='';
+    wrap.onmouseenter=()=>{if(overlay)overlay.style.opacity='1';};
+    wrap.onmouseleave=()=>{if(overlay)overlay.style.opacity='0';};
+  }else{
+    wrap.style.cursor='default';
+    document.getElementById('hero-logo-input').style.display='none';
+    wrap.onmouseenter=null;wrap.onmouseleave=null;
+    if(overlay)overlay.style.opacity='0';
+  }
+}
 function uploadTeamLogo(id,input){if(!input.files[0])return;loadImage(input.files[0],url=>{teams[id].logo=url;saveData();renderGroup();renderMatches();renderStats();renderSettings();});}
 function removeTeamLogo(id){teams[id].logo=null;saveData();renderGroup();renderMatches();renderStats();renderSettings();}
+function uploadHeroLogoFromSettings(input){
+  if(!input.files[0])return;
+  loadImage(input.files[0],url=>{
+    applyHeroLogo(url);
+    saveData();
+    renderSettings();
+  });
+}
 function renameTeam(id,val){const name=val.length>0?val:'Команда '+(id+1);teams[id].name=name;const sel=document.getElementById('team-filter');const opts=sel.querySelectorAll('option');if(opts[id+1])opts[id+1].textContent=name;saveData();renderGroup();renderMatches();renderStats();}
 function renameTeamEl(id,el){renameTeam(id,el.value);}
 function renamePlayerEl(id,el){const p=players.find(x=>x.id===id);if(p&&el.value.length>0){p.name=el.value;saveData();renderStats();}}
@@ -579,5 +671,6 @@ document.body.classList.add('readonly');
   setTimeout(()=>document.getElementById('loader').classList.add('hide'),500);
 })();
 </script>
+
 </body>
 </html>
