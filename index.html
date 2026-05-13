@@ -889,8 +889,9 @@ function renderMatches(){
       </div>
 
       ${isExpanded?`<div onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="margin-top:0">
-        ${isAdmin?`<div style="display:flex;justify-content:center;padding:10px 0">
+        ${isAdmin?`<div style="display:flex;justify-content:center;gap:10px;padding:10px 0;flex-wrap:wrap">
           <button onclick="openVeto(${i});event.stopPropagation()" style="font-size:12px;font-weight:600;padding:7px 18px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;color:var(--gold);cursor:pointer;font-family:inherit">🗺️ Пик / Бан карт</button>
+          ${isMatchFinished(m)&&hasMatchStats(i)?`<button onclick="forcePostResult(${i});event.stopPropagation()" style="font-size:12px;font-weight:600;padding:7px 18px;background:rgba(62,207,122,.1);border:1px solid rgba(62,207,122,.3);border-radius:8px;color:var(--green);cursor:pointer;font-family:inherit">📰 Опубликовать результат</button>`:''}
         </div>`:''}
         <div class="map-row">${mapsDetailHtml}</div>
       </div>`:''}
@@ -1397,16 +1398,26 @@ function renderMapStatsBody(mi,ki){
 }
 function hasMatchStats(mi){
   const m=matches[mi];
-  // все игроки обеих команд должны иметь хотя бы 1 значение
   const teamPlayers=players.filter(p=>p.team===m.t1||p.team===m.t2);
-  return teamPlayers.every(p=>{
-    // проверяем во всех сыгранных картах
+  // считаем игроков у которых есть хотя бы 1 ненулевое значение на любой карте
+  const withStats=teamPlayers.filter(p=>{
     return m.maps.some(mp=>{
-      if(!mapFinished(mp)||!mp.stats||!mp.stats[p.id])return false;
+      if(!mp.stats||!mp.stats[p.id])return false;
       const s=mp.stats[p.id];
-      return s.k>0||s.d>0||s.a>0;
+      return(s.k||0)+(s.d||0)+(s.a||0)>0;
     });
   });
+  // публикуем когда у всех 10 игроков есть статистика
+  return withStats.length>=teamPlayers.length;
+}
+
+async function forcePostResult(mi){
+  matches[mi].resultPosted=true;
+  saveData();
+  await autoPostMatchResult(mi);
+  renderMatches();
+  // switch to news tab
+  showSection('news', document.querySelector('.nav-btn'));
 }
 
 function saveMapStat(mi,ki,pid,field,val){
