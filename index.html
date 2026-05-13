@@ -698,7 +698,7 @@ async function loadData(){
     if(rt)teams=JSON.parse(rt);else{const l=localStorage.getItem('ym_teams');if(l)teams=JSON.parse(l);}
     if(rp)players=JSON.parse(rp);else{const l=localStorage.getItem('ym_players');if(l)players=JSON.parse(l);}
     const rawM=rm||(()=>{const l=localStorage.getItem('ym_matches');return l||null;})();
-    if(rawM){const p=JSON.parse(rawM);matches=p.map((o,i)=>o.maps?{...o,maps:o.maps.map(mp=>({...emptyMap(),...mp})),veto:o.veto||[]}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[]});}
+    if(rawM){const p=JSON.parse(rawM);matches=p.map((o,i)=>o.maps?{...o,maps:o.maps.map(mp=>({...emptyMap(),...mp})),veto:o.veto||[],resultPosted:o.resultPosted||false}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[],resultPosted:false});}
     const heroLogo=rh||localStorage.getItem('ym_hero_logo');
     if(heroLogo) setTimeout(()=>applyHeroLogo(heroLogo),0);
   }catch(e){
@@ -1395,6 +1395,13 @@ function renderMapStatsBody(mi,ki){
   const mvp = getMapMVP(_msi, _msk);
   document.getElementById('mst-body').innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2)+(mvp?`<div style="margin-top:14px;display:flex;justify-content:center">${mvpBadge(mvp,'MVP карты')}</div>`:'');
 }
+function hasMatchStats(mi){
+  return matches[mi].maps.some(mp=>{
+    if(!mp.stats)return false;
+    return Object.values(mp.stats).some(s=>s&&(s.k>0||s.d>0||s.a>0));
+  });
+}
+
 function saveMapStat(mi,ki,pid,field,val){
   const n=Math.max(0,parseInt(val)||0);
   if(!matches[mi].maps[ki].stats)matches[mi].maps[ki].stats={};
@@ -1404,18 +1411,19 @@ function saveMapStat(mi,ki,pid,field,val){
   renderMapStatsBody(_msi, _msk);
   renderStats();
   renderMatches();
+  // auto-post when match finished + stats added for the first time
+  if(isMatchFinished(matches[mi]) && hasMatchStats(mi) && !matches[mi].resultPosted){
+    matches[mi].resultPosted=true;
+    saveData();
+    autoPostMatchResult(mi);
+  }
 }
 
 function setMap(mi,ki,field,val){
   if(!matches[mi].maps[ki])return;
-  const wasFinished = isMatchFinished(matches[mi]);
   if(field==='map'||field==='pick')matches[mi].maps[ki][field]=val;
   else{const n=parseInt(val);matches[mi].maps[ki][field]=isNaN(n)?null:Math.max(0,n);}
   saveData();renderGroup();renderMatches();
-  // auto-publish result post when match just finished
-  if(!wasFinished && isMatchFinished(matches[mi])){
-    autoPostMatchResult(mi);
-  }
 }
 
 async function autoPostMatchResult(mi){
