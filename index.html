@@ -793,8 +793,8 @@ function renderMatches(){
       const isDecider=k===2;
       const pickOpts=`<option value="">— пик —</option><option value="t1" ${mp.pick==='t1'?'selected':''}>${t1.name}</option><option value="t2" ${mp.pick==='t2'?'selected':''}>${t2.name}</option>`;
       const pickLabel=isDecider?`<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(240,165,0,.15);color:var(--gold);font-weight:700;border:1px solid rgba(240,165,0,.3)">DECIDER</span>`:mp.pick==='t1'?`<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${COLORS[m.t1]}22;color:${COLORS[m.t1]};font-weight:700;border:1px solid ${COLORS[m.t1]}44">PICK ${t1.name.toUpperCase()}</span>`:mp.pick==='t2'?`<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${COLORS[m.t2]}22;color:${COLORS[m.t2]};font-weight:700;border:1px solid ${COLORS[m.t2]}44">PICK ${t2.name.toUpperCase()}</span>`:'';
-      return`<div class="map-entry" style="flex-direction:column;align-items:stretch;gap:8px">
-        <div style="display:grid;grid-template-columns:54px 1fr auto 1fr;align-items:center;gap:10px">
+      return`<div class="map-entry" style="flex-direction:column;align-items:stretch;gap:6px">
+        <div style="display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:10px">
           <div class="map-num">Карта ${k+1}</div>
           <div style="display:flex;flex-direction:column;gap:4px">
             <select class="map-sel" onchange="setMap(${i},${k},'map',this.value)"><option value="">— карта —</option>${opts}</select>
@@ -805,11 +805,15 @@ function renderMatches(){
             <span style="color:var(--text3);font-size:11px;font-weight:700">:</span>
             <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onchange="setMap(${i},${k},'r2',this.value)">
           </div>
-          <div class="map-result" style="color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--text3)'}">
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding-left:64px">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${pickLabel}
+          </div>
+          <div style="font-size:11px;font-weight:600;color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--text3)'}">
             ${played?(mw1?t1.name+' ✓':mw2?t2.name+' ✓':'Ничья'):''}
           </div>
         </div>
-        ${pickLabel?`<div style="padding-left:64px">${pickLabel}</div>`:''}
       </div>
       <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
         <button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
