@@ -44,11 +44,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .admin-btn.active{background:rgba(62,207,122,.1);border-color:rgba(62,207,122,.35);color:var(–green)}
 
 /* NAV */
-nav{position:relative;z-index:1;display:flex;gap:8px;padding:14px 24px;border-top:1px solid var(–border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav{position:relative;z-index:1;display:flex;gap:0;padding:0 24px;border-top:1px solid var(–border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 nav::-webkit-scrollbar{display:none}
-.nav-btn{padding:8px 18px;font-size:13px;font-weight:600;color:var(–text2);background:rgba(255,255,255,.05);border:1px solid var(–border);border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
-.nav-btn:hover{background:rgba(255,255,255,.1);color:var(–text);border-color:var(–border2)}
-.nav-btn.active{background:var(–red);border-color:var(–red);color:white;box-shadow:0 3px 14px rgba(232,53,53,.45)}
+.nav-btn{padding:14px 20px;font-size:13px;font-weight:600;color:var(–text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
+.nav-btn:hover{color:var(–text)}
+.nav-btn.active{color:var(–red2);border-bottom-color:var(–red2)}
 
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:28px 20px}
@@ -167,7 +167,7 @@ body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1
 .hero-badge{display:none}
 .admin-btn{padding:6px 12px;font-size:11px}
 .hero-top{margin-bottom:18px}
-.nav-btn{padding:7px 14px;font-size:12px}
+.nav-btn{padding:12px 14px;font-size:12px}
 main{padding:16px 10px}
 .sec-title{font-size:16px;margin-bottom:14px}
 .col-hide{display:none}
