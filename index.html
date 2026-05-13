@@ -287,10 +287,9 @@ tbody td{padding:10px 8px;font-size:12px}
     <button class="sort-pill" id="sp-kd" onclick="setSort('kd')">K/D</button>
   </div>
   <div class="table-wrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch">
-    <table style="min-width:460px"><thead><tr>
+    <table style="min-width:360px"><thead><tr>
       <th style="width:32px">#</th>
-      <th style="width:160px">Игрок</th>
-      <th style="width:110px">Команда</th>
+      <th style="width:220px">Игрок</th>
       <th class="tc" style="width:68px">Kills</th>
       <th class="tc" style="width:68px">Deaths</th>
       <th class="tc" style="width:68px">Assists</th>
@@ -577,10 +576,10 @@ function renderStats(){
     const t=teams[p.team],kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0?'kd-bad':'';
     return`<tr>
       <td style="color:var(--text3);font-weight:700">${i+1}</td>
-      <td><div style="display:flex;align-items:center;gap:9px">
+      <td><div style="display:flex;align-items:center;gap:8px">
+        ${teamLogoHtml(teams[p.team],22,5)}
         <span style="font-weight:600">${p.name}</span>
       </div></td>
-      <td><div style="display:flex;align-items:center;gap:7px">${teamLogoHtml(teams[p.team],22,5)}<span style="color:var(--text2);font-size:12px">${t.name}</span></div></td>
       <td class="tc"><input class="stat-in" type="number" min="0" value="${p.kills}" onchange="updateStat(${p.id},'kills',this.value)"></td>
       <td class="tc"><input class="stat-in" type="number" min="0" value="${p.deaths}" onchange="updateStat(${p.id},'deaths',this.value)"></td>
       <td class="tc"><input class="stat-in" type="number" min="0" value="${p.assists}" onchange="updateStat(${p.id},'assists',this.value)"></td>
