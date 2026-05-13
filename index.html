@@ -689,11 +689,15 @@ function matchScore(m){
   m.maps.forEach(mp=>{if(mp.r1===null||mp.r2===null)return;rw1+=mp.r1;rw2+=mp.r2;if(mp.r1>mp.r2)s1++;else if(mp.r2>mp.r1)s2++;});
   return{s1,s2,rw1,rw2};
 }
+function isMatchFinished(m){
+  const{s1,s2}=matchScore(m);
+  return s1===2||s2===2;
+}
 function standings(){
   const st=teams.map(t=>({...t,w:0,l:0,played:0,rw:0,rl:0,pts:0}));
   matches.forEach(m=>{
+    if(!isMatchFinished(m))return;
     const{s1,s2,rw1,rw2}=matchScore(m);
-    if(s1===0&&s2===0)return;
     const a=st[m.t1],b=st[m.t2];
     a.played++;b.played++;a.rw+=rw1;a.rl+=rw2;b.rw+=rw2;b.rl+=rw1;
     if(s1>s2){a.w++;b.l++;a.pts+=3;}else if(s2>s1){b.w++;a.l++;b.pts+=3;}else{a.pts++;b.pts++;}
@@ -806,9 +810,10 @@ function renderMatches(){
             <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onchange="setMap(${i},${k},'r2',this.value)">
           </div>
         </div>
-        ${played||isDecider?`<div style="padding-left:64px;font-size:11px;font-weight:600;color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--gold)'}">
-          ${played?(mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'):isDecider?'🎯 Decider':''}
-        </div>`:''}
+        <div style="padding-left:64px;display:flex;align-items:center;gap:8px;min-height:16px">
+          ${isDecider?`<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(240,165,0,.15);color:var(--gold);font-weight:700;border:1px solid rgba(240,165,0,.3)">🎯 DECIDER</span>`:''}
+          ${played?`<span style="font-size:11px;font-weight:600;color:${mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'}">${mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'}</span>`:''}
+        </div>
       </div>
       <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
         <button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
