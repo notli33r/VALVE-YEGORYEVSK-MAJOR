@@ -328,6 +328,9 @@ tbody td{padding:10px 8px;font-size:12px}
   <div class="sec-title" style="margin-bottom:14px;font-size:16px">Ники игроков</div>
   <div class="players-grid" id="player-settings"></div>
 </section>
+<section id="sec-team" class="section">
+  <div id="team-page-content"></div>
+</section>
 </main>
 
 <script>
@@ -505,7 +508,7 @@ function renderGroup(){
   const st=standings();
   document.getElementById('group-tbody').innerHTML=st.map((t,i)=>{
     const diff=t.rw-t.rl,dc=diff>0?'diff-pos':diff<0?'diff-neg':'diff-zero',p=PLACES[i];
-    return`<tr>
+    return`<tr style="cursor:pointer" onclick="showTeam(${t.id})">
       <td style="color:var(--text3);font-weight:700;font-size:13px">${i+1}</td>
       <td><div class="team-cell">${teamLogoHtml(teams.find(x=>x.id===t.id),36,8)}<span>${t.name}</span></div></td>
       <td class="tc" style="color:var(--text2)">${t.played}</td>
@@ -684,6 +687,125 @@ function uploadHeroLogoFromSettings(input){
 function renameTeam(id,val){const name=val.length>0?val:'Команда '+(id+1);teams[id].name=name;const sel=document.getElementById('team-filter');const opts=sel.querySelectorAll('option');if(opts[id+1])opts[id+1].textContent=name;saveData();renderGroup();renderMatches();renderStats();}
 function renameTeamEl(id,el){renameTeam(id,el.value);}
 function renamePlayerEl(id,el){const p=players.find(x=>x.id===id);if(p&&el.value.length>0){p.name=el.value;saveData();renderStats();}}
+function showTeam(teamId){
+  const t = teams[teamId];
+  const tp = players.filter(p=>p.team===teamId);
+  const st = standings().find(x=>x.id===teamId);
+  const teamMatches = matches.filter(m=>m.t1===teamId||m.t2===teamId);
+
+  // played maps
+  let mapsPlayed={}, mapsWon={};
+  teamMatches.forEach(m=>{
+    const isT1 = m.t1===teamId;
+    m.maps.forEach(mp=>{
+      if(!mp.map||mp.r1===null||mp.r2===null)return;
+      mapsPlayed[mp.map]=(mapsPlayed[mp.map]||0)+1;
+      const won = isT1 ? mp.r1>mp.r2 : mp.r2>mp.r1;
+      if(won) mapsWon[mp.map]=(mapsWon[mp.map]||0)+1;
+    });
+  });
+
+  const totalKills=tp.reduce((s,p)=>s+p.kills,0);
+  const totalDeaths=tp.reduce((s,p)=>s+p.deaths,0);
+  const totalAssists=tp.reduce((s,p)=>s+p.assists,0);
+
+  const mapsHtml = Object.keys(mapsPlayed).length
+    ? Object.keys(mapsPlayed).map(map=>{
+        const w=mapsWon[map]||0, total=mapsPlayed[map];
+        const pct=Math.round(w/total*100);
+        return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+          <span style="font-weight:600">${map}</span>
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:12px;color:var(--text2)">${w}/${total} карт</span>
+            <span style="font-weight:700;color:${pct>=50?'var(--green)':'var(--red2)'}">${pct}%</span>
+          </div>
+        </div>`;
+      }).join('')
+    : `<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>`;
+
+  const playersHtml = tp.sort((a,b)=>kd(b)-kd(a)).map((p,i)=>{
+    const kdv=kd(p);
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="color:var(--text3);font-size:12px;width:16px">${i+1}</span>
+        <span style="font-weight:600">${p.name}</span>
+      </div>
+      <div style="display:flex;gap:16px;font-size:13px">
+        <span style="color:var(--text2)">K: <b style="color:var(--text)">${p.kills}</b></span>
+        <span style="color:var(--text2)">D: <b style="color:var(--text)">${p.deaths}</b></span>
+        <span style="color:var(--text2)">A: <b style="color:var(--text)">${p.assists}</b></span>
+        <span style="font-weight:700;color:${kdv>=1.2?'var(--green)':kdv<1.0?'var(--red2)':'var(--text)'}">${kdv.toFixed(2)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  const matchesHtml = teamMatches.map(m=>{
+    const opp = teams[m.t1===teamId?m.t2:m.t1];
+    const {s1,s2}=matchScore(m);
+    const ts = m.t1===teamId?s1:s2, os = m.t1===teamId?s2:s1;
+    const hasScore=m.maps.some(mp=>mp.r1!==null||mp.r2!==null);
+    const won=hasScore&&ts>os, lost=hasScore&&ts<os;
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px">
+        ${teamLogoHtml(opp,26,6)}
+        <span style="font-weight:600">${opp.name}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px;font-weight:800;color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${hasScore?ts+':'+os:'—'}</span>
+        ${hasScore?`<span style="font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700;background:${won?'rgba(62,207,122,.15)':lost?'rgba(232,53,53,.12)':'rgba(255,255,255,.06)'};color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${won?'WIN':lost?'LOSS':'DRAW'}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('team-page-content').innerHTML=`
+    <button onclick="showSection('group',document.querySelector('.nav-btn'))" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;margin-bottom:20px;padding:0;font-family:inherit">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Назад
+    </button>
+
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+      ${teamLogoHtml(t,64,12)}
+      <div>
+        <div style="font-size:22px;font-weight:800">${t.name}</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px">${st?st.w+'В · '+st.l+'П · '+st.pts+' очков':'Статистика недоступна'}</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--green)">${totalKills}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Kills</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--red2)">${totalDeaths}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Deaths</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:24px;font-weight:800;color:var(--blue)">${totalAssists}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:.06em">Assists</div>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Игроки</div>
+      ${playersHtml}
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Матчи</div>
+      ${matchesHtml||'<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>'}
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:4px">Карты</div>
+      ${mapsHtml}
+    </div>`;
+
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-team').classList.add('active');
+}
+
 function showSection(name,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sec-'+name).classList.add('active');btn.classList.add('active');if(name==='settings')renderSettings();}
 function resetAll(){if(!confirm('Сбросить все данные? Это нельзя отменить.'))return;localStorage.clear();location.reload();}
 
