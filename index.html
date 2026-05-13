@@ -577,7 +577,9 @@ function renderStats(){
     const t=teams[p.team],kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0?'kd-bad':'';
     return`<tr>
       <td style="color:var(--text3);font-weight:700">${i+1}</td>
-      <td><div style="display:flex;align-items:center;gap:9px"><div class="avatar" style="background:${AVATAR_BG[p.team]};color:${COLORS[p.team]}">${p.name.substring(0,2).toUpperCase()}</div><span style="font-weight:600">${p.name}</span></div></td>
+      <td><div style="display:flex;align-items:center;gap:9px">
+        <span style="font-weight:600">${p.name}</span>
+      </div></td>
       <td><div style="display:flex;align-items:center;gap:7px">${teamLogoHtml(teams[p.team],22,5)}<span style="color:var(--text2);font-size:12px">${t.name}</span></div></td>
       <td class="tc"><input class="stat-in" type="number" min="0" value="${p.kills}" onchange="updateStat(${p.id},'kills',this.value)"></td>
       <td class="tc"><input class="stat-in" type="number" min="0" value="${p.deaths}" onchange="updateStat(${p.id},'deaths',this.value)"></td>
