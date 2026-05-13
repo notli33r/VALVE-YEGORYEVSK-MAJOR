@@ -824,22 +824,24 @@ function renderMatches(){
       </div>`;
     }).join('');
 
-    html+=`<div class="match-card" style="cursor:pointer" onclick="toggleMatch(${i})">
-      <div class="match-layout">
-        <div class="match-team">${teamLogoHtml(teams[m.t1],46,9)}<span>${t1.name}</span>${w1?'<span class="win-tag">WIN</span>':''}</div>
-        <div class="score-center">
-          <div class="score-big" style="color:${hasScore?'var(--text)':'var(--text3)'}">
-            <span style="color:${w1?'var(--text)':'var(--text2)'}">${s1}</span><span style="color:var(--text3);font-size:20px;margin:0 8px">:</span><span style="color:${w2?'var(--text)':'var(--text2)'}">${s2}</span>
+    html+=`<div class="match-card">
+      <div style="cursor:pointer" onclick="toggleMatch(${i})">
+        <div class="match-layout">
+          <div class="match-team">${teamLogoHtml(teams[m.t1],46,9)}<span>${t1.name}</span>${w1?'<span class="win-tag">WIN</span>':''}</div>
+          <div class="score-center">
+            <div class="score-big" style="color:${hasScore?'var(--text)':'var(--text3)'}">
+              <span style="color:${w1?'var(--text)':'var(--text2)'}">${s1}</span><span style="color:var(--text3);font-size:20px;margin:0 8px">:</span><span style="color:${w2?'var(--text)':'var(--text2)'}">${s2}</span>
+            </div>
+            <div class="score-label">BO3</div>
           </div>
-          <div class="score-label">BO3</div>
+          <div class="match-team right">${w2?'<span class="win-tag">WIN</span>':''}<span>${t2.name}</span>${teamLogoHtml(teams[m.t2],46,9)}</div>
         </div>
-        <div class="match-team right">${w2?'<span class="win-tag">WIN</span>':''}<span>${t2.name}</span>${teamLogoHtml(teams[m.t2],46,9)}</div>
+        ${mapPills?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;justify-content:center">${mapPills}</div>`:''}
+        ${matchMvpHtml}
+        <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--text3)">${isExpanded?'▲ Свернуть':'▼ Подробнее'}</div>
       </div>
-      ${mapPills?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;justify-content:center">${mapPills}</div>`:''}
-      ${matchMvpHtml}
-      <div style="text-align:center;margin-top:8px;font-size:11px;color:var(--text3)">${isExpanded?'▲ Свернуть':'▼ Подробнее'}</div>
 
-      ${isExpanded?`<div onclick="event.stopPropagation()" style="margin-top:0">
+      ${isExpanded?`<div onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="margin-top:0">
         ${isAdmin?`<div style="display:flex;justify-content:center;padding:10px 0">
           <button onclick="openVeto(${i});event.stopPropagation()" style="font-size:12px;font-weight:600;padding:7px 18px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;color:var(--gold);cursor:pointer;font-family:inherit">🗺️ Пик / Бан карт</button>
         </div>`:''}
