@@ -860,14 +860,14 @@ function renderMatches(){
           <span style="color:var(--text3);font-size:13px;font-weight:700">:</span>
           <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onclick="event.stopPropagation()" onchange="setMap(${i},${k},'r2',this.value)">
         </div>
-        <div style="text-align:right;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'transparent'}">
-          ${played?(mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'):''}
+        <div style="text-align:right">
+          ${mapFinished(mp)
+            ? `<button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:4px 10px;background:${mw1?'rgba(74,222,128,.12)':'rgba(255,85,85,.1)'};border:1px solid ${mw1?'rgba(74,222,128,.3)':'rgba(255,85,85,.25)'};border-radius:6px;color:${mw1?'var(--green)':'var(--red2)'};cursor:pointer;font-family:inherit;white-space:nowrap">
+                ✓ ${mw1?t1.name:mw2?t2.name:'Ничья'}${statsCount>0?' 📊':''}
+              </button>`
+            : `<span style="font-size:11px;color:transparent">—</span>`
+          }
         </div>
-      </div>
-      <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
-        <button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
-          📊 Статистика ${statsCount>0?'('+statsCount+')':''}
-        </button>
       </div>`;
     }).join('');
 
