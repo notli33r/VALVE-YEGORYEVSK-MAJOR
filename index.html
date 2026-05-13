@@ -806,14 +806,9 @@ function renderMatches(){
             <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onchange="setMap(${i},${k},'r2',this.value)">
           </div>
         </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-left:64px">
-          <div style="display:flex;align-items:center;gap:6px">
-            ${pickLabel}
-          </div>
-          <div style="font-size:11px;font-weight:600;color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--text3)'}">
-            ${played?(mw1?t1.name+' ✓':mw2?t2.name+' ✓':'Ничья'):''}
-          </div>
-        </div>
+        ${played||isDecider?`<div style="padding-left:64px;font-size:11px;font-weight:600;color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--gold)'}">
+          ${played?(mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'):isDecider?'🎯 Decider':''}
+        </div>`:''}
       </div>
       <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
         <button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
@@ -1122,13 +1117,20 @@ function renderStats(){
   });
   document.getElementById('stats-tbody').innerHTML=data.map((p,i)=>{
     const kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0&&p.deaths>0?'kd-bad':'';
-    return`<tr>
-      <td style="color:var(--text3);font-weight:700">${i+1}</td>
+    const medals=['🥇','🥈','🥉'];
+    const medalColors=['#f0a500','#b0b8c8','#cd7f32'];
+    const isMedal = i < 3;
+    const rowStyle = isMedal ? `background:${['rgba(240,165,0,.07)','rgba(180,184,200,.05)','rgba(205,127,50,.06)'][i]};` : '';
+    const numCell = isMedal
+      ? `<span style="font-size:16px">${medals[i]}</span>`
+      : `<span style="color:var(--text3);font-weight:700">${i+1}</span>`;
+    return`<tr style="${rowStyle}">
+      <td>${numCell}</td>
       <td><div style="display:flex;align-items:center;gap:8px">
         ${teamLogoHtml(teams[p.team],22,5)}
-        <span style="font-weight:600">${p.name}</span>
+        <span style="font-weight:600;${isMedal?'color:'+medalColors[i]:''}">${p.name}</span>
       </div></td>
-      <td class="tc" style="font-weight:600">${p.kills}</td>
+      <td class="tc" style="font-weight:700;${isMedal?'color:'+medalColors[i]:''}">${p.kills}</td>
       <td class="tc" style="color:var(--text2)">${p.deaths}</td>
       <td class="tc" style="color:var(--text2)">${p.assists}</td>
       <td class="tc"><span class="${kdc}" style="font-weight:700">${kdv.toFixed(2)}</span></td>
