@@ -814,10 +814,7 @@ function renderMatches(){
             <input class="map-sc ${mw2?'winner':mw1?'loser':''}" type="number" min="0" max="30" value="${mp.r2!==null?mp.r2:''}" placeholder="0" onclick="event.stopPropagation()" onchange="setMap(${i},${k},'r2',this.value)">
           </div>
         </div>
-        <div style="padding-left:64px;display:flex;align-items:center;gap:8px;min-height:16px">
-          ${isDecider?`<span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(240,165,0,.15);color:var(--gold);font-weight:700;border:1px solid rgba(240,165,0,.3)">🎯 DECIDER</span>`:''}
-          ${played?`<span style="font-size:11px;font-weight:600;color:${mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'}">${mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'}</span>`:''}
-        </div>
+        ${played?`<div style="text-align:center;font-size:11px;font-weight:600;margin-top:4px;color:${mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'}">${mw1?'✓ '+t1.name:mw2?'✓ '+t2.name:'Ничья'}</div>`:''}
       </div>
       <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
         <button onclick="openMapStats(${i},${k});event.stopPropagation()" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
