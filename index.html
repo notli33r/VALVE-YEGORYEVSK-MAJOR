@@ -688,14 +688,23 @@ async function loadData(){
 }
 
 function kd(p){return p.deaths>0?p.kills/p.deaths:p.kills>0?p.kills:0;}
+function mapFinished(mp){
+  if(mp.r1===null||mp.r2===null)return false;
+  const max=Math.max(mp.r1,mp.r2), min=Math.min(mp.r1,mp.r2);
+  // стандартная победа: 13+ раундов и отрыв 2+
+  // овертайм: после 12:12 побеждает тот кто первый наберёт на 2 больше
+  if(max<13)return false;
+  return max-min>=2;
+}
+
 function matchScore(m){
   let s1=0,s2=0,rw1=0,rw2=0;
   m.maps.forEach(mp=>{
     if(mp.r1===null||mp.r2===null)return;
     rw1+=mp.r1;rw2+=mp.r2;
-    // карта завершена только если победитель набрал ≥13 раундов
-    if(mp.r1>mp.r2&&mp.r1>=13)s1++;
-    else if(mp.r2>mp.r1&&mp.r2>=13)s2++;
+    if(!mapFinished(mp))return;
+    if(mp.r1>mp.r2)s1++;
+    else if(mp.r2>mp.r1)s2++;
   });
   return{s1,s2,rw1,rw2};
 }
@@ -780,12 +789,12 @@ function renderMatches(){
 
     // Map summary pills for compact view
     const mapPills = m.maps.filter((mp,k)=>{
-      if(k===2){let a=0,b=0;[m.maps[0],m.maps[1]].forEach(mp0=>{if(mp0.r1===null||mp0.r2===null)return;if(mp0.r1>mp0.r2)a++;else if(mp0.r2>mp0.r1)b++;});return a===1&&b===1;}
+      if(k===2){let a=0,b=0;[m.maps[0],m.maps[1]].forEach(mp0=>{if(!mapFinished(mp0))return;if(mp0.r1>mp0.r2)a++;else if(mp0.r2>mp0.r1)b++;});return a===1&&b===1;}
       return true;
     }).filter(mp=>mp.map).map((mp,k)=>{
       const played=mp.r1!==null&&mp.r2!==null;
-      const mw1=played&&mp.r1>mp.r2,mw2=played&&mp.r2>mp.r1;
-      const col=mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)';
+      const mw1=played&&mapFinished(mp)&&mp.r1>mp.r2, mw2=played&&mapFinished(mp)&&mp.r2>mp.r1;
+      const col=mw1?'var(--green)':mw2?'var(--red2)':played?'var(--text2)':'var(--text3)';
       const realK = m.maps.indexOf(mp);
       const mapMvp = getMapMVP(i, realK);
       return`<div style="display:flex;flex-direction:column;align-items:center;gap:3px">
@@ -800,8 +809,10 @@ function renderMatches(){
 
     // Expanded detail: maps
     const mapsDetailHtml = m.maps.map((mp,k)=>{
-      if(k===2){let a=0,b=0;[m.maps[0],m.maps[1]].forEach(mp0=>{if(mp0.r1===null||mp0.r2===null)return;if(mp0.r1>mp0.r2)a++;else if(mp0.r2>mp0.r1)b++;});if(a!==1||b!==1)return'';}
-      const played=mp.r1!==null&&mp.r2!==null,mw1=played&&mp.r1>mp.r2,mw2=played&&mp.r2>mp.r1;
+      if(k===2){let a=0,b=0;[m.maps[0],m.maps[1]].forEach(mp0=>{if(!mapFinished(mp0))return;if(mp0.r1>mp0.r2)a++;else if(mp0.r2>mp0.r1)b++;});if(a!==1||b!==1)return'';}
+      const played=mp.r1!==null&&mp.r2!==null;
+      const mw1=played&&mapFinished(mp)&&mp.r1>mp.r2;
+      const mw2=played&&mapFinished(mp)&&mp.r2>mp.r1;
       const opts=DEFAULT_MAPS.map(n=>`<option value="${n}" ${mp.map===n?'selected':''}>${n}</option>`).join('');
       const statsCount=Object.keys(mp.stats||{}).length;
       const isDecider=k===2;
