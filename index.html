@@ -1396,9 +1396,16 @@ function renderMapStatsBody(mi,ki){
   document.getElementById('mst-body').innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2)+(mvp?`<div style="margin-top:14px;display:flex;justify-content:center">${mvpBadge(mvp,'MVP карты')}</div>`:'');
 }
 function hasMatchStats(mi){
-  return matches[mi].maps.some(mp=>{
-    if(!mp.stats)return false;
-    return Object.values(mp.stats).some(s=>s&&(s.k>0||s.d>0||s.a>0));
+  const m=matches[mi];
+  // все игроки обеих команд должны иметь хотя бы 1 значение
+  const teamPlayers=players.filter(p=>p.team===m.t1||p.team===m.t2);
+  return teamPlayers.every(p=>{
+    // проверяем во всех сыгранных картах
+    return m.maps.some(mp=>{
+      if(!mapFinished(mp)||!mp.stats||!mp.stats[p.id])return false;
+      const s=mp.stats[p.id];
+      return s.k>0||s.d>0||s.a>0;
+    });
   });
 }
 
@@ -1434,14 +1441,18 @@ async function autoPostMatchResult(mi){
   const loser = s1>s2?t2:t1;
   const ws = s1>s2?s1:s2, ls = s1>s2?s2:s1;
 
-  // build map results line
-  const mapLines = m.maps.filter(mp=>mapFinished(mp)&&mp.map).map(mp=>{
-    const mw1=mp.r1>mp.r2;
-    return`${mp.map}: ${mp.r1}:${mp.r2} (${mw1?t1.name:t2.name})`;
-  }).join('\n');
+  // map results
+  const mapLines = m.maps
+    .filter(mp=>mapFinished(mp))
+    .map((mp,idx)=>{
+      const mw1=mp.r1>mp.r2;
+      const mapName=mp.map||`Карта ${idx+1}`;
+      return`${mapName}: ${mp.r1}:${mp.r2} → ${mw1?t1.name:t2.name}`;
+    }).join('\n');
 
   const mvp = getMatchMVP(mi);
   const mvpLine = mvp ? `\n\n⭐ MVP матча: ${mvp.name} (${teams[mvp.team].name})` : '';
+
   const content = `🏆 ${winner.name} побеждает ${loser.name} со счётом ${ws}:${ls}!\n\n${mapLines}${mvpLine}`;
 
   await sbPostNews('Система', content, null);
