@@ -205,6 +205,19 @@ tbody td{padding:10px 8px;font-size:12px}
   <div class="loader-text">Загрузка турнира...</div>
 </div>
 
+<div class="modal-bg" id="map-stats-modal">
+  <div class="modal-box" style="width:min(520px,calc(100vw - 20px));max-height:90vh;overflow-y:auto;padding:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div>
+        <div id="mst-title" style="font-size:16px;font-weight:800"></div>
+        <div id="mst-sub" style="font-size:12px;color:var(--text2);margin-top:2px"></div>
+      </div>
+      <button onclick="closeMapStats()" style="background:rgba(255,255,255,.08);border:1px solid var(--border2);border-radius:8px;color:var(--text2);cursor:pointer;padding:6px 12px;font-size:12px;font-family:inherit;font-weight:600">✕ Закрыть</button>
+    </div>
+    <div id="mst-body"></div>
+  </div>
+</div>
+
 <div class="modal-bg" id="admin-modal">
   <div class="modal-box">
     <h3>🔐 Администратор</h3>
@@ -409,7 +422,8 @@ let players=[
   {id:18,name:'HooXi',team:3,kills:0,deaths:0,assists:0},{id:19,name:'nexa',team:3,kills:0,deaths:0,assists:0}
 ];
 const DEFAULT_MAPS=['Mirage','Inferno','Nuke','Dust2','Overpass','Ancient','Anubis'];
-function emptyMaps(){return[{map:'',r1:null,r2:null},{map:'',r1:null,r2:null},{map:'',r1:null,r2:null}];}
+function emptyMap(){return{map:'',r1:null,r2:null,stats:{}};}
+function emptyMaps(){return[emptyMap(),emptyMap(),emptyMap()];}
 let matches=[
   {id:0,t1:0,t2:1,maps:emptyMaps()},{id:1,t1:2,t2:3,maps:emptyMaps()},
   {id:2,t1:0,t2:2,maps:emptyMaps()},{id:3,t1:1,t2:3,maps:emptyMaps()},
@@ -445,7 +459,7 @@ async function loadData(){
     if(rt)teams=JSON.parse(rt);else{const l=localStorage.getItem('ym_teams');if(l)teams=JSON.parse(l);}
     if(rp)players=JSON.parse(rp);else{const l=localStorage.getItem('ym_players');if(l)players=JSON.parse(l);}
     const rawM=rm||(()=>{const l=localStorage.getItem('ym_matches');return l||null;})();
-    if(rawM){const p=JSON.parse(rawM);matches=p.map((o,i)=>o.maps?o:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
+    if(rawM){const p=JSON.parse(rawM);matches=p.map((o,i)=>o.maps?{...o,maps:o.maps.map(mp=>({...emptyMap(),...mp}))}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
     const heroLogo=rh||localStorage.getItem('ym_hero_logo');
     if(heroLogo) setTimeout(()=>applyHeroLogo(heroLogo),0);
   }catch(e){
@@ -533,6 +547,7 @@ function renderMatches(){
     const mapsHtml=m.maps.map((mp,k)=>{
       const played=mp.r1!==null&&mp.r2!==null,mw1=played&&mp.r1>mp.r2,mw2=played&&mp.r2>mp.r1;
       const opts=DEFAULT_MAPS.map(n=>`<option value="${n}" ${mp.map===n?'selected':''}>${n}</option>`).join('');
+      const statsCount=Object.keys(mp.stats||{}).length;
       return`<div class="map-entry">
         <div class="map-num">Карта ${k+1}</div>
         <select class="map-sel" onchange="setMap(${i},${k},'map',this.value)"><option value="">— карта —</option>${opts}</select>
@@ -544,6 +559,11 @@ function renderMatches(){
         <div class="map-result" style="color:${played?(mw1?'var(--green)':mw2?'var(--red2)':'var(--text3)'):'var(--text3)'}">
           ${played?(mw1?t1.name+' ✓':mw2?t2.name+' ✓':'Ничья'):''}
         </div>
+      </div>
+      <div style="padding:4px 0 8px;display:flex;justify-content:flex-end">
+        <button onclick="openMapStats(${i},${k})" style="font-size:11px;font-weight:600;padding:5px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.25);border-radius:6px;color:var(--blue);cursor:pointer;font-family:inherit">
+          📊 Статистика игроков ${statsCount>0?'('+statsCount+')':''}
+        </button>
       </div>`;
     }).join('');
     html+=`<div class="match-card">
@@ -562,6 +582,64 @@ function renderMatches(){
   });
   document.getElementById('matches-container').innerHTML=html;
 }
+let _msi=null,_msk=null;
+function openMapStats(mi,ki){
+  _msi=mi;_msk=ki;
+  const m=matches[mi],mp=m.maps[ki];
+  const t1=teams[m.t1],t2=teams[m.t2];
+  const mapName=mp.map||'Карта '+(ki+1);
+  document.getElementById('mst-title').textContent='📊 '+mapName;
+  document.getElementById('mst-sub').textContent=t1.name+' vs '+t2.name;
+  renderMapStatsBody(mi,ki);
+  document.getElementById('map-stats-modal').classList.add('open');
+}
+function closeMapStats(){
+  document.getElementById('map-stats-modal').classList.remove('open');
+  _msi=null;_msk=null;
+}
+function renderMapStatsBody(mi,ki){
+  const m=matches[mi],mp=m.maps[ki];
+  const stats=mp.stats||{};
+  const t1=teams[m.t1],t2=teams[m.t2];
+
+  const teamBlock=(team)=>{
+    const tp=players.filter(p=>p.team===team.id);
+    return`<div style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+        ${teamLogoHtml(team,24,5)}
+        <span style="font-weight:700;font-size:14px">${team.name}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr repeat(3,52px);gap:6px;align-items:center;margin-bottom:6px">
+        <span></span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Игрок</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">K</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">D</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">A</span>
+      </div>
+      ${tp.map(p=>{
+        const ps=stats[p.id]||{k:0,d:0,a:0};
+        const ro=isAdmin?'':'pointer-events:none;opacity:.5;';
+        return`<div style="display:grid;grid-template-columns:auto 1fr repeat(3,52px);gap:6px;align-items:center;margin-bottom:5px">
+          <div style="width:8px;height:8px;border-radius:50%;background:${COLORS[team.id]};flex-shrink:0"></div>
+          <span style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</span>
+          <input type="number" min="0" value="${ps.k}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'k',this.value)">
+          <input type="number" min="0" value="${ps.d}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'d',this.value)">
+          <input type="number" min="0" value="${ps.a}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'a',this.value)">
+        </div>`;
+      }).join('')}
+    </div>`;
+  };
+
+  document.getElementById('mst-body').innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2);
+}
+function saveMapStat(mi,ki,pid,field,val){
+  const n=Math.max(0,parseInt(val)||0);
+  if(!matches[mi].maps[ki].stats)matches[mi].maps[ki].stats={};
+  if(!matches[mi].maps[ki].stats[pid])matches[mi].maps[ki].stats[pid]={k:0,d:0,a:0};
+  matches[mi].maps[ki].stats[pid][field]=n;
+  saveData();
+}
+
 function setMap(mi,ki,field,val){
   if(!matches[mi].maps[ki])return;
   if(field==='map')matches[mi].maps[ki].map=val;
@@ -569,33 +647,45 @@ function setMap(mi,ki,field,val){
   saveData();renderGroup();renderMatches();
 }
 
+function calcPlayerStats(pid){
+  let k=0,d=0,a=0;
+  matches.forEach(m=>{
+    m.maps.forEach(mp=>{
+      if(!mp.stats||!mp.stats[pid])return;
+      k+=mp.stats[pid].k||0;
+      d+=mp.stats[pid].d||0;
+      a+=mp.stats[pid].a||0;
+    });
+  });
+  return{kills:k,deaths:d,assists:a};
+}
+
 function setSort(k){sortKey=k;document.querySelectorAll('.sort-pill').forEach(b=>b.classList.remove('active'));const btn=document.getElementById('sp-'+k);if(btn)btn.classList.add('active');renderStats();}
 function renderStats(){
   const filter=document.getElementById('team-filter').value;
-  let data=[...players];
+  let data=players.map(p=>({...p,...calcPlayerStats(p.id)}));
   if(filter!=='all')data=data.filter(p=>p.team===parseInt(filter));
-  data.sort((a,b)=>sortKey==='kd'?kd(b)-kd(a):sortKey==='deaths'?a.deaths-b.deaths:b[sortKey]-a[sortKey]);
+  data.sort((a,b)=>{
+    const ka=kd(a),kb=kd(b);
+    if(sortKey==='kd')return kb-ka;
+    if(sortKey==='deaths')return a.deaths-b.deaths;
+    return b[sortKey]-a[sortKey];
+  });
   document.getElementById('stats-tbody').innerHTML=data.map((p,i)=>{
-    const t=teams[p.team],kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0?'kd-bad':'';
+    const kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0&&p.deaths>0?'kd-bad':'';
     return`<tr>
       <td style="color:var(--text3);font-weight:700">${i+1}</td>
       <td><div style="display:flex;align-items:center;gap:8px">
         ${teamLogoHtml(teams[p.team],22,5)}
         <span style="font-weight:600">${p.name}</span>
       </div></td>
-      <td class="tc"><input class="stat-in" type="number" min="0" value="${p.kills}" onchange="updateStat(${p.id},'kills',this.value)"></td>
-      <td class="tc"><input class="stat-in" type="number" min="0" value="${p.deaths}" onchange="updateStat(${p.id},'deaths',this.value)"></td>
-      <td class="tc"><input class="stat-in" type="number" min="0" value="${p.assists}" onchange="updateStat(${p.id},'assists',this.value)"></td>
+      <td class="tc" style="font-weight:600">${p.kills}</td>
+      <td class="tc" style="color:var(--text2)">${p.deaths}</td>
+      <td class="tc" style="color:var(--text2)">${p.assists}</td>
       <td class="tc"><span class="${kdc}" style="font-weight:700">${kdv.toFixed(2)}</span></td>
     </tr>`;
   }).join('');
 }
-function updateStat(id,field,val){
-  const n=parseFloat(val);if(isNaN(n))return;
-  const p=players.find(x=>x.id===id);
-  if(p){p[field]=Math.max(0,Math.round(n));saveData();renderStats();}
-}
-
 function renderSettings(){
   // Sync settings hero logo preview
   const heroSrc = document.getElementById('hero-logo').dataset.img;
