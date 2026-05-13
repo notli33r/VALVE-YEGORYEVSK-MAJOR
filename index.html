@@ -1056,6 +1056,7 @@ async function submitNews(){
 async function renderNewsFeed(){
   const el=document.getElementById('news-feed');
   if(!el)return;
+  openComments={};
   el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">Загрузка...</div>`;
   const news=await sbGetNews();
   if(!news.length){
@@ -1085,8 +1086,115 @@ async function renderNewsFeed(){
       </div>
       <div style="font-size:14px;line-height:1.6;color:var(--text);white-space:pre-wrap">${n.content}</div>
       ${n.image_url?`<img src="${n.image_url}" style="width:100%;max-height:400px;object-fit:cover;border-radius:10px;margin-top:12px">`:''}
+      <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px">
+        <button onclick="toggleComments('${n.id}')" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:12px;font-family:inherit;display:flex;align-items:center;gap:5px;padding:0">
+          💬 Комментарии
+        </button>
+        <div id="comments-${n.id}" style="display:none;margin-top:10px">
+          <div id="comments-inner-${n.id}"></div>
+        </div>
+      </div>
     </div>`;
   }).join('');
+}
+
+async function sbGetComments(newsId){
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments?news_id=eq.${newsId}&select=*&order=created_at.asc`,{
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}
+    });
+    return await r.json();
+  }catch(e){return[];}
+}
+async function sbPostComment(newsId,author,content){
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments`,{
+      method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({news_id:newsId,author_name:author,content})
+    });
+    return r.ok;
+  }catch(e){return false;}
+}
+async function sbDeleteComment(id){
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments?id=eq.${id}`,{
+      method:'DELETE',
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Prefer':'return=minimal'}
+    });
+    return r.ok;
+  }catch(e){return false;}
+}
+
+let openComments={};
+
+async function toggleComments(newsId){
+  openComments[newsId]=!openComments[newsId];
+  const el=document.getElementById('comments-'+newsId);
+  if(!el)return;
+  if(openComments[newsId]){
+    el.style.display='block';
+    await renderComments(newsId);
+  }else{
+    el.style.display='none';
+  }
+}
+
+async function renderComments(newsId){
+  const el=document.getElementById('comments-inner-'+newsId);
+  if(!el)return;
+  el.innerHTML=`<div style="color:var(--text3);font-size:12px;padding:8px 0">Загрузка...</div>`;
+  const comments=await sbGetComments(newsId);
+  const canPost=currentPlayer||isAdmin;
+  const authorName=isAdmin?'Админ':currentPlayer?currentPlayer.nickname:null;
+
+  const commentsHtml=comments.map(c=>{
+    const date=new Date(c.created_at);
+    const dateStr=date.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+    const cp=players.find(p=>p.name===c.author_name);
+    const ct=cp?teams[cp.team]:null;
+    const canDel=isAdmin||(currentPlayer&&currentPlayer.nickname===c.author_name);
+    const ava=ct?teamLogoHtml(ct,24,5):`<div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text2);flex-shrink:0">${c.author_name.substring(0,2).toUpperCase()}</div>`;
+    return`<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start">
+      ${ava}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+          <span style="font-size:12px;font-weight:700">${c.author_name}</span>
+          ${ct?`<span style="font-size:10px;color:${COLORS[ct.id]}">${ct.name}</span>`:''}
+          <span style="font-size:10px;color:var(--text3);margin-left:auto">${dateStr}</span>
+          ${canDel?`<button onclick="deleteComment('${c.id}','${newsId}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:11px;padding:0 4px">✕</button>`:''}
+        </div>
+        <div style="font-size:13px;color:var(--text);line-height:1.4">${c.content}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const inputHtml=canPost?`<div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+    <input id="comment-input-${newsId}" type="text" placeholder="Написать комментарий..." maxlength="300"
+      style="flex:1;height:34px;padding:0 10px;font-size:13px;background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);font-family:inherit;outline:none"
+      onkeydown="if(event.key==='Enter')submitComment('${newsId}','${authorName}')">
+    <button onclick="submitComment('${newsId}','${authorName}')"
+      style="padding:7px 14px;font-size:12px;font-weight:700;background:rgba(255,255,255,.1);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);cursor:pointer;font-family:inherit;white-space:nowrap">
+      Отправить
+    </button>
+  </div>`:`<div style="font-size:12px;color:var(--text3);margin-top:8px;text-align:center">Войди как игрок чтобы комментировать</div>`;
+
+  el.innerHTML=(comments.length?commentsHtml:`<div style="color:var(--text3);font-size:12px;padding:8px 0">Комментариев пока нет</div>`)+inputHtml;
+}
+
+async function submitComment(newsId,author){
+  const input=document.getElementById('comment-input-'+newsId);
+  if(!input)return;
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  await sbPostComment(newsId,author,text);
+  renderComments(newsId);
+}
+
+async function deleteComment(id,newsId){
+  await sbDeleteComment(id);
+  renderComments(newsId);
 }
 
 async function deleteNews(id){
