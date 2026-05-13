@@ -414,21 +414,18 @@ let sortKey='kills';
 
 function saveData(){
   try{
-    // Logos are large (base64) — save only in localStorage
-    const logos = teams.map(t=>({id:t.id, logo:t.logo}));
-    localStorage.setItem('ym_logos', JSON.stringify(logos));
+    localStorage.setItem('ym_teams', JSON.stringify(teams));
+    localStorage.setItem('ym_players', JSON.stringify(players));
+    localStorage.setItem('ym_matches', JSON.stringify(matches));
     const heroLogo = document.getElementById('hero-logo').dataset.img || null;
     if(heroLogo) localStorage.setItem('ym_hero_logo', heroLogo);
     else localStorage.removeItem('ym_hero_logo');
 
-    // Save teams WITHOUT logos to Supabase (small payload)
-    const teamsNoLogos = teams.map(t=>({id:t.id, name:t.name, logo:null}));
-    localStorage.setItem('ym_teams', JSON.stringify(teamsNoLogos));
-    localStorage.setItem('ym_players', JSON.stringify(players));
-    localStorage.setItem('ym_matches', JSON.stringify(matches));
-    sbSet('ym_teams', JSON.stringify(teamsNoLogos));
+    // Push everything to Supabase (logos are compressed ~5kb)
+    sbSet('ym_teams', JSON.stringify(teams));
     sbSet('ym_players', JSON.stringify(players));
     sbSet('ym_matches', JSON.stringify(matches));
+    if(heroLogo) sbSet('ym_hero_logo', heroLogo);
 
     const ind=document.getElementById('save-indicator');
     if(ind){ind.style.opacity='1';clearTimeout(ind._t);ind._t=setTimeout(()=>ind.style.opacity='0',1800);}
@@ -437,25 +434,23 @@ function saveData(){
 
 async function loadData(){
   try{
-    const[rt,rp,rm]=await Promise.all([sbGet('ym_teams'),sbGet('ym_players'),sbGet('ym_matches')]);
+    const[rt,rp,rm,rh]=await Promise.all([
+      sbGet('ym_teams'),sbGet('ym_players'),sbGet('ym_matches'),sbGet('ym_hero_logo')
+    ]);
     if(rt)teams=JSON.parse(rt);else{const l=localStorage.getItem('ym_teams');if(l)teams=JSON.parse(l);}
     if(rp)players=JSON.parse(rp);else{const l=localStorage.getItem('ym_players');if(l)players=JSON.parse(l);}
     const rawM=rm||(()=>{const l=localStorage.getItem('ym_matches');return l||null;})();
     if(rawM){const p=JSON.parse(rawM);matches=p.map((o,i)=>o.maps?o:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
+    const heroLogo=rh||localStorage.getItem('ym_hero_logo');
+    if(heroLogo) setTimeout(()=>applyHeroLogo(heroLogo),0);
   }catch(e){
     try{
       const t=localStorage.getItem('ym_teams');if(t)teams=JSON.parse(t);
       const p=localStorage.getItem('ym_players');if(p)players=JSON.parse(p);
       const m=localStorage.getItem('ym_matches');if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?o:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
+      const h=localStorage.getItem('ym_hero_logo');if(h)setTimeout(()=>applyHeroLogo(h),0);
     }catch(e2){}
   }
-  // Always restore logos from localStorage (device-local)
-  try{
-    const logos=JSON.parse(localStorage.getItem('ym_logos')||'[]');
-    logos.forEach(l=>{ const t=teams.find(x=>x.id===l.id); if(t)t.logo=l.logo; });
-    const heroLogo=localStorage.getItem('ym_hero_logo');
-    if(heroLogo) applyHeroLogo(heroLogo);
-  }catch(e){}
 }
 
 function kd(p){return p.deaths>0?p.kills/p.deaths:p.kills>0?p.kills:0;}
@@ -481,6 +476,26 @@ function teamLogoHtml(t,size=28,r=6){
   return`<div style="width:${size}px;height:${size}px;border-radius:${r}px;background:${COLORS[t.id]}20;border:1px solid ${COLORS[t.id]}40;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${Math.round(size*.38)}px;color:${COLORS[t.id]};flex-shrink:0;letter-spacing:-.3px">${t.name.substring(0,2).toUpperCase()}</div>`;
 }
 function loadImage(file,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(file);}
+
+function compressImage(file, maxSize, cb){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      if(w > maxSize || h > maxSize){
+        if(w > h){ h = Math.round(h * maxSize / w); w = maxSize; }
+        else { w = Math.round(w * maxSize / h); h = maxSize; }
+      }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      cb(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 
 const PLACES=[{cls:'p1',label:'🥇 1-е место'},{cls:'p2',label:'🥈 2-е место'},{cls:'p3',label:'🥉 3-е место'},{cls:'p4',label:'4-е место'}];
 
@@ -619,7 +634,7 @@ function applyHeroLogo(src){
 }
 function uploadHeroLogo(input){
   if(!isAdmin||!input.files[0])return;
-  loadImage(input.files[0],url=>{
+  compressImage(input.files[0], 128, url=>{
     applyHeroLogo(url);
     saveData();
   });
@@ -646,11 +661,17 @@ function setHeroLogoClickable(on){
     if(overlay)overlay.style.opacity='0';
   }
 }
-function uploadTeamLogo(id,input){if(!input.files[0])return;loadImage(input.files[0],url=>{teams[id].logo=url;saveData();renderGroup();renderMatches();renderStats();renderSettings();});}
+function uploadTeamLogo(id,input){
+  if(!input.files[0])return;
+  compressImage(input.files[0], 128, url=>{
+    teams[id].logo=url;
+    saveData();renderGroup();renderMatches();renderStats();renderSettings();
+  });
+}
 function removeTeamLogo(id){teams[id].logo=null;saveData();renderGroup();renderMatches();renderStats();renderSettings();}
 function uploadHeroLogoFromSettings(input){
   if(!input.files[0])return;
-  loadImage(input.files[0],url=>{
+  compressImage(input.files[0], 128, url=>{
     applyHeroLogo(url);
     saveData();
     renderSettings();
