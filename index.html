@@ -693,10 +693,20 @@ function saveData(){
   }catch(e){}
 }
 
+async function sbGetWithTimeout(key, ms=4000){
+  return Promise.race([
+    sbGet(key),
+    new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))
+  ]);
+}
+
 async function loadData(){
   try{
     const[rt,rp,rm,rh]=await Promise.all([
-      sbGet('ym_teams'),sbGet('ym_players'),sbGet('ym_matches'),sbGet('ym_hero_logo')
+      sbGetWithTimeout('ym_teams'),
+      sbGetWithTimeout('ym_players'),
+      sbGetWithTimeout('ym_matches'),
+      sbGetWithTimeout('ym_hero_logo')
     ]);
     if(rt)teams=JSON.parse(rt);else{const l=localStorage.getItem('ym_teams');if(l)teams=JSON.parse(l);}
     if(rp)players=JSON.parse(rp);else{const l=localStorage.getItem('ym_players');if(l)players=JSON.parse(l);}
@@ -705,10 +715,11 @@ async function loadData(){
     const heroLogo=rh||localStorage.getItem('ym_hero_logo');
     if(heroLogo) setTimeout(()=>applyHeroLogo(heroLogo),0);
   }catch(e){
+    // fallback to localStorage
     try{
       const t=localStorage.getItem('ym_teams');if(t)teams=JSON.parse(t);
       const p=localStorage.getItem('ym_players');if(p)players=JSON.parse(p);
-      const m=localStorage.getItem('ym_matches');if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?o:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps()});}
+      const m=localStorage.getItem('ym_matches');if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?{...o,veto:o.veto||[],resultPosted:o.resultPosted||false,maps:o.maps.map(mp=>({...emptyMap(),...mp}))}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[],resultPosted:false});}
       const h=localStorage.getItem('ym_hero_logo');if(h)setTimeout(()=>applyHeroLogo(h),0);
     }catch(e2){}
   }
@@ -1693,12 +1704,16 @@ function showSection(name,btn){document.querySelectorAll(’.section’).forEach
 function resetAll(){if(!confirm(‘Сбросить все данные? Это нельзя отменить.’))return;localStorage.clear();location.reload();}
 
 document.body.classList.add(‘readonly’);
+// Safety: hide loader after 6 seconds no matter what
+setTimeout(()=>document.getElementById(‘loader’).classList.add(‘hide’),6000);
 (async()=>{
+try{
 await loadData();
+}catch(e){}
 const sel=document.getElementById(‘team-filter’);
 teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel.appendChild(o);});
 renderGroup();renderMatches();renderStats();
-setTimeout(()=>document.getElementById(‘loader’).classList.add(‘hide’),500);
+setTimeout(()=>document.getElementById(‘loader’).classList.add(‘hide’),300);
 })();
 </script>
 
