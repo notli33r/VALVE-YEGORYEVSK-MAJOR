@@ -403,11 +403,7 @@ tbody td{padding:10px 8px;font-size:12px}
 </head>
 <body>
 
-<div id="loader">
-  <div class="loader-icon">CS</div>
-  <div class="loader-bar"><div class="loader-bar-inner"></div></div>
-  <div class="loader-text">Загрузка турнира...</div>
-</div>
+<!-- no loader -->
 
 <div class="modal-bg" id="map-stats-modal">
   <div class="modal-box" style="width:min(520px,calc(100vw - 20px));max-height:90vh;overflow-y:auto;padding:20px">
@@ -1704,21 +1700,13 @@ function showSection(name,btn){document.querySelectorAll(’.section’).forEach
 function resetAll(){if(!confirm(‘Сбросить все данные? Это нельзя отменить.’))return;localStorage.clear();location.reload();}
 
 document.body.classList.add(‘readonly’);
-// Hide loader immediately - don’t wait for Supabase
-document.addEventListener(‘DOMContentLoaded’,()=>{
-setTimeout(()=>document.getElementById(‘loader’).classList.add(‘hide’),100);
-});
-setTimeout(()=>document.getElementById(‘loader’).classList.add(‘hide’),1000);
 (async()=>{
-try{
-await loadData();
-}catch(e){console.error(‘loadData error:’,e);}
+try{ await loadData(); }catch(e){}
 try{
 const sel=document.getElementById(‘team-filter’);
 teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel.appendChild(o);});
 renderGroup();renderMatches();renderStats();
-}catch(e){console.error(‘render error:’,e);}
-document.getElementById(‘loader’).classList.add(‘hide’);
+}catch(e){console.error(e);}
 })();
 </script>
 
