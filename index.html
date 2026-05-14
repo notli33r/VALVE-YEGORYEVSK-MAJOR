@@ -1701,12 +1701,26 @@ function resetAll(){if(!confirm(‘Сбросить все данные? Это 
 
 document.body.classList.add(‘readonly’);
 (async()=>{
-try{ await loadData(); }catch(e){}
+// First render with localStorage data immediately
 try{
+const t=localStorage.getItem(‘ym_teams’);if(t)teams=JSON.parse(t);
+const p=localStorage.getItem(‘ym_players’);if(p)players=JSON.parse(p);
+const m=localStorage.getItem(‘ym_matches’);if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?{…o,veto:o.veto||[],resultPosted:o.resultPosted||false,maps:o.maps.map(mp=>({…emptyMap(),…mp}))}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[],resultPosted:false});}
+const h=localStorage.getItem(‘ym_hero_logo’);if(h)applyHeroLogo(h);
+}catch(e){}
 const sel=document.getElementById(‘team-filter’);
 teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel.appendChild(o);});
 renderGroup();renderMatches();renderStats();
-}catch(e){console.error(e);}
+
+// Then load from Supabase and re-render
+try{
+await loadData();
+// Rebuild filter dropdown
+const sel2=document.getElementById(‘team-filter’);
+sel2.innerHTML=’<option value="all">Все команды</option>’;
+teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel2.appendChild(o);});
+renderGroup();renderMatches();renderStats();
+}catch(e){}
 })();
 </script>
 
