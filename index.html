@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -45,33 +44,33 @@ body::before{
 #loader{position:fixed;inset:0;z-index:9999;background:#050814;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .6s,visibility .6s}
 #loader.hide{opacity:0;visibility:hidden;pointer-events:none}
 .loader-icon{
-width:62px;height:62px;border-radius:16px;
-background:linear-gradient(135deg,rgba(232,53,53,.9),rgba(180,20,20,.8));
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,100,100,.4);
-box-shadow:0 0 40px rgba(232,53,53,.6),inset 0 1px 0 rgba(255,255,255,.2);
-display:flex;align-items:center;justify-content:center;
-font-weight:900;font-size:22px;color:white;
-animation:lpulse 1.2s ease-in-out infinite;
+  width:62px;height:62px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(232,53,53,.9),rgba(180,20,20,.8));
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,100,100,.4);
+  box-shadow:0 0 40px rgba(232,53,53,.6),inset 0 1px 0 rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:22px;color:white;
+  animation:lpulse 1.2s ease-in-out infinite;
 }
 @keyframes lpulse{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(232,53,53,.5)}50%{transform:scale(1.06);box-shadow:0 0 70px rgba(232,53,53,.8)}}
 .loader-bar{width:200px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
-.loader-bar-inner{height:100%;width:0;background:linear-gradient(90deg,var(–red),#ff8c00);border-radius:2px;animation:lbar 1.8s ease-out forwards}
+.loader-bar-inner{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff8c00);border-radius:2px;animation:lbar 1.8s ease-out forwards}
 @keyframes lbar{0%{width:0}50%{width:60%}100%{width:100%}}
-.loader-text{font-size:11px;color:var(–text3);letter-spacing:.18em;text-transform:uppercase}
+.loader-text{font-size:11px;color:var(--text3);letter-spacing:.18em;text-transform:uppercase}
 
 /* HERO */
 .hero{
-position:relative;overflow:hidden;
-background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.02) 100%);
-border-bottom:1px solid var(–border-glass);
-backdrop-filter:blur(40px);
--webkit-backdrop-filter:blur(40px);
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.02) 100%);
+  border-bottom:1px solid var(--border-glass);
+  backdrop-filter:blur(40px);
+  -webkit-backdrop-filter:blur(40px);
 }
 .hero::before{
-content:’’;position:absolute;inset:0;
-background:radial-gradient(ellipse 80% 100% at 50% -20%,rgba(232,53,53,.15) 0%,transparent 60%);
-pointer-events:none;
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 100% at 50% -20%,rgba(232,53,53,.15) 0%,transparent 60%);
+  pointer-events:none;
 }
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,transparent,rgba(0,0,0,.5) 30%,rgba(0,0,0,.5) 70%,transparent);pointer-events:none}
 .hero-glow{display:none}
@@ -79,56 +78,56 @@ pointer-events:none;
 .hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap}
 .hero-brand{display:flex;align-items:center;gap:14px}
 .hero-logo{
-width:50px;height:50px;border-radius:14px;
-background:linear-gradient(135deg,rgba(232,53,53,.85),rgba(140,10,10,.7));
-backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-border:1px solid rgba(255,120,120,.35);
-box-shadow:0 8px 32px rgba(232,53,53,.5),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(0,0,0,.2);
-display:flex;align-items:center;justify-content:center;
-font-weight:900;font-size:18px;color:white;flex-shrink:0;
-overflow:hidden;position:relative;
+  width:50px;height:50px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(232,53,53,.85),rgba(140,10,10,.7));
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,120,120,.35);
+  box-shadow:0 8px 32px rgba(232,53,53,.5),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(0,0,0,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:18px;color:white;flex-shrink:0;
+  overflow:hidden;position:relative;
 }
-.hero-logo::after{content:’’;position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.15),transparent);border-radius:14px 14px 0 0}
-.hero-title{font-size:21px;font-weight:800;letter-spacing:.03em;color:var(–text)}
-.hero-sub{font-size:11px;color:var(–text2);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
+.hero-logo::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.15),transparent);border-radius:14px 14px 0 0}
+.hero-title{font-size:21px;font-weight:800;letter-spacing:.03em;color:var(--text)}
+.hero-sub{font-size:11px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
 .hero-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .hero-badge{
-background:rgba(232,53,53,.15);
-border:1px solid rgba(232,53,53,.3);
-backdrop-filter:blur(10px);
-border-radius:20px;padding:6px 16px;
-font-size:11px;font-weight:700;color:var(–red);
-letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
+  background:rgba(232,53,53,.15);
+  border:1px solid rgba(232,53,53,.3);
+  backdrop-filter:blur(10px);
+  border-radius:20px;padding:6px 16px;
+  font-size:11px;font-weight:700;color:var(--red);
+  letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;
 }
 .admin-btn{
-display:flex;align-items:center;gap:6px;padding:7px 16px;font-size:12px;font-weight:600;
-background:var(–glass);
-border:1px solid var(–border-glass);
-backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-border-radius:20px;color:var(–text2);cursor:pointer;transition:all .2s;white-space:nowrap;
--webkit-appearance:none;appearance:none;font-family:inherit;
-box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  display:flex;align-items:center;gap:6px;padding:7px 16px;font-size:12px;font-weight:600;
+  background:var(--glass);
+  border:1px solid var(--border-glass);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-radius:20px;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap;
+  -webkit-appearance:none;appearance:none;font-family:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
 }
-.admin-btn:hover{background:var(–glass2);color:var(–text);border-color:var(–border-glass2)}
-.admin-btn.active{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.3);color:var(–green)}
+.admin-btn:hover{background:var(--glass2);color:var(--text);border-color:var(--border-glass2)}
+.admin-btn.active{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.3);color:var(--green)}
 
 /* NAV */
 nav{
-position:relative;z-index:1;display:flex;gap:0;padding:0 24px;
-border-top:1px solid var(–border-glass);
-background:rgba(255,255,255,.03);
-backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  position:relative;z-index:1;display:flex;gap:0;padding:0 24px;
+  border-top:1px solid var(--border-glass);
+  background:rgba(255,255,255,.03);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
 nav::-webkit-scrollbar{display:none}
 .nav-btn{
-padding:14px 20px;font-size:13px;font-weight:600;color:var(–text2);
-background:none;border:none;border-bottom:2px solid transparent;
-cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;
-letter-spacing:.02em;-webkit-appearance:none;appearance:none;font-family:inherit;
+  padding:14px 20px;font-size:13px;font-weight:600;color:var(--text2);
+  background:none;border:none;border-bottom:2px solid transparent;
+  cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;
+  letter-spacing:.02em;-webkit-appearance:none;appearance:none;font-family:inherit;
 }
-.nav-btn:hover{color:var(–text)}
-.nav-btn.active{color:white;border-bottom-color:var(–red);text-shadow:0 0 20px rgba(232,53,53,.5)}
+.nav-btn:hover{color:var(--text)}
+.nav-btn.active{color:white;border-bottom-color:var(--red);text-shadow:0 0 20px rgba(232,53,53,.5)}
 
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:28px 20px}
@@ -136,170 +135,170 @@ main{max-width:1100px;margin:0 auto;padding:28px 20px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
 .sec-title{
-font-size:19px;font-weight:800;letter-spacing:.02em;margin-bottom:18px;
-display:flex;align-items:center;gap:10px;color:var(–text);
+  font-size:19px;font-weight:800;letter-spacing:.02em;margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;color:var(--text);
 }
 .sec-title::before{
-content:’’;width:3px;height:20px;
-background:linear-gradient(180deg,var(–red),transparent);
-border-radius:2px;flex-shrink:0;
-box-shadow:0 0 8px var(–red);
+  content:'';width:3px;height:20px;
+  background:linear-gradient(180deg,var(--red),transparent);
+  border-radius:2px;flex-shrink:0;
+  box-shadow:0 0 8px var(--red);
 }
 
 /* GLASS CARD base */
 .glass-card{
-background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.05) 100%);
-border:1px solid var(–border-glass);
-border-radius:16px;
-backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(0,0,0,.1);
-position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.05) 100%);
+  border:1px solid var(--border-glass);
+  border-radius:16px;
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(0,0,0,.1);
+  position:relative;overflow:hidden;
 }
 .glass-card::before{
-content:’’;position:absolute;top:0;left:0;right:0;height:1px;
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
 }
 
 /* TABLE */
 .table-wrap{
-background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
-border:1px solid var(–border-glass);
-border-radius:16px;overflow:hidden;
-backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-box-shadow:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.1);
-position:relative;
+  background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid var(--border-glass);
+  border-radius:16px;overflow:hidden;
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  box-shadow:0 8px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.1);
+  position:relative;
 }
-.table-wrap::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.table-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 thead th{
-padding:11px 14px;font-size:10px;font-weight:700;color:var(–text3);
-text-transform:uppercase;letter-spacing:.1em;
-background:rgba(255,255,255,.05);
-border-bottom:1px solid var(–border-glass);text-align:left;
+  padding:11px 14px;font-size:10px;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.1em;
+  background:rgba(255,255,255,.05);
+  border-bottom:1px solid var(--border-glass);text-align:left;
 }
 .tc{text-align:center!important}
 tbody tr{transition:background .1s}
 tbody tr:hover{background:rgba(255,255,255,.05)}
-tbody td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:var(–text)}
+tbody td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--text)}
 tbody tr:last-child td{border-bottom:none}
 .team-cell{display:flex;align-items:center;gap:10px;font-weight:600}
 .place-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.02em;white-space:nowrap;backdrop-filter:blur(10px)}
-.p1{background:rgba(240,165,0,.18);color:var(–gold);border:1px solid rgba(240,165,0,.3);box-shadow:0 0 12px rgba(240,165,0,.2)}
-.p2{background:rgba(96,165,250,.15);color:var(–blue);border:1px solid rgba(96,165,250,.25)}
-.p3{background:rgba(255,255,255,.07);color:var(–text2);border:1px solid var(–border-glass)}
+.p1{background:rgba(240,165,0,.18);color:var(--gold);border:1px solid rgba(240,165,0,.3);box-shadow:0 0 12px rgba(240,165,0,.2)}
+.p2{background:rgba(96,165,250,.15);color:var(--blue);border:1px solid rgba(96,165,250,.25)}
+.p3{background:rgba(255,255,255,.07);color:var(--text2);border:1px solid var(--border-glass)}
 .p4{background:rgba(232,53,53,.12);color:#ff6b6b;border:1px solid rgba(232,53,53,.2)}
-.diff-pos{color:var(–green);font-weight:700}.diff-neg{color:var(–red2);font-weight:700}.diff-zero{color:var(–text3)}
+.diff-pos{color:var(--green);font-weight:700}.diff-neg{color:var(--red2);font-weight:700}.diff-zero{color:var(--text3)}
 
 /* MATCHES */
-.round-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(–text3);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
-.round-label::after{content:’’;flex:1;height:1px;background:var(–border-glass)}
+.round-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.round-label::after{content:'';flex:1;height:1px;background:var(--border-glass)}
 .round-label:first-child{margin-top:0}
 .match-card{
-background:linear-gradient(135deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.04) 100%);
-border:1px solid var(–border-glass);
-border-radius:18px;padding:18px 20px;
-backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-box-shadow:0 4px 24px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.12);
-margin-bottom:10px;transition:border-color .2s,box-shadow .2s;
-position:relative;
+  background:linear-gradient(135deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid var(--border-glass);
+  border-radius:18px;padding:18px 20px;
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  box-shadow:0 4px 24px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.12);
+  margin-bottom:10px;transition:border-color .2s,box-shadow .2s;
+  position:relative;
 }
-.match-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);pointer-events:none;z-index:0}
-.match-card:hover{background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.07) 100%);border-color:var(–border-glass2);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15)}
+.match-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);pointer-events:none;z-index:0}
+.match-card:hover{background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.07) 100%);border-color:var(--border-glass2);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15)}
 .match-layout{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
 .match-team{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700}
 .match-team.right{flex-direction:row-reverse}
-.win-tag{font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:var(–green);font-weight:700;letter-spacing:.05em;border:1px solid rgba(74,222,128,.25);backdrop-filter:blur(10px)}
+.win-tag{font-size:10px;padding:3px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:var(--green);font-weight:700;letter-spacing:.05em;border:1px solid rgba(74,222,128,.25);backdrop-filter:blur(10px)}
 .score-center{text-align:center}
 .score-big{font-size:32px;font-weight:900;line-height:1;letter-spacing:.02em}
-.score-label{font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
+.score-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.14em;margin-top:4px}
 
 /* MAPS */
 .map-row{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;display:flex;flex-direction:column;gap:7px;position:relative;z-index:20}
 .map-entry{
-display:grid;grid-template-columns:54px 1fr auto 1fr;align-items:center;gap:10px;
-background:rgba(255,255,255,.05);
-border-radius:10px;padding:8px 12px;
-border:1px solid rgba(255,255,255,.1);
-backdrop-filter:blur(10px);
-position:relative;z-index:20;
+  display:grid;grid-template-columns:54px 1fr auto 1fr;align-items:center;gap:10px;
+  background:rgba(255,255,255,.05);
+  border-radius:10px;padding:8px 12px;
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(10px);
+  position:relative;z-index:20;
 }
-.map-num{font-size:10px;font-weight:700;color:var(–text3);text-transform:uppercase;letter-spacing:.07em}
+.map-num{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
 .map-sel{
-height:28px;padding:0 8px;font-size:12px;font-weight:500;
-background:rgba(255,255,255,.08);border:1px solid var(–border-glass);
-border-radius:8px;color:var(–text2);cursor:pointer;transition:border-color .15s;
-backdrop-filter:blur(10px);-webkit-appearance:none;font-family:inherit;
+  height:28px;padding:0 8px;font-size:12px;font-weight:500;
+  background:rgba(255,255,255,.08);border:1px solid var(--border-glass);
+  border-radius:8px;color:var(--text2);cursor:pointer;transition:border-color .15s;
+  backdrop-filter:blur(10px);-webkit-appearance:none;font-family:inherit;
 }
-.map-sel:focus{outline:none;border-color:var(–red);color:var(–text)}
+.map-sel:focus{outline:none;border-color:var(--red);color:var(--text)}
 .map-score-box{display:flex;align-items:center;gap:6px;justify-content:center}
 .map-sc{
-width:42px;height:30px;text-align:center;font-size:14px;font-weight:700;
-background:rgba(255,255,255,.08);border:1px solid var(–border-glass);
-border-radius:8px;color:var(–text);transition:all .15s;font-family:inherit;
-position:relative;z-index:30;pointer-events:auto;cursor:text;
+  width:42px;height:30px;text-align:center;font-size:14px;font-weight:700;
+  background:rgba(255,255,255,.08);border:1px solid var(--border-glass);
+  border-radius:8px;color:var(--text);transition:all .15s;font-family:inherit;
+  position:relative;z-index:30;pointer-events:auto;cursor:text;
 }
-.map-sc:focus{outline:none;border-color:var(–red)}
-.map-sc.winner{border-color:rgba(74,222,128,.5);color:var(–green);background:rgba(74,222,128,.1);box-shadow:0 0 12px rgba(74,222,128,.2)}
-.map-sc.loser{color:var(–text3)}
+.map-sc:focus{outline:none;border-color:var(--red)}
+.map-sc.winner{border-color:rgba(74,222,128,.5);color:var(--green);background:rgba(74,222,128,.1);box-shadow:0 0 12px rgba(74,222,128,.2)}
+.map-sc.loser{color:var(--text3)}
 .map-result{font-size:11px;font-weight:600;text-align:right}
 
 /* STATS */
 .stats-controls{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
 .filter-sel{
-padding:7px 12px;font-size:13px;
-background:rgba(255,255,255,.08);border:1px solid var(–border-glass);
-border-radius:10px;color:var(–text);cursor:pointer;
--webkit-appearance:none;appearance:none;font-family:inherit;
-backdrop-filter:blur(10px);
+  padding:7px 12px;font-size:13px;
+  background:rgba(255,255,255,.08);border:1px solid var(--border-glass);
+  border-radius:10px;color:var(--text);cursor:pointer;
+  -webkit-appearance:none;appearance:none;font-family:inherit;
+  backdrop-filter:blur(10px);
 }
-.filter-sel:focus{outline:none;border-color:var(–red)}
-.sep-text{font-size:12px;color:var(–text3)}
+.filter-sel:focus{outline:none;border-color:var(--red)}
+.sep-text{font-size:12px;color:var(--text3)}
 .sort-pill{
-padding:6px 14px;font-size:12px;font-weight:600;
-background:rgba(255,255,255,.06);border:1px solid var(–border-glass);
-border-radius:20px;color:var(–text2);cursor:pointer;transition:all .18s;
--webkit-appearance:none;appearance:none;font-family:inherit;
-backdrop-filter:blur(10px);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  padding:6px 14px;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,.06);border:1px solid var(--border-glass);
+  border-radius:20px;color:var(--text2);cursor:pointer;transition:all .18s;
+  -webkit-appearance:none;appearance:none;font-family:inherit;
+  backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
 }
-.sort-pill:hover{background:rgba(255,255,255,.1);color:var(–text);border-color:var(–border-glass2)}
+.sort-pill:hover{background:rgba(255,255,255,.1);color:var(--text);border-color:var(--border-glass2)}
 .sort-pill.active{
-background:linear-gradient(135deg,rgba(232,53,53,.8),rgba(180,20,20,.7));
-border-color:rgba(255,100,100,.4);color:white;
-box-shadow:0 0 16px rgba(232,53,53,.4),inset 0 1px 0 rgba(255,255,255,.15);
+  background:linear-gradient(135deg,rgba(232,53,53,.8),rgba(180,20,20,.7));
+  border-color:rgba(255,100,100,.4);color:white;
+  box-shadow:0 0 16px rgba(232,53,53,.4),inset 0 1px 0 rgba(255,255,255,.15);
 }
 .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .stat-in{
-width:58px;height:30px;text-align:center;font-size:13px;font-weight:600;
-background:rgba(255,255,255,.08);border:1px solid var(–border-glass);
-border-radius:8px;color:var(–text);transition:border-color .15s;font-family:inherit;
+  width:58px;height:30px;text-align:center;font-size:13px;font-weight:600;
+  background:rgba(255,255,255,.08);border:1px solid var(--border-glass);
+  border-radius:8px;color:var(--text);transition:border-color .15s;font-family:inherit;
 }
-.stat-in:focus{outline:none;border-color:var(–red)}
-.kd-good{color:var(–green);font-weight:700;text-shadow:0 0 8px rgba(74,222,128,.4)}
-.kd-bad{color:var(–red2);font-weight:700}
+.stat-in:focus{outline:none;border-color:var(--red)}
+.kd-good{color:var(--green);font-weight:700;text-shadow:0 0 8px rgba(74,222,128,.4)}
+.kd-bad{color:var(--red2);font-weight:700}
 
 /* SETTINGS */
 .settings-card{
-background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
-border:1px solid var(–border-glass);border-radius:14px;padding:18px;
-backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid var(--border-glass);border-radius:14px;padding:18px;
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
 }
 .settings-card-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08)}
 .settings-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .settings-row:last-child{border-bottom:none}
 .settings-in{
-flex:1;height:34px;padding:0 10px;font-size:13px;
-background:rgba(255,255,255,.07);border:1px solid var(–border-glass);
-border-radius:10px;color:var(–text);transition:border-color .15s;font-family:inherit;
-backdrop-filter:blur(10px);
+  flex:1;height:34px;padding:0 10px;font-size:13px;
+  background:rgba(255,255,255,.07);border:1px solid var(--border-glass);
+  border-radius:10px;color:var(--text);transition:border-color .15s;font-family:inherit;
+  backdrop-filter:blur(10px);
 }
-.settings-in:focus{outline:none;border-color:var(–red)}
+.settings-in:focus{outline:none;border-color:var(--red)}
 .full-card{
-background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
-border:1px solid var(–border-glass);border-radius:14px;padding:20px;margin-bottom:20px;
-backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+  background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.04) 100%);
+  border:1px solid var(--border-glass);border-radius:14px;padding:20px;margin-bottom:20px;
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
 }
 .full-card-title{font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px}
 .players-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -308,7 +307,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
 .team-logo-wrap{position:relative;cursor:pointer;flex-shrink:0}
 .team-logo-wrap input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .team-logo{display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid;transition:all .15s;position:relative;backdrop-filter:blur(10px)}
-.team-logo-wrap:hover .team-logo{border-color:var(–red)!important;box-shadow:0 0 16px rgba(232,53,53,.3)}
+.team-logo-wrap:hover .team-logo{border-color:var(--red)!important;box-shadow:0 0 16px rgba(232,53,53,.3)}
 .team-logo img{width:100%;height:100%;object-fit:cover}
 .team-logo-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:10px;color:white;font-weight:700;letter-spacing:.06em;pointer-events:none}
 .team-logo-wrap:hover .team-logo-overlay{opacity:1}
@@ -317,43 +316,43 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:200;align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
 .modal-box{
-background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.06) 100%);
-border:1px solid var(–border-glass2);
-border-radius:22px;padding:28px;width:min(360px,calc(100vw - 24px));
-backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
-box-shadow:0 24px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.1);
-position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.06) 100%);
+  border:1px solid var(--border-glass2);
+  border-radius:22px;padding:28px;width:min(360px,calc(100vw - 24px));
+  backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+  box-shadow:0 24px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.1);
+  position:relative;overflow:hidden;
 }
-.modal-box::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
-.modal-box h3{font-size:18px;font-weight:800;margin-bottom:6px;color:var(–text)}
-.modal-box p{font-size:13px;color:var(–text2);margin-bottom:18px;line-height:1.5}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
+.modal-box h3{font-size:18px;font-weight:800;margin-bottom:6px;color:var(--text)}
+.modal-box p{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.5}
 .modal-input{
-width:100%;height:46px;padding:0 14px;font-size:15px;
-background:rgba(255,255,255,.08);border:1px solid var(–border-glass);
-border-radius:12px;color:var(–text);margin-bottom:10px;transition:border-color .15s;
--webkit-appearance:none;appearance:none;font-family:inherit;
-backdrop-filter:blur(10px);
+  width:100%;height:46px;padding:0 14px;font-size:15px;
+  background:rgba(255,255,255,.08);border:1px solid var(--border-glass);
+  border-radius:12px;color:var(--text);margin-bottom:10px;transition:border-color .15s;
+  -webkit-appearance:none;appearance:none;font-family:inherit;
+  backdrop-filter:blur(10px);
 }
-.modal-input:focus{outline:none;border-color:var(–red);box-shadow:0 0 0 3px rgba(232,53,53,.15)}
-.modal-input::placeholder{color:var(–text3)}
-.modal-err{font-size:12px;color:var(–red2);margin-bottom:10px;min-height:18px}
+.modal-input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(232,53,53,.15)}
+.modal-input::placeholder{color:var(--text3)}
+.modal-err{font-size:12px;color:var(--red2);margin-bottom:10px;min-height:18px}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end}
 .btn-confirm{
-padding:11px 24px;font-size:13px;font-weight:700;
-background:linear-gradient(135deg,rgba(232,53,53,.9),rgba(160,10,10,.8));
-border:1px solid rgba(255,100,100,.3);border-radius:12px;color:white;cursor:pointer;
-box-shadow:0 4px 20px rgba(232,53,53,.4),inset 0 1px 0 rgba(255,255,255,.15);
-transition:all .15s;-webkit-appearance:none;appearance:none;font-family:inherit;
-backdrop-filter:blur(10px);
+  padding:11px 24px;font-size:13px;font-weight:700;
+  background:linear-gradient(135deg,rgba(232,53,53,.9),rgba(160,10,10,.8));
+  border:1px solid rgba(255,100,100,.3);border-radius:12px;color:white;cursor:pointer;
+  box-shadow:0 4px 20px rgba(232,53,53,.4),inset 0 1px 0 rgba(255,255,255,.15);
+  transition:all .15s;-webkit-appearance:none;appearance:none;font-family:inherit;
+  backdrop-filter:blur(10px);
 }
 .btn-confirm:active{transform:scale(.97)}
 .btn-cancel-m{
-padding:11px 18px;font-size:13px;font-weight:600;
-background:rgba(255,255,255,.07);border:1px solid var(–border-glass);
-border-radius:12px;color:var(–text2);cursor:pointer;transition:all .15s;
--webkit-appearance:none;appearance:none;font-family:inherit;backdrop-filter:blur(10px);
+  padding:11px 18px;font-size:13px;font-weight:600;
+  background:rgba(255,255,255,.07);border:1px solid var(--border-glass);
+  border-radius:12px;color:var(--text2);cursor:pointer;transition:all .15s;
+  -webkit-appearance:none;appearance:none;font-family:inherit;backdrop-filter:blur(10px);
 }
-.btn-cancel-m:active{background:rgba(255,255,255,.12);color:var(–text)}
+.btn-cancel-m:active{background:rgba(255,255,255,.12);color:var(--text)}
 
 /* READONLY */
 body.readonly .stat-in{pointer-events:none;opacity:.35}
@@ -367,39 +366,38 @@ body.readonly .sort-pill,body.readonly .filter-sel{pointer-events:auto;opacity:1
 
 /* MOBILE */
 @media(max-width:600px){
-.hero-inner{padding:22px 14px 0}
-.hero-logo{width:40px;height:40px;font-size:15px;border-radius:10px}
-.hero-title{font-size:15px}
-.hero-sub{display:none}
-.hero-badge{display:none}
-.admin-btn{padding:6px 12px;font-size:11px}
-.hero-top{margin-bottom:18px}
-.nav-btn{padding:12px 14px;font-size:12px}
-main{padding:16px 10px}
-.sec-title{font-size:16px;margin-bottom:14px}
-.col-hide{display:none}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-thead th{padding:9px 8px;font-size:9px}
-tbody td{padding:10px 8px;font-size:12px}
-.team-cell{gap:7px}
-.place-badge{font-size:10px;padding:3px 7px}
-.match-card{padding:12px 14px;border-radius:14px}
-.match-layout{gap:8px}
-.match-team{font-size:12px;gap:6px}
-.score-big{font-size:24px}
-.map-entry{grid-template-columns:44px 1fr auto 1fr!important;gap:5px}
-.map-sel{max-width:100%}
-.map-sel{font-size:11px;height:26px}
-.map-sc{width:36px;height:28px;font-size:13px}
-.stat-in{width:48px;height:27px;font-size:12px}
-.avatar{width:26px!important;height:26px!important;font-size:10px!important}
-.players-grid{grid-template-columns:1fr}
-.settings-card{padding:14px}
-.full-card{padding:14px}
-.modal-box{width:calc(100vw - 20px);padding:20px;border-radius:18px}
+  .hero-inner{padding:22px 14px 0}
+  .hero-logo{width:40px;height:40px;font-size:15px;border-radius:10px}
+  .hero-title{font-size:15px}
+  .hero-sub{display:none}
+  .hero-badge{display:none}
+  .admin-btn{padding:6px 12px;font-size:11px}
+  .hero-top{margin-bottom:18px}
+  .nav-btn{padding:12px 14px;font-size:12px}
+  main{padding:16px 10px}
+  .sec-title{font-size:16px;margin-bottom:14px}
+  .col-hide{display:none}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  thead th{padding:9px 8px;font-size:9px}
+  tbody td{padding:10px 8px;font-size:12px}
+  .team-cell{gap:7px}
+  .place-badge{font-size:10px;padding:3px 7px}
+  .match-card{padding:12px 14px;border-radius:14px}
+  .match-layout{gap:8px}
+  .match-team{font-size:12px;gap:6px}
+  .score-big{font-size:24px}
+  .map-entry{grid-template-columns:44px 1fr auto 1fr!important;gap:5px}
+  .map-sel{max-width:100%}
+  .map-sel{font-size:11px;height:26px}
+  .map-sc{width:36px;height:28px;font-size:13px}
+  .stat-in{width:48px;height:27px;font-size:12px}
+  .avatar{width:26px!important;height:26px!important;font-size:10px!important}
+  .players-grid{grid-template-columns:1fr}
+  .settings-card{padding:14px}
+  .full-card{padding:14px}
+  .modal-box{width:calc(100vw - 20px);padding:20px;border-radius:18px}
 }
 </style>
-
 </head>
 <body>
 
@@ -508,7 +506,6 @@ tbody td{padding:10px 8px;font-size:12px}
 </section>
 
 <!-- NEWS -->
-
 <section id="sec-news" class="section">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
     <div class="sec-title" style="margin-bottom:0">Новости</div>
@@ -519,7 +516,6 @@ tbody td{padding:10px 8px;font-size:12px}
 </section>
 
 <!-- MATCHES -->
-
 <section id="sec-matches" class="section">
   <div class="sec-title">Матчи</div>
   <div id="matches-container"></div>
@@ -1016,713 +1012,810 @@ function renderNewsPostArea(){
     <div style="background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--border-glass2);border-radius:16px;padding:18px;backdrop-filter:blur(30px)">
       <div style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--text)">✍️ Написать новость</div>
       <textarea id="news-text" placeholder="Что случилось? Напиши новость..." style="width:100%;min-height:100px;padding:12px;font-size:14px;background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:10px;color:var(--text);font-family:inherit;resize:vertical;outline:none;line-height:1.5"></textarea>
-
-```
-  <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">
-    <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:8px;padding:6px 12px">
-      📷 Добавить фото
-      <input type="file" accept="image/*" style="display:none" onchange="handleNewsImage(this)">
-    </label>
-    <div id="news-img-preview" style="display:none;align-items:center;gap:8px">
-      <img id="news-img-thumb" style="height:36px;border-radius:6px;object-fit:cover">
-      <button onclick="removeNewsImage()" style="background:none;border:none;color:var(--red2);cursor:pointer;font-size:16px">✕</button>
-    </div>
-    <button onclick="submitNews()" style="margin-left:auto;padding:8px 20px;font-size:13px;font-weight:700;background:linear-gradient(135deg,rgba(232,53,53,.85),rgba(160,10,10,.75));border:1px solid rgba(255,100,100,.3);border-radius:10px;color:white;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(232,53,53,.3)">
-      Опубликовать
-    </button>
-  </div>
-  <div id="news-post-err" style="font-size:12px;color:var(--red2);margin-top:6px;min-height:16px"></div>
-</div>`;
-```
-
+      <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">
+        <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:8px;padding:6px 12px">
+          📷 Добавить фото
+          <input type="file" accept="image/*" style="display:none" onchange="handleNewsImage(this)">
+        </label>
+        <div id="news-img-preview" style="display:none;align-items:center;gap:8px">
+          <img id="news-img-thumb" style="height:36px;border-radius:6px;object-fit:cover">
+          <button onclick="removeNewsImage()" style="background:none;border:none;color:var(--red2);cursor:pointer;font-size:16px">✕</button>
+        </div>
+        <button onclick="submitNews()" style="margin-left:auto;padding:8px 20px;font-size:13px;font-weight:700;background:linear-gradient(135deg,rgba(232,53,53,.85),rgba(160,10,10,.75));border:1px solid rgba(255,100,100,.3);border-radius:10px;color:white;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(232,53,53,.3)">
+          Опубликовать
+        </button>
+      </div>
+      <div id="news-post-err" style="font-size:12px;color:var(--red2);margin-top:6px;min-height:16px"></div>
+    </div>`;
 }
 
 function handleNewsImage(input){
-if(!input.files[0])return;
-compressImage(input.files[0],600,url=>{
-newsImageData=url;
-document.getElementById(‘news-img-thumb’).src=url;
-document.getElementById(‘news-img-preview’).style.display=‘flex’;
-});
+  if(!input.files[0])return;
+  compressImage(input.files[0],600,url=>{
+    newsImageData=url;
+    document.getElementById('news-img-thumb').src=url;
+    document.getElementById('news-img-preview').style.display='flex';
+  });
 }
 function removeNewsImage(){
-newsImageData=null;
-document.getElementById(‘news-img-preview’).style.display=‘none’;
+  newsImageData=null;
+  document.getElementById('news-img-preview').style.display='none';
 }
 
 async function submitNews(){
-const text=document.getElementById(‘news-text’).value.trim();
-if(!text){document.getElementById(‘news-post-err’).textContent=‘Напиши текст новости’;return;}
-const btn=document.querySelector(’#news-post-area button[onclick=“submitNews()”]’);
-btn.textContent=’…’;btn.disabled=true;
-const ok=await sbPostNews(currentPlayer.nickname,text,newsImageData);
-if(ok){
-document.getElementById(‘news-text’).value=’’;
-newsImageData=null;
-document.getElementById(‘news-img-preview’).style.display=‘none’;
-document.getElementById(‘news-post-err’).textContent=’’;
-renderNewsFeed();
-}else{
-document.getElementById(‘news-post-err’).textContent=‘Ошибка публикации’;
-}
-btn.textContent=‘Опубликовать’;btn.disabled=false;
+  const text=document.getElementById('news-text').value.trim();
+  if(!text){document.getElementById('news-post-err').textContent='Напиши текст новости';return;}
+  const btn=document.querySelector('#news-post-area button[onclick="submitNews()"]');
+  btn.textContent='...';btn.disabled=true;
+  const ok=await sbPostNews(currentPlayer.nickname,text,newsImageData);
+  if(ok){
+    document.getElementById('news-text').value='';
+    newsImageData=null;
+    document.getElementById('news-img-preview').style.display='none';
+    document.getElementById('news-post-err').textContent='';
+    renderNewsFeed();
+  }else{
+    document.getElementById('news-post-err').textContent='Ошибка публикации';
+  }
+  btn.textContent='Опубликовать';btn.disabled=false;
 }
 
 async function renderNewsFeed(){
-const el=document.getElementById(‘news-feed’);
-if(!el)return;
-openComments={};
-el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">Загрузка...</div>`;
-const news=await sbGetNews();
-if(!news.length){
-el.innerHTML=`<div style="text-align:center;padding:40px;color:var(--text3);font-size:14px">Новостей пока нет. Войди и напиши первую!</div>`;
-return;
-}
-el.innerHTML=news.map(n=>{
-const date=new Date(n.created_at);
-const dateStr=date.toLocaleDateString(‘ru-RU’,{day:‘numeric’,month:‘long’,hour:‘2-digit’,minute:‘2-digit’});
-const canDelete=isAdmin||(currentPlayer&&currentPlayer.nickname===n.author_name);
-// find player’s team logo
-const isSystem = n.author_name === ‘Система’;
-const authorPlayer=players.find(p=>p.name===n.author_name);
-const authorTeam=authorPlayer?teams[authorPlayer.team]:null;
-const avatarHtml= isSystem
-? `<div style="width:36px;height:36px;border-radius:50%;background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏆</div>`
-: authorTeam
-? teamLogoHtml(authorTeam,36,8)
-: `<div style="width:36px;height:36px;border-radius:50%;background:rgba(232,53,53,.2);border:1px solid rgba(232,53,53,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--red);flex-shrink:0">${n.author_name.substring(0,2).toUpperCase()}</div>`;
-const cardBg = isSystem
-? ‘linear-gradient(135deg,rgba(240,165,0,.12),rgba(240,165,0,.05))’
-: ‘linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04))’;
-return`<div style="background:${cardBg};border:1px solid ${isSystem?'rgba(240,165,0,.25)':'var(--border-glass)'};border-radius:16px;padding:18px;margin-bottom:12px;backdrop-filter:blur(20px);position:relative"> <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px"> <div style="display:flex;align-items:center;gap:10px"> ${avatarHtml} <div> <div style="font-weight:700;font-size:14px">${n.author_name}</div> <div style="font-size:11px;color:var(--text3)">${dateStr}${authorTeam?` · <span style="color:${COLORS[authorTeam.id]}">${authorTeam.name}</span>`:''}</div> </div> </div> ${canDelete?`<button onclick="deleteNews('${n.id}')" style="background:rgba(232,53,53,.1);border:1px solid rgba(232,53,53,.2);border-radius:6px;color:var(--red2);cursor:pointer;padding:4px 10px;font-size:11px;font-family:inherit">✕ Удалить</button>`:''} </div> <div style="font-size:14px;line-height:1.6;color:var(--text);white-space:pre-wrap">${n.content}</div> ${n.image_url?`<img src="${n.image_url}" style="width:100%;max-height:400px;object-fit:cover;border-radius:10px;margin-top:12px">`:''} <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px"> <button onclick="toggleComments('${n.id}')" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:12px;font-family:inherit;display:flex;align-items:center;gap:5px;padding:0"> 💬 Комментарии </button> <div id="comments-${n.id}" style="display:none;margin-top:10px"> <div id="comments-inner-${n.id}"></div> </div> </div> </div>`;
-}).join(’’);
+  const el=document.getElementById('news-feed');
+  if(!el)return;
+  openComments={};
+  el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">Загрузка...</div>`;
+  const news=await sbGetNews();
+  if(!news.length){
+    el.innerHTML=`<div style="text-align:center;padding:40px;color:var(--text3);font-size:14px">Новостей пока нет. Войди и напиши первую!</div>`;
+    return;
+  }
+  el.innerHTML=news.map(n=>{
+    const date=new Date(n.created_at);
+    const dateStr=date.toLocaleDateString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
+    const canDelete=isAdmin||(currentPlayer&&currentPlayer.nickname===n.author_name);
+    // find player's team logo
+    const isSystem = n.author_name === 'Система';
+    const authorPlayer=players.find(p=>p.name===n.author_name);
+    const authorTeam=authorPlayer?teams[authorPlayer.team]:null;
+    const avatarHtml= isSystem
+      ? `<div style="width:36px;height:36px;border-radius:50%;background:rgba(240,165,0,.2);border:1px solid rgba(240,165,0,.4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏆</div>`
+      : authorTeam
+        ? teamLogoHtml(authorTeam,36,8)
+        : `<div style="width:36px;height:36px;border-radius:50%;background:rgba(232,53,53,.2);border:1px solid rgba(232,53,53,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--red);flex-shrink:0">${n.author_name.substring(0,2).toUpperCase()}</div>`;
+    const cardBg = isSystem
+      ? 'linear-gradient(135deg,rgba(240,165,0,.12),rgba(240,165,0,.05))'
+      : 'linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04))';
+    return`<div style="background:${cardBg};border:1px solid ${isSystem?'rgba(240,165,0,.25)':'var(--border-glass)'};border-radius:16px;padding:18px;margin-bottom:12px;backdrop-filter:blur(20px);position:relative">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px">
+          ${avatarHtml}
+          <div>
+            <div style="font-weight:700;font-size:14px">${n.author_name}</div>
+            <div style="font-size:11px;color:var(--text3)">${dateStr}${authorTeam?' · <span style="color:'+COLORS[authorTeam.id]+'">'+authorTeam.name+'</span>':''}</div>
+          </div>
+        </div>
+        ${canDelete?`<button onclick="deleteNews('${n.id}')" style="background:rgba(232,53,53,.1);border:1px solid rgba(232,53,53,.2);border-radius:6px;color:var(--red2);cursor:pointer;padding:4px 10px;font-size:11px;font-family:inherit">✕ Удалить</button>`:''}
+      </div>
+      <div style="font-size:14px;line-height:1.6;color:var(--text);white-space:pre-wrap">${n.content}</div>
+      ${n.image_url?`<img src="${n.image_url}" style="width:100%;max-height:400px;object-fit:cover;border-radius:10px;margin-top:12px">`:''}
+      <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.07);padding-top:10px">
+        <button onclick="toggleComments('${n.id}')" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:12px;font-family:inherit;display:flex;align-items:center;gap:5px;padding:0">
+          💬 Комментарии
+        </button>
+        <div id="comments-${n.id}" style="display:none;margin-top:10px">
+          <div id="comments-inner-${n.id}"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 async function sbGetComments(newsId){
-try{
-const r=await fetch(`${SB_URL}/rest/v1/news_comments?news_id=eq.${newsId}&select=*&order=created_at.asc`,{
-headers:{‘apikey’:SB_KEY,‘Authorization’:`Bearer ${SB_KEY}`}
-});
-return await r.json();
-}catch(e){return[];}
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments?news_id=eq.${newsId}&select=*&order=created_at.asc`,{
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}
+    });
+    return await r.json();
+  }catch(e){return[];}
 }
 async function sbPostComment(newsId,author,content){
-try{
-const r=await fetch(`${SB_URL}/rest/v1/news_comments`,{
-method:‘POST’,
-headers:{‘apikey’:SB_KEY,‘Authorization’:`Bearer ${SB_KEY}`,‘Content-Type’:‘application/json’,‘Prefer’:‘return=minimal’},
-body:JSON.stringify({news_id:newsId,author_name:author,content})
-});
-return r.ok;
-}catch(e){return false;}
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments`,{
+      method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({news_id:newsId,author_name:author,content})
+    });
+    return r.ok;
+  }catch(e){return false;}
 }
 async function sbDeleteComment(id){
-try{
-const r=await fetch(`${SB_URL}/rest/v1/news_comments?id=eq.${id}`,{
-method:‘DELETE’,
-headers:{‘apikey’:SB_KEY,‘Authorization’:`Bearer ${SB_KEY}`,‘Prefer’:‘return=minimal’}
-});
-return r.ok;
-}catch(e){return false;}
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/news_comments?id=eq.${id}`,{
+      method:'DELETE',
+      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Prefer':'return=minimal'}
+    });
+    return r.ok;
+  }catch(e){return false;}
 }
 
 let openComments={};
 
 async function toggleComments(newsId){
-openComments[newsId]=!openComments[newsId];
-const el=document.getElementById(‘comments-’+newsId);
-if(!el)return;
-if(openComments[newsId]){
-el.style.display=‘block’;
-await renderComments(newsId);
-}else{
-el.style.display=‘none’;
-}
+  openComments[newsId]=!openComments[newsId];
+  const el=document.getElementById('comments-'+newsId);
+  if(!el)return;
+  if(openComments[newsId]){
+    el.style.display='block';
+    await renderComments(newsId);
+  }else{
+    el.style.display='none';
+  }
 }
 
 async function renderComments(newsId){
-const el=document.getElementById(‘comments-inner-’+newsId);
-if(!el)return;
-el.innerHTML=`<div style="color:var(--text3);font-size:12px;padding:8px 0">Загрузка...</div>`;
-const comments=await sbGetComments(newsId);
-const canPost=currentPlayer||isAdmin;
-const authorName=isAdmin?‘Админ’:currentPlayer?currentPlayer.nickname:null;
+  const el=document.getElementById('comments-inner-'+newsId);
+  if(!el)return;
+  el.innerHTML=`<div style="color:var(--text3);font-size:12px;padding:8px 0">Загрузка...</div>`;
+  const comments=await sbGetComments(newsId);
+  const canPost=currentPlayer||isAdmin;
+  const authorName=isAdmin?'Админ':currentPlayer?currentPlayer.nickname:null;
 
-const commentsHtml=comments.map(c=>{
-const date=new Date(c.created_at);
-const dateStr=date.toLocaleTimeString(‘ru-RU’,{hour:‘2-digit’,minute:‘2-digit’});
-const cp=players.find(p=>p.name===c.author_name);
-const ct=cp?teams[cp.team]:null;
-const canDel=isAdmin||(currentPlayer&&currentPlayer.nickname===c.author_name);
-const ava=ct?teamLogoHtml(ct,24,5):`<div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text2);flex-shrink:0">${c.author_name.substring(0,2).toUpperCase()}</div>`;
-return`<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start"> ${ava} <div style="flex:1;min-width:0"> <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px"> <span style="font-size:12px;font-weight:700">${c.author_name}</span> ${ct?`<span style="font-size:10px;color:${COLORS[ct.id]}">${ct.name}</span>`:''} <span style="font-size:10px;color:var(--text3);margin-left:auto">${dateStr}</span> ${canDel?`<button onclick="deleteComment('${c.id}','${newsId}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:11px;padding:0 4px">✕</button>`:''} </div> <div style="font-size:13px;color:var(--text);line-height:1.4">${c.content}</div> </div> </div>`;
-}).join(’’);
+  const commentsHtml=comments.map(c=>{
+    const date=new Date(c.created_at);
+    const dateStr=date.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+    const cp=players.find(p=>p.name===c.author_name);
+    const ct=cp?teams[cp.team]:null;
+    const canDel=isAdmin||(currentPlayer&&currentPlayer.nickname===c.author_name);
+    const ava=ct?teamLogoHtml(ct,24,5):`<div style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text2);flex-shrink:0">${c.author_name.substring(0,2).toUpperCase()}</div>`;
+    return`<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start">
+      ${ava}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+          <span style="font-size:12px;font-weight:700">${c.author_name}</span>
+          ${ct?`<span style="font-size:10px;color:${COLORS[ct.id]}">${ct.name}</span>`:''}
+          <span style="font-size:10px;color:var(--text3);margin-left:auto">${dateStr}</span>
+          ${canDel?`<button onclick="deleteComment('${c.id}','${newsId}')" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:11px;padding:0 4px">✕</button>`:''}
+        </div>
+        <div style="font-size:13px;color:var(--text);line-height:1.4">${c.content}</div>
+      </div>
+    </div>`;
+  }).join('');
 
-const inputHtml=canPost?`<div style="display:flex;gap:8px;margin-top:10px;align-items:center">
-<input id="comment-input-${newsId}" type="text" placeholder="Написать комментарий..." maxlength="300"
-style="flex:1;height:34px;padding:0 10px;font-size:13px;background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);font-family:inherit;outline:none"
-onkeydown="if(event.key==='Enter')submitComment('${newsId}','${authorName}')">
-<button onclick="submitComment('${newsId}','${authorName}')"
-style="padding:7px 14px;font-size:12px;font-weight:700;background:rgba(255,255,255,.1);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);cursor:pointer;font-family:inherit;white-space:nowrap">
-Отправить
-</button>
+  const inputHtml=canPost?`<div style="display:flex;gap:8px;margin-top:10px;align-items:center"><input id="comment-input-${newsId}" type="text" placeholder="Написать комментарий..." maxlength="300" style="flex:1;height:34px;padding:0 10px;font-size:13px;background:rgba(255,255,255,.07);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);font-family:inherit;outline:none" onkeydown="if(event.key==='Enter')submitComment('${newsId}','${authorName}')"><button onclick="submitComment('${newsId}','${authorName}')" style="padding:7px 14px;font-size:12px;font-weight:700;background:rgba(255,255,255,.1);border:1px solid var(--border-glass);border-radius:8px;color:var(--text);cursor:pointer;font-family:inherit;white-space:nowrap">Отправить</button></div>`:`<div style="font-size:12px;color:var(--text3);margin-top:8px;text-align:center">Войди как игрок чтобы комментировать</div>`;
 
-  </div>`:`<div style="font-size:12px;color:var(--text3);margin-top:8px;text-align:center">Войди как игрок чтобы комментировать</div>`;
-
-el.innerHTML=(comments.length?commentsHtml:`<div style="color:var(--text3);font-size:12px;padding:8px 0">Комментариев пока нет</div>`)+inputHtml;
+  el.innerHTML=(comments.length?commentsHtml:`<div style="color:var(--text3);font-size:12px;padding:8px 0">Комментариев пока нет</div>`)+inputHtml;
 }
 
 async function submitComment(newsId,author){
-const input=document.getElementById(‘comment-input-’+newsId);
-if(!input)return;
-const text=input.value.trim();
-if(!text)return;
-input.value=’’;
-await sbPostComment(newsId,author,text);
-renderComments(newsId);
+  const input=document.getElementById('comment-input-'+newsId);
+  if(!input)return;
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  await sbPostComment(newsId,author,text);
+  renderComments(newsId);
 }
 
 async function deleteComment(id,newsId){
-await sbDeleteComment(id);
-renderComments(newsId);
+  await sbDeleteComment(id);
+  renderComments(newsId);
 }
 
 async function deleteNews(id){
-if(!confirm(‘Удалить новость?’))return;
-await sbDeleteNews(id);
-renderNewsFeed();
+  if(!confirm('Удалить новость?'))return;
+  await sbDeleteNews(id);
+  renderNewsFeed();
 }
 // ──────────────────────────────────────────────────────
 
 // ── VETO SYSTEM ───────────────────────────────────────
 // BO3 sequence: ban1, ban2, pick1, pick2, ban3, ban4, decider
 const VETO_SEQUENCE = [
-{action:‘ban’,  team:‘t1’, label:‘Бан’},
-{action:‘ban’,  team:‘t2’, label:‘Бан’},
-{action:‘pick’, team:‘t1’, label:‘Пик’},
-{action:‘pick’, team:‘t2’, label:‘Пик’},
-{action:‘ban’,  team:‘t1’, label:‘Бан’},
-{action:‘ban’,  team:‘t2’, label:‘Бан’},
-{action:‘decider’, team:null, label:‘Decider’},
+  {action:'ban',  team:'t1', label:'Бан'},
+  {action:'ban',  team:'t2', label:'Бан'},
+  {action:'pick', team:'t1', label:'Пик'},
+  {action:'pick', team:'t2', label:'Пик'},
+  {action:'ban',  team:'t1', label:'Бан'},
+  {action:'ban',  team:'t2', label:'Бан'},
+  {action:'decider', team:null, label:'Decider'},
 ];
 let _vetoMatch = null;
 
 function openVeto(mi) {
-_vetoMatch = mi;
-if (!matches[mi].veto) matches[mi].veto = [];
-renderVeto();
-document.getElementById(‘veto-modal’).classList.add(‘open’);
+  _vetoMatch = mi;
+  if (!matches[mi].veto) matches[mi].veto = [];
+  renderVeto();
+  document.getElementById('veto-modal').classList.add('open');
 }
 function closeVeto() {
-document.getElementById(‘veto-modal’).classList.remove(‘open’);
-_vetoMatch = null;
+  document.getElementById('veto-modal').classList.remove('open');
+  _vetoMatch = null;
 }
 
 function renderVeto() {
-const mi = _vetoMatch;
-const m = matches[mi];
-const t1 = teams[m.t1], t2 = teams[m.t2];
-const veto = m.veto || [];
-const step = Math.min(veto.length, VETO_SEQUENCE.length - 1);
-const cur = VETO_SEQUENCE[veto.length] || null;
-const done = veto.length >= VETO_SEQUENCE.length;
+  const mi = _vetoMatch;
+  const m = matches[mi];
+  const t1 = teams[m.t1], t2 = teams[m.t2];
+  const veto = m.veto || [];
+  const step = Math.min(veto.length, VETO_SEQUENCE.length - 1);
+  const cur = VETO_SEQUENCE[veto.length] || null;
+  const done = veto.length >= VETO_SEQUENCE.length;
 
-document.getElementById(‘veto-title’).textContent = `🗺️ Пик/Бан — ${t1.name} vs ${t2.name}`;
+  document.getElementById('veto-title').textContent = `🗺️ Пик/Бан — ${t1.name} vs ${t2.name}`;
 
-if (done) {
-document.getElementById(‘veto-step’).textContent = ‘Все карты определены’;
-} else if (cur) {
-const whose = cur.team === ‘t1’ ? t1.name : cur.team === ‘t2’ ? t2.name : ‘Авто’;
-document.getElementById(‘veto-step’).textContent = `Шаг ${veto.length + 1}/7 · ${cur.label} · ${whose}`;
-}
+  if (done) {
+    document.getElementById('veto-step').textContent = 'Все карты определены';
+  } else if (cur) {
+    const whose = cur.team === 't1' ? t1.name : cur.team === 't2' ? t2.name : 'Авто';
+    document.getElementById('veto-step').textContent = `Шаг ${veto.length + 1}/7 · ${cur.label} · ${whose}`;
+  }
 
-// Build veto history
-const historyHtml = veto.map((v, idx) => {
-const seq = VETO_SEQUENCE[idx];
-const team = seq.team === ‘t1’ ? t1 : seq.team === ‘t2’ ? t2 : null;
-const isBan = seq.action === ‘ban’;
-const isDecider = seq.action === ‘decider’;
-const color = isDecider ? ‘var(–gold)’ : isBan ? ‘var(–red2)’ : ‘var(–green)’;
-const bg = isDecider ? ‘rgba(240,165,0,.12)’ : isBan ? ‘rgba(232,53,53,.1)’ : ‘rgba(62,207,122,.1)’;
-const border = isDecider ? ‘rgba(240,165,0,.3)’ : isBan ? ‘rgba(232,53,53,.25)’ : ‘rgba(62,207,122,.25)’;
-return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:${bg};border:1px solid ${border};border-radius:8px;margin-bottom:6px"> <div style="display:flex;align-items:center;gap:8px"> <span style="font-size:10px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:.06em">${seq.label}</span> ${team ? `<div style="display:flex;align-items:center;gap:5px">${teamLogoHtml(team,18,4)}<span style="font-size:12px;color:var(--text2)">${team.name}</span></div>` : ''} </div> <span style="font-weight:700;font-size:14px;color:${color}">${v}</span> </div>`;
-}).join(’’);
+  // Build veto history
+  const historyHtml = veto.map((v, idx) => {
+    const seq = VETO_SEQUENCE[idx];
+    const team = seq.team === 't1' ? t1 : seq.team === 't2' ? t2 : null;
+    const isBan = seq.action === 'ban';
+    const isDecider = seq.action === 'decider';
+    const color = isDecider ? 'var(--gold)' : isBan ? 'var(--red2)' : 'var(--green)';
+    const bg = isDecider ? 'rgba(240,165,0,.12)' : isBan ? 'rgba(232,53,53,.1)' : 'rgba(62,207,122,.1)';
+    const border = isDecider ? 'rgba(240,165,0,.3)' : isBan ? 'rgba(232,53,53,.25)' : 'rgba(62,207,122,.25)';
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:${bg};border:1px solid ${border};border-radius:8px;margin-bottom:6px">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:10px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:.06em">${seq.label}</span>
+        ${team ? `<div style="display:flex;align-items:center;gap:5px">${teamLogoHtml(team,18,4)}<span style="font-size:12px;color:var(--text2)">${team.name}</span></div>` : ''}
+      </div>
+      <span style="font-weight:700;font-size:14px;color:${color}">${v}</span>
+    </div>`;
+  }).join('');
 
-// Available maps
-const usedMaps = veto.map(v => v);
-const available = DEFAULT_MAPS.filter(mp => !usedMaps.includes(mp));
+  // Available maps
+  const usedMaps = veto.map(v => v);
+  const available = DEFAULT_MAPS.filter(mp => !usedMaps.includes(mp));
 
-const mapsHtml = done ? ‘’ : `<div style="margin-bottom:12px"> <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px"> ${cur && cur.action === 'ban' ? '🚫 Выбери карту для бана' : cur && cur.action === 'pick' ? '✅ Выбери карту для пика' : '🎯 Decider — последняя карта'} </div> ${cur && cur.action === 'decider' ?`<button onclick="doVeto('${available[0]}')" style="width:100%;padding:12px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;color:var(--gold);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
-${available[0] || ‘—’} <span style="font-size:11px;opacity:.7">(Decider)</span>
-</button>`:`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px">
-${available.map(mp => ` <button onclick="doVeto('${mp}')" style="padding:10px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='var(--bg4)';this.style.borderColor='var(--border2)'" onmouseout="this.style.background='var(--bg3)';this.style.borderColor='var(--border)'"> ${mp} </button>`).join(’’)}
-</div>` } </div>`;
+  const mapsHtml = done ? '' : `
+    <div style="margin-bottom:12px">
+      <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">
+        ${cur && cur.action === 'ban' ? '🚫 Выбери карту для бана' : cur && cur.action === 'pick' ? '✅ Выбери карту для пика' : '🎯 Decider — последняя карта'}
+      </div>
+      ${cur && cur.action === 'decider'
+        ? `<button onclick="doVeto('${available[0]}')" style="width:100%;padding:12px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;color:var(--gold);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+            ${available[0] || '—'} <span style="font-size:11px;opacity:.7">(Decider)</span>
+          </button>`
+        : `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px">
+          ${available.map(mp => `
+            <button onclick="doVeto('${mp}')" style="padding:10px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s"
+              onmouseover="this.style.background='var(--bg4)';this.style.borderColor='var(--border2)'"
+              onmouseout="this.style.background='var(--bg3)';this.style.borderColor='var(--border)'">
+              ${mp}
+            </button>`).join('')}
+          </div>`
+      }
+    </div>`;
 
-// Reset button
-const resetHtml = veto.length > 0
-? `<button onclick="resetVeto()" style="font-size:11px;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:6px;color:var(--text3);cursor:pointer;font-family:inherit;margin-top:4px">↩ Сбросить всё</button>`
-: ‘’;
+  // Reset button
+  const resetHtml = veto.length > 0
+    ? `<button onclick="resetVeto()" style="font-size:11px;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:6px;color:var(--text3);cursor:pointer;font-family:inherit;margin-top:4px">↩ Сбросить всё</button>`
+    : '';
 
-document.getElementById(‘veto-body’).innerHTML = mapsHtml + (historyHtml ? `<div style="margin-top:${done?0:16}px">${historyHtml}</div>` : ‘’) + `<div style="text-align:center;margin-top:8px">${resetHtml}</div>`;
+  document.getElementById('veto-body').innerHTML = mapsHtml + (historyHtml ? `<div style="margin-top:${done?0:16}px">${historyHtml}</div>` : '') + `<div style="text-align:center;margin-top:8px">${resetHtml}</div>`;
 }
 
 function doVeto(mapName) {
-const mi = _vetoMatch;
-const m = matches[mi];
-if (!m.veto) m.veto = [];
-const step = m.veto.length;
-if (step >= VETO_SEQUENCE.length) return;
+  const mi = _vetoMatch;
+  const m = matches[mi];
+  if (!m.veto) m.veto = [];
+  const step = m.veto.length;
+  if (step >= VETO_SEQUENCE.length) return;
 
-m.veto.push(mapName);
+  m.veto.push(mapName);
 
-// Apply picks to match maps
-const seq = VETO_SEQUENCE[step];
-if (seq.action === ‘pick’ || seq.action === ‘decider’) {
-const picks = m.veto.map((v, i) => ({v, i}))
-.filter(({i}) => VETO_SEQUENCE[i].action === ‘pick’ || VETO_SEQUENCE[i].action === ‘decider’);
-const mapIdx = picks.length - 1;
-if (mapIdx < 3) {
-if (!m.maps[mapIdx]) m.maps[mapIdx] = emptyMap();
-m.maps[mapIdx].map = mapName;
-m.maps[mapIdx].pick = seq.team === ‘t1’ ? ‘t1’ : seq.team === ‘t2’ ? ‘t2’ : ‘decider’;
-}
-}
+  // Apply picks to match maps
+  const seq = VETO_SEQUENCE[step];
+  if (seq.action === 'pick' || seq.action === 'decider') {
+    const picks = m.veto.map((v, i) => ({v, i}))
+      .filter(({i}) => VETO_SEQUENCE[i].action === 'pick' || VETO_SEQUENCE[i].action === 'decider');
+    const mapIdx = picks.length - 1;
+    if (mapIdx < 3) {
+      if (!m.maps[mapIdx]) m.maps[mapIdx] = emptyMap();
+      m.maps[mapIdx].map = mapName;
+      m.maps[mapIdx].pick = seq.team === 't1' ? 't1' : seq.team === 't2' ? 't2' : 'decider';
+    }
+  }
 
-saveData();
-renderVeto();
-renderMatches();
+  saveData();
+  renderVeto();
+  renderMatches();
 }
 
 function resetVeto() {
-const mi = _vetoMatch;
-if (!confirm(‘Сбросить пик/бан?’)) return;
-matches[mi].veto = [];
-matches[mi].maps = emptyMaps();
-saveData();
-renderVeto();
-renderMatches();
+  const mi = _vetoMatch;
+  if (!confirm('Сбросить пик/бан?')) return;
+  matches[mi].veto = [];
+  matches[mi].maps = emptyMaps();
+  saveData();
+  renderVeto();
+  renderMatches();
 }
 // ──────────────────────────────────────────────────────
 
 let _msi=null,_msk=null;
 function openMapStats(mi,ki){
-_msi=mi;_msk=ki;
-const m=matches[mi],mp=m.maps[ki];
-const t1=teams[m.t1],t2=teams[m.t2];
-const mapName=mp.map||’Карта ’+(ki+1);
-document.getElementById(‘mst-title’).textContent=’📊 ‘+mapName;
-document.getElementById(‘mst-sub’).textContent=t1.name+’ vs ’+t2.name;
-renderMapStatsBody(mi,ki);
-document.getElementById(‘map-stats-modal’).classList.add(‘open’);
+  _msi=mi;_msk=ki;
+  const m=matches[mi],mp=m.maps[ki];
+  const t1=teams[m.t1],t2=teams[m.t2];
+  const mapName=mp.map||'Карта '+(ki+1);
+  document.getElementById('mst-title').textContent='📊 '+mapName;
+  document.getElementById('mst-sub').textContent=t1.name+' vs '+t2.name;
+  renderMapStatsBody(mi,ki);
+  document.getElementById('map-stats-modal').classList.add('open');
 }
 function closeMapStats(){
-document.getElementById(‘map-stats-modal’).classList.remove(‘open’);
-_msi=null;_msk=null;
+  document.getElementById('map-stats-modal').classList.remove('open');
+  _msi=null;_msk=null;
 }
 function renderMapStatsBody(mi,ki){
-const m=matches[mi],mp=m.maps[ki];
-const stats=mp.stats||{};
-const t1=teams[m.t1],t2=teams[m.t2];
+  const m=matches[mi],mp=m.maps[ki];
+  const stats=mp.stats||{};
+  const t1=teams[m.t1],t2=teams[m.t2];
 
-const teamBlock=(team)=>{
-const tp=players.filter(p=>p.team===team.id);
-return`<div style="margin-bottom:16px"> <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)"> ${teamLogoHtml(team,24,5)} <span style="font-weight:700;font-size:14px">${team.name}</span> </div> <div style="display:grid;grid-template-columns:auto 1fr repeat(4,52px);gap:6px;align-items:center;margin-bottom:6px"> <span></span> <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Игрок</span> <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">K</span> <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">D</span> <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">A</span> <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">K/D</span> </div> ${tp.map(p=>{ const ps=stats[p.id]||{k:0,d:0,a:0}; const kdv=ps.d>0?(ps.k/ps.d):ps.k>0?ps.k:0; const kdColor=kdv>=1.2?'var(--green)':kdv<1.0&&ps.d>0?'var(--red2)':'var(--text2)'; const ro=isAdmin?'':'pointer-events:none;opacity:.5;'; return`<div style="display:grid;grid-template-columns:auto 1fr repeat(4,52px);gap:6px;align-items:center;margin-bottom:5px">
-<div style="width:8px;height:8px;border-radius:50%;background:${COLORS[team.id]};flex-shrink:0"></div>
-<span style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</span>
-<input type="number" min="0" value="${ps.k}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'k',this.value)">
-<input type="number" min="0" value="${ps.d}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'d',this.value)">
-<input type="number" min="0" value="${ps.a}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'a',this.value)">
-<span style="text-align:center;font-size:13px;font-weight:700;color:${kdColor}">${kdv.toFixed(2)}</span>
-</div>`; }).join('')} </div>`;
-};
+  const teamBlock=(team)=>{
+    const tp=players.filter(p=>p.team===team.id);
+    return`<div style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+        ${teamLogoHtml(team,24,5)}
+        <span style="font-weight:700;font-size:14px">${team.name}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr repeat(4,52px);gap:6px;align-items:center;margin-bottom:6px">
+        <span></span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Игрок</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">K</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">D</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">A</span>
+        <span style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;text-align:center">K/D</span>
+      </div>
+      ${tp.map(p=>{
+        const ps=stats[p.id]||{k:0,d:0,a:0};
+        const kdv=ps.d>0?(ps.k/ps.d):ps.k>0?ps.k:0;
+        const kdColor=kdv>=1.2?'var(--green)':kdv<1.0&&ps.d>0?'var(--red2)':'var(--text2)';
+        const ro=isAdmin?'':'pointer-events:none;opacity:.5;';
+        return`<div style="display:grid;grid-template-columns:auto 1fr repeat(4,52px);gap:6px;align-items:center;margin-bottom:5px">
+          <div style="width:8px;height:8px;border-radius:50%;background:${COLORS[team.id]};flex-shrink:0"></div>
+          <span style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</span>
+          <input type="number" min="0" value="${ps.k}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'k',this.value)">
+          <input type="number" min="0" value="${ps.d}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'d',this.value)">
+          <input type="number" min="0" value="${ps.a}" style="${ro}width:50px;height:28px;text-align:center;font-size:13px;font-weight:600;background:#1a2030;border:1px solid rgba(255,255,255,.1);border-radius:6px;color:#eaedf2;font-family:inherit" onchange="saveMapStat(${mi},${ki},${p.id},'a',this.value)">
+          <span style="text-align:center;font-size:13px;font-weight:700;color:${kdColor}">${kdv.toFixed(2)}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  };
 
-const mvp = getMapMVP(_msi, _msk);
-document.getElementById(‘mst-body’).innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2)+(mvp?`<div style="margin-top:14px;display:flex;justify-content:center">${mvpBadge(mvp,'MVP карты')}</div>`:’’);
+  const mvp = getMapMVP(_msi, _msk);
+  document.getElementById('mst-body').innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2)+(mvp?`<div style="margin-top:14px;display:flex;justify-content:center">${mvpBadge(mvp,'MVP карты')}</div>`:'');
 }
 function hasMatchStats(mi){
-const m=matches[mi];
-const teamPlayers=players.filter(p=>p.team===m.t1||p.team===m.t2);
-// считаем игроков у которых есть хотя бы 1 ненулевое значение на любой карте
-const withStats=teamPlayers.filter(p=>{
-return m.maps.some(mp=>{
-if(!mp.stats||!mp.stats[p.id])return false;
-const s=mp.stats[p.id];
-return(s.k||0)+(s.d||0)+(s.a||0)>0;
-});
-});
-// публикуем когда у всех 10 игроков есть статистика
-return withStats.length>=teamPlayers.length;
+  const m=matches[mi];
+  const teamPlayers=players.filter(p=>p.team===m.t1||p.team===m.t2);
+  // считаем игроков у которых есть хотя бы 1 ненулевое значение на любой карте
+  const withStats=teamPlayers.filter(p=>{
+    return m.maps.some(mp=>{
+      if(!mp.stats||!mp.stats[p.id])return false;
+      const s=mp.stats[p.id];
+      return(s.k||0)+(s.d||0)+(s.a||0)>0;
+    });
+  });
+  // публикуем когда у всех 10 игроков есть статистика
+  return withStats.length>=teamPlayers.length;
 }
 
 async function forcePostResult(mi){
-matches[mi].resultPosted=true;
-saveData();
-await autoPostMatchResult(mi);
-renderMatches();
-// switch to news tab
-showSection(‘news’, document.querySelector(’.nav-btn’));
+  matches[mi].resultPosted=true;
+  saveData();
+  await autoPostMatchResult(mi);
+  renderMatches();
+  // switch to news tab
+  showSection('news', document.querySelector('.nav-btn'));
 }
 
 function saveMapStat(mi,ki,pid,field,val){
-const n=Math.max(0,parseInt(val)||0);
-if(!matches[mi].maps[ki].stats)matches[mi].maps[ki].stats={};
-if(!matches[mi].maps[ki].stats[pid])matches[mi].maps[ki].stats[pid]={k:0,d:0,a:0};
-matches[mi].maps[ki].stats[pid][field]=n;
-saveData();
-renderMapStatsBody(_msi, _msk);
-renderStats();
-renderMatches();
-// auto-post when match finished + stats added for the first time
-if(isMatchFinished(matches[mi]) && hasMatchStats(mi) && !matches[mi].resultPosted){
-matches[mi].resultPosted=true;
-saveData();
-autoPostMatchResult(mi);
-}
+  const n=Math.max(0,parseInt(val)||0);
+  if(!matches[mi].maps[ki].stats)matches[mi].maps[ki].stats={};
+  if(!matches[mi].maps[ki].stats[pid])matches[mi].maps[ki].stats[pid]={k:0,d:0,a:0};
+  matches[mi].maps[ki].stats[pid][field]=n;
+  saveData();
+  renderMapStatsBody(_msi, _msk);
+  renderStats();
+  renderMatches();
+  // auto-post when match finished + stats added for the first time
+  if(isMatchFinished(matches[mi]) && hasMatchStats(mi) && !matches[mi].resultPosted){
+    matches[mi].resultPosted=true;
+    saveData();
+    autoPostMatchResult(mi);
+  }
 }
 
 function setMap(mi,ki,field,val){
-if(!matches[mi].maps[ki])return;
-if(field===‘map’||field===‘pick’)matches[mi].maps[ki][field]=val;
-else{const n=parseInt(val);matches[mi].maps[ki][field]=isNaN(n)?null:Math.max(0,n);}
-saveData();renderGroup();renderMatches();
+  if(!matches[mi].maps[ki])return;
+  if(field==='map'||field==='pick')matches[mi].maps[ki][field]=val;
+  else{const n=parseInt(val);matches[mi].maps[ki][field]=isNaN(n)?null:Math.max(0,n);}
+  saveData();renderGroup();renderMatches();
 }
 
 async function autoPostMatchResult(mi){
-const m = matches[mi];
-const t1 = teams[m.t1], t2 = teams[m.t2];
-const {s1,s2} = matchScore(m);
-const winner = s1>s2?t1:t2;
-const loser = s1>s2?t2:t1;
-const ws = s1>s2?s1:s2, ls = s1>s2?s2:s1;
+  const m = matches[mi];
+  const t1 = teams[m.t1], t2 = teams[m.t2];
+  const {s1,s2} = matchScore(m);
+  const winner = s1>s2?t1:t2;
+  const loser = s1>s2?t2:t1;
+  const ws = s1>s2?s1:s2, ls = s1>s2?s2:s1;
 
-// map results
-const mapLines = m.maps
-.filter(mp=>mapFinished(mp))
-.map((mp,idx)=>{
-const mw1=mp.r1>mp.r2;
-const mapName=mp.map||`Карта ${idx+1}`;
-return`${mapName}: ${mp.r1}:${mp.r2} → ${mw1?t1.name:t2.name}`;
-}).join(’\n’);
+  // map results
+  const mapLines = m.maps
+    .filter(mp=>mapFinished(mp))
+    .map((mp,idx)=>{
+      const mw1=mp.r1>mp.r2;
+      const mapName=mp.map||`Карта ${idx+1}`;
+      return`${mapName}: ${mp.r1}:${mp.r2} → ${mw1?t1.name:t2.name}`;
+    }).join('\n');
 
-const mvp = getMatchMVP(mi);
-const mvpLine = mvp ? `\n\n⭐ MVP матча: ${mvp.name} (${teams[mvp.team].name})` : ‘’;
+  const mvp = getMatchMVP(mi);
+  const mvpLine = mvp ? `\n\n⭐ MVP матча: ${mvp.name} (${teams[mvp.team].name})` : '';
 
-const content = `🏆 ${winner.name} побеждает ${loser.name} со счётом ${ws}:${ls}!\n\n${mapLines}${mvpLine}`;
+  const content = `🏆 ${winner.name} побеждает ${loser.name} со счётом ${ws}:${ls}!\n\n${mapLines}${mvpLine}`;
 
-await sbPostNews(‘Система’, content, null);
+  await sbPostNews('Система', content, null);
 
-// refresh feed if news tab is open
-const newsSec = document.getElementById(‘sec-news’);
-if(newsSec && newsSec.classList.contains(‘active’)){
-renderNewsFeed();
-}
+  // refresh feed if news tab is open
+  const newsSec = document.getElementById('sec-news');
+  if(newsSec && newsSec.classList.contains('active')){
+    renderNewsFeed();
+  }
 }
 
 function getMapMVP(mi, ki) {
-const mp = matches[mi].maps[ki];
-if (!mp || !mp.stats || !Object.keys(mp.stats).length) return null;
-const m = matches[mi];
-const allPids = […players.filter(p=>p.team===m.t1||p.team===m.t2)].map(p=>p.id);
-let best = null, bestScore = -1;
-allPids.forEach(pid => {
-const s = mp.stats[pid];
-if (!s) return;
-const score = s.k * 2 + s.a - s.d * 0.5;
-if (score > bestScore) { bestScore = score; best = pid; }
-});
-return best !== null ? players.find(p=>p.id===best) : null;
+  const mp = matches[mi].maps[ki];
+  if (!mp || !mp.stats || !Object.keys(mp.stats).length) return null;
+  const m = matches[mi];
+  const allPids = [...players.filter(p=>p.team===m.t1||p.team===m.t2)].map(p=>p.id);
+  let best = null, bestScore = -1;
+  allPids.forEach(pid => {
+    const s = mp.stats[pid];
+    if (!s) return;
+    const score = s.k * 2 + s.a - s.d * 0.5;
+    if (score > bestScore) { bestScore = score; best = pid; }
+  });
+  return best !== null ? players.find(p=>p.id===best) : null;
 }
 
 function getMatchMVP(mi) {
-const m = matches[mi];
-const allPids = players.filter(p=>p.team===m.t1||p.team===m.t2).map(p=>p.id);
-let best = null, bestScore = -1;
-allPids.forEach(pid => {
-let k=0, d=0, a=0;
-m.maps.forEach(mp => {
-if (!mp.stats || !mp.stats[pid]) return;
-k += mp.stats[pid].k||0;
-d += mp.stats[pid].d||0;
-a += mp.stats[pid].a||0;
-});
-const score = k * 2 + a - d * 0.5;
-if (score > bestScore && k > 0) { bestScore = score; best = pid; }
-});
-return best !== null ? players.find(p=>p.id===best) : null;
+  const m = matches[mi];
+  const allPids = players.filter(p=>p.team===m.t1||p.team===m.t2).map(p=>p.id);
+  let best = null, bestScore = -1;
+  allPids.forEach(pid => {
+    let k=0, d=0, a=0;
+    m.maps.forEach(mp => {
+      if (!mp.stats || !mp.stats[pid]) return;
+      k += mp.stats[pid].k||0;
+      d += mp.stats[pid].d||0;
+      a += mp.stats[pid].a||0;
+    });
+    const score = k * 2 + a - d * 0.5;
+    if (score > bestScore && k > 0) { bestScore = score; best = pid; }
+  });
+  return best !== null ? players.find(p=>p.id===best) : null;
 }
 
-function mvpBadge(player, label=‘⭐ MVP’) {
-if (!player) return ‘’;
-const t = teams[player.team];
-return `<div style="display:inline-flex;align-items:center;gap:7px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;padding:6px 12px">
-<span style="font-size:13px">⭐</span>
-<div>
-<div style="font-size:9px;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${label}</div>
-<div style="font-size:13px;font-weight:700;color:var(--text)">${player.name}</div>
-<div style="font-size:11px;color:var(--text2)">${t.name}</div>
-</div>
-
+function mvpBadge(player, label='⭐ MVP') {
+  if (!player) return '';
+  const t = teams[player.team];
+  return `<div style="display:inline-flex;align-items:center;gap:7px;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);border-radius:8px;padding:6px 12px">
+    <span style="font-size:13px">⭐</span>
+    <div>
+      <div style="font-size:9px;color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase">${label}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text)">${player.name}</div>
+      <div style="font-size:11px;color:var(--text2)">${t.name}</div>
+    </div>
   </div>`;
 }
 
 function calcPlayerStats(pid){
-let k=0,d=0,a=0;
-matches.forEach(m=>{
-m.maps.forEach(mp=>{
-if(!mp.stats||!mp.stats[pid])return;
-k+=mp.stats[pid].k||0;
-d+=mp.stats[pid].d||0;
-a+=mp.stats[pid].a||0;
-});
-});
-return{kills:k,deaths:d,assists:a};
+  let k=0,d=0,a=0;
+  matches.forEach(m=>{
+    m.maps.forEach(mp=>{
+      if(!mp.stats||!mp.stats[pid])return;
+      k+=mp.stats[pid].k||0;
+      d+=mp.stats[pid].d||0;
+      a+=mp.stats[pid].a||0;
+    });
+  });
+  return{kills:k,deaths:d,assists:a};
 }
 
-function setSort(k){sortKey=k;document.querySelectorAll(’.sort-pill’).forEach(b=>b.classList.remove(‘active’));const btn=document.getElementById(‘sp-’+k);if(btn)btn.classList.add(‘active’);renderStats();}
+function setSort(k){sortKey=k;document.querySelectorAll('.sort-pill').forEach(b=>b.classList.remove('active'));const btn=document.getElementById('sp-'+k);if(btn)btn.classList.add('active');renderStats();}
 function renderStats(){
-const filter=document.getElementById(‘team-filter’).value;
-let data=players.map(p=>({…p,…calcPlayerStats(p.id)}));
-if(filter!==‘all’)data=data.filter(p=>p.team===parseInt(filter));
-data.sort((a,b)=>{
-const ka=kd(a),kb=kd(b);
-if(sortKey===‘kd’)return kb-ka;
-if(sortKey===‘deaths’)return a.deaths-b.deaths;
-return b[sortKey]-a[sortKey];
-});
-document.getElementById(‘stats-tbody’).innerHTML=data.map((p,i)=>{
-const kdv=kd(p),kdc=kdv>=1.2?‘kd-good’:kdv<1.0&&p.deaths>0?‘kd-bad’:’’;
-const medals=[‘🥇’,‘🥈’,‘🥉’];
-const medalColors=[’#f0a500’,’#b0b8c8’,’#cd7f32’];
-const isMedal = i < 3;
-const rowStyle = isMedal ? `background:${['rgba(240,165,0,.07)','rgba(180,184,200,.05)','rgba(205,127,50,.06)'][i]};` : ‘’;
-const numCell = isMedal
-? `<span style="font-size:16px">${medals[i]}</span>`
-: `<span style="color:var(--text3);font-weight:700">${i+1}</span>`;
-return`<tr style="${rowStyle}"> <td>${numCell}</td> <td><div style="display:flex;align-items:center;gap:8px"> ${teamLogoHtml(teams[p.team],22,5)} <span style="font-weight:600;${isMedal?'color:'+medalColors[i]:''}">${p.name}</span> </div></td> <td class="tc" style="font-weight:700;${isMedal?'color:'+medalColors[i]:''}">${p.kills}</td> <td class="tc" style="color:var(--text2)">${p.deaths}</td> <td class="tc" style="color:var(--text2)">${p.assists}</td> <td class="tc"><span class="${kdc}" style="font-weight:700">${kdv.toFixed(2)}</span></td> </tr>`;
-}).join(’’);
+  const filter=document.getElementById('team-filter').value;
+  let data=players.map(p=>({...p,...calcPlayerStats(p.id)}));
+  if(filter!=='all')data=data.filter(p=>p.team===parseInt(filter));
+  data.sort((a,b)=>{
+    const ka=kd(a),kb=kd(b);
+    if(sortKey==='kd')return kb-ka;
+    if(sortKey==='deaths')return a.deaths-b.deaths;
+    return b[sortKey]-a[sortKey];
+  });
+  document.getElementById('stats-tbody').innerHTML=data.map((p,i)=>{
+    const kdv=kd(p),kdc=kdv>=1.2?'kd-good':kdv<1.0&&p.deaths>0?'kd-bad':'';
+    const medals=['🥇','🥈','🥉'];
+    const medalColors=['#f0a500','#b0b8c8','#cd7f32'];
+    const isMedal = i < 3;
+    const rowStyle = isMedal ? `background:${['rgba(240,165,0,.07)','rgba(180,184,200,.05)','rgba(205,127,50,.06)'][i]};` : '';
+    const numCell = isMedal
+      ? `<span style="font-size:16px">${medals[i]}</span>`
+      : `<span style="color:var(--text3);font-weight:700">${i+1}</span>`;
+    return`<tr style="${rowStyle}">
+      <td>${numCell}</td>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        ${teamLogoHtml(teams[p.team],22,5)}
+        <span style="font-weight:600;${isMedal?'color:'+medalColors[i]:''}">${p.name}</span>
+      </div></td>
+      <td class="tc" style="font-weight:700;${isMedal?'color:'+medalColors[i]:''}">${p.kills}</td>
+      <td class="tc" style="color:var(--text2)">${p.deaths}</td>
+      <td class="tc" style="color:var(--text2)">${p.assists}</td>
+      <td class="tc"><span class="${kdc}" style="font-weight:700">${kdv.toFixed(2)}</span></td>
+    </tr>`;
+  }).join('');
 }
 function renderSettings(){
-// Sync settings hero logo preview
-const heroSrc = document.getElementById(‘hero-logo’).dataset.img;
-const shl = document.getElementById(‘settings-hero-logo’);
-if(shl && heroSrc){
-shl.innerHTML=`<img src="${heroSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:9px"><div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
-shl.style.background=‘transparent’;shl.style.borderColor=‘var(–border2)’;
-} else if(shl){
-shl.innerHTML=`CS<div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
-shl.style.background=‘var(–red)’;shl.style.borderColor=‘var(–red)’;
-}
-document.getElementById(‘team-name-settings’).innerHTML=` <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px"> ${teams.map(t=>`
-<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px">
-<label class="team-logo-wrap" style="width:76px;height:76px">
-<div class="team-logo" style="width:76px;height:76px;border-radius:12px;background:${t.logo?'transparent':COLORS[t.id]+'20'};border-color:${t.logo?'var(--border2)':COLORS[t.id]+'50'};color:${COLORS[t.id]}">
-${t.logo?`<img src="${t.logo}" style="width:100%;height:100%;object-fit:cover">`:`<span style="font-weight:800;font-size:24px;letter-spacing:-.3px">${t.name.substring(0,2).toUpperCase()}</span>`}
-<div class="team-logo-overlay" style="border-radius:10px;font-size:10px">ЗАГРУЗИТЬ</div>
-</div>
-<input type="file" accept="image/*" onchange="uploadTeamLogo(${t.id},this)">
-</label>
-<input class="settings-in" value="${t.name}" onchange="renameTeamEl(${t.id},this)" onblur="renameTeamEl(${t.id},this)" placeholder="Название команды" style="width:100%;text-align:center">
-${t.logo?`<button onclick="removeTeamLogo(${t.id})" style="background:none;border:1px solid var(--border2);border-radius:6px;color:var(--text3);cursor:pointer;padding:4px 12px;font-size:11px;font-weight:600">✕ Удалить</button>`:`<span style="font-size:11px;color:var(--text3)">Нажми чтобы загрузить</span>`}
-</div>`).join('')} </div>`;
-document.getElementById(‘player-settings’).innerHTML=teams.map(t=>{
-const tp=players.filter(p=>p.team===t.id);
-return`<div class="settings-card"> <div class="settings-card-title">${teamLogoHtml(t,26,6)}<span>${t.name}</span></div> ${tp.map((p,idx)=>`
-<div class="settings-row">
-<label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;width:26px;flex-shrink:0">#${idx+1}</label>
-<input class="settings-in" value="${p.name}" onchange="renamePlayerEl(${p.id},this)" onblur="renamePlayerEl(${p.id},this)" placeholder="Ник">
-</div>`).join('')} </div>`;
-}).join(’’);
+  // Sync settings hero logo preview
+  const heroSrc = document.getElementById('hero-logo').dataset.img;
+  const shl = document.getElementById('settings-hero-logo');
+  if(shl && heroSrc){
+    shl.innerHTML=`<img src="${heroSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:9px"><div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
+    shl.style.background='transparent';shl.style.borderColor='var(--border2)';
+  } else if(shl){
+    shl.innerHTML=`CS<div class="team-logo-overlay" style="border-radius:9px;font-size:9px">ЗАГРУЗИТЬ</div>`;
+    shl.style.background='var(--red)';shl.style.borderColor='var(--red)';
+  }
+  document.getElementById('team-name-settings').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px">
+    ${teams.map(t=>`
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px">
+        <label class="team-logo-wrap" style="width:76px;height:76px">
+          <div class="team-logo" style="width:76px;height:76px;border-radius:12px;background:${t.logo?'transparent':COLORS[t.id]+'20'};border-color:${t.logo?'var(--border2)':COLORS[t.id]+'50'};color:${COLORS[t.id]}">
+            ${t.logo?`<img src="${t.logo}" style="width:100%;height:100%;object-fit:cover">`:`<span style="font-weight:800;font-size:24px;letter-spacing:-.3px">${t.name.substring(0,2).toUpperCase()}</span>`}
+            <div class="team-logo-overlay" style="border-radius:10px;font-size:10px">ЗАГРУЗИТЬ</div>
+          </div>
+          <input type="file" accept="image/*" onchange="uploadTeamLogo(${t.id},this)">
+        </label>
+        <input class="settings-in" value="${t.name}" onchange="renameTeamEl(${t.id},this)" onblur="renameTeamEl(${t.id},this)" placeholder="Название команды" style="width:100%;text-align:center">
+        ${t.logo?`<button onclick="removeTeamLogo(${t.id})" style="background:none;border:1px solid var(--border2);border-radius:6px;color:var(--text3);cursor:pointer;padding:4px 12px;font-size:11px;font-weight:600">✕ Удалить</button>`:`<span style="font-size:11px;color:var(--text3)">Нажми чтобы загрузить</span>`}
+      </div>`).join('')}
+    </div>`;
+  document.getElementById('player-settings').innerHTML=teams.map(t=>{
+    const tp=players.filter(p=>p.team===t.id);
+    return`<div class="settings-card">
+      <div class="settings-card-title">${teamLogoHtml(t,26,6)}<span>${t.name}</span></div>
+      ${tp.map((p,idx)=>`
+        <div class="settings-row">
+          <label style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;width:26px;flex-shrink:0">#${idx+1}</label>
+          <input class="settings-in" value="${p.name}" onchange="renamePlayerEl(${p.id},this)" onblur="renamePlayerEl(${p.id},this)" placeholder="Ник">
+        </div>`).join('')}
+    </div>`;
+  }).join('');
 }
 function applyHeroLogo(src){
-const el=document.getElementById(‘hero-logo’);
-el.dataset.img=src;
-el.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"><div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>`;
+  const el=document.getElementById('hero-logo');
+  el.dataset.img=src;
+  el.innerHTML=`<img src="${src}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"><div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>`;
 }
 function uploadHeroLogo(input){
-if(!isAdmin||!input.files[0])return;
-compressImage(input.files[0], 256, url=>{
-applyHeroLogo(url);
-saveData();
-});
+  if(!isAdmin||!input.files[0])return;
+  compressImage(input.files[0], 256, url=>{
+    applyHeroLogo(url);
+    saveData();
+  });
 }
 function removeHeroLogo(){
-const el=document.getElementById(‘hero-logo’);
-el.dataset.img=’’;
-el.innerHTML=‘CS<div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>’;
-localStorage.removeItem(‘ym_hero_logo’);
-saveData();
+  const el=document.getElementById('hero-logo');
+  el.dataset.img='';
+  el.innerHTML='CS<div id="hero-logo-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;font-size:9px;color:white;font-weight:700;letter-spacing:.06em;border-radius:12px;pointer-events:none">ЗАГРУЗИТЬ</div>';
+  localStorage.removeItem('ym_hero_logo');
+  saveData();
 }
 function setHeroLogoClickable(on){
-const wrap=document.getElementById(‘hero-logo-wrap’);
-const overlay=document.getElementById(‘hero-logo-overlay’);
-if(on){
-wrap.style.cursor=‘pointer’;
-document.getElementById(‘hero-logo-input’).style.display=’’;
-wrap.onmouseenter=()=>{if(overlay)overlay.style.opacity=‘1’;};
-wrap.onmouseleave=()=>{if(overlay)overlay.style.opacity=‘0’;};
-}else{
-wrap.style.cursor=‘default’;
-document.getElementById(‘hero-logo-input’).style.display=‘none’;
-wrap.onmouseenter=null;wrap.onmouseleave=null;
-if(overlay)overlay.style.opacity=‘0’;
-}
+  const wrap=document.getElementById('hero-logo-wrap');
+  const overlay=document.getElementById('hero-logo-overlay');
+  if(on){
+    wrap.style.cursor='pointer';
+    document.getElementById('hero-logo-input').style.display='';
+    wrap.onmouseenter=()=>{if(overlay)overlay.style.opacity='1';};
+    wrap.onmouseleave=()=>{if(overlay)overlay.style.opacity='0';};
+  }else{
+    wrap.style.cursor='default';
+    document.getElementById('hero-logo-input').style.display='none';
+    wrap.onmouseenter=null;wrap.onmouseleave=null;
+    if(overlay)overlay.style.opacity='0';
+  }
 }
 function uploadTeamLogo(id,input){
-if(!input.files[0])return;
-compressImage(input.files[0], 256, url=>{
-teams[id].logo=url;
-saveData();renderGroup();renderMatches();renderStats();renderSettings();
-});
+  if(!input.files[0])return;
+  compressImage(input.files[0], 256, url=>{
+    teams[id].logo=url;
+    saveData();renderGroup();renderMatches();renderStats();renderSettings();
+  });
 }
 function removeTeamLogo(id){teams[id].logo=null;saveData();renderGroup();renderMatches();renderStats();renderSettings();}
 function uploadHeroLogoFromSettings(input){
-if(!input.files[0])return;
-compressImage(input.files[0], 256, url=>{
-applyHeroLogo(url);
-saveData();
-renderSettings();
-});
+  if(!input.files[0])return;
+  compressImage(input.files[0], 256, url=>{
+    applyHeroLogo(url);
+    saveData();
+    renderSettings();
+  });
 }
-function renameTeam(id,val){const name=val.length>0?val:’Команда ’+(id+1);teams[id].name=name;const sel=document.getElementById(‘team-filter’);const opts=sel.querySelectorAll(‘option’);if(opts[id+1])opts[id+1].textContent=name;saveData();renderGroup();renderMatches();renderStats();}
+function renameTeam(id,val){const name=val.length>0?val:'Команда '+(id+1);teams[id].name=name;const sel=document.getElementById('team-filter');const opts=sel.querySelectorAll('option');if(opts[id+1])opts[id+1].textContent=name;saveData();renderGroup();renderMatches();renderStats();}
 function renameTeamEl(id,el){renameTeam(id,el.value);}
 function renamePlayerEl(id,el){const p=players.find(x=>x.id===id);if(p&&el.value.length>0){p.name=el.value;saveData();renderStats();}}
 function showTeam(teamId){
-const t = teams[teamId];
-const tp = players.filter(p=>p.team===teamId).map(p=>({…p,…calcPlayerStats(p.id)}));
-const st = standings().find(x=>x.id===teamId);
-const teamMatches = matches.filter(m=>m.t1===teamId||m.t2===teamId);
+  const t = teams[teamId];
+  const tp = players.filter(p=>p.team===teamId).map(p=>({...p,...calcPlayerStats(p.id)}));
+  const st = standings().find(x=>x.id===teamId);
+  const teamMatches = matches.filter(m=>m.t1===teamId||m.t2===teamId);
 
-// played maps
-let mapsPlayed={}, mapsWon={};
-teamMatches.forEach(m=>{
-const isT1 = m.t1===teamId;
-m.maps.forEach(mp=>{
-if(!mp.map||mp.r1===null||mp.r2===null)return;
-mapsPlayed[mp.map]=(mapsPlayed[mp.map]||0)+1;
-const won = isT1 ? mp.r1>mp.r2 : mp.r2>mp.r1;
-if(won) mapsWon[mp.map]=(mapsWon[mp.map]||0)+1;
-});
-});
+  // played maps
+  let mapsPlayed={}, mapsWon={};
+  teamMatches.forEach(m=>{
+    const isT1 = m.t1===teamId;
+    m.maps.forEach(mp=>{
+      if(!mp.map||mp.r1===null||mp.r2===null)return;
+      mapsPlayed[mp.map]=(mapsPlayed[mp.map]||0)+1;
+      const won = isT1 ? mp.r1>mp.r2 : mp.r2>mp.r1;
+      if(won) mapsWon[mp.map]=(mapsWon[mp.map]||0)+1;
+    });
+  });
 
-const totalKills=tp.reduce((s,p)=>s+p.kills,0);
-const totalDeaths=tp.reduce((s,p)=>s+p.deaths,0);
+  const totalKills=tp.reduce((s,p)=>s+p.kills,0);
+  const totalDeaths=tp.reduce((s,p)=>s+p.deaths,0);
 
-// место в турнире
-const allSt = standings();
-const place = allSt.findIndex(x=>x.id===teamId)+1;
-const placeLabel = [‘🥇 1-е место’,‘🥈 2-е место’,‘🥉 3-е место’,‘4-е место’][place-1]||’—’;
-const placeColor = [‘var(–gold)’,’#b0b8c8’,’#cd7f32’,‘var(–red2)’][place-1]||‘var(–text2)’;
+  // место в турнире
+  const allSt = standings();
+  const place = allSt.findIndex(x=>x.id===teamId)+1;
+  const placeLabel = ['🥇 1-е место','🥈 2-е место','🥉 3-е место','4-е место'][place-1]||'—';
+  const placeColor = ['var(--gold)','#b0b8c8','#cd7f32','var(--red2)'][place-1]||'var(--text2)';
 
-// лучший игрок по KD
-const topPlayer = tp.length ? […tp].sort((a,b)=>kd(b)-kd(a))[0] : null;
+  // лучший игрок по KD
+  const topPlayer = tp.length ? [...tp].sort((a,b)=>kd(b)-kd(a))[0] : null;
 
-// процент побед на картах
-const totalMapsPlayed = Object.values(mapsPlayed).reduce((s,v)=>s+v,0);
-const totalMapsWon = Object.values(mapsWon).reduce((s,v)=>s+v,0);
-const mapWinPct = totalMapsPlayed>0 ? Math.round(totalMapsWon/totalMapsPlayed*100) : null;
+  // процент побед на картах
+  const totalMapsPlayed = Object.values(mapsPlayed).reduce((s,v)=>s+v,0);
+  const totalMapsWon = Object.values(mapsWon).reduce((s,v)=>s+v,0);
+  const mapWinPct = totalMapsPlayed>0 ? Math.round(totalMapsWon/totalMapsPlayed*100) : null;
 
-const mapsHtml = Object.keys(mapsPlayed).length
-? Object.keys(mapsPlayed).map(map=>{
-const w=mapsWon[map]||0, total=mapsPlayed[map];
-const pct=Math.round(w/total*100);
-return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08)"> <span style="font-weight:600">${map}</span> <div style="display:flex;align-items:center;gap:12px"> <span style="font-size:12px;color:var(--text2)">${w}/${total} карт</span> <span style="font-weight:700;color:${pct>=50?'var(--green)':'var(--red2)'}">${pct}%</span> </div> </div>`;
-}).join(’’)
-: `<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>`;
+  const mapsHtml = Object.keys(mapsPlayed).length
+    ? Object.keys(mapsPlayed).map(map=>{
+        const w=mapsWon[map]||0, total=mapsPlayed[map];
+        const pct=Math.round(w/total*100);
+        return`<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08)">
+          <span style="font-weight:600">${map}</span>
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:12px;color:var(--text2)">${w}/${total} карт</span>
+            <span style="font-weight:700;color:${pct>=50?'var(--green)':'var(--red2)'}">${pct}%</span>
+          </div>
+        </div>`;
+      }).join('')
+    : `<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>`;
 
-const playersHtml = tp.sort((a,b)=>kd(b)-kd(a)).map((p,i)=>{
-const kdv=kd(p);
-const medals=[‘🥇’,‘🥈’,‘🥉’];
-return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)"> <div style="display:flex;align-items:center;gap:10px"> <span style="font-size:14px;width:20px">${medals[i]||i+1}</span> <span style="font-weight:600">${p.name}</span> </div> <div style="display:flex;gap:14px;font-size:13px"> <span style="color:var(--text2)">K: <b style="color:var(--text)">${p.kills}</b></span> <span style="color:var(--text2)">D: <b style="color:var(--text)">${p.deaths}</b></span> <span style="color:var(--text2)">A: <b style="color:var(--text)">${p.assists}</b></span> <span style="font-weight:700;color:${kdv>=1.2?'var(--green)':kdv<1.0&&p.deaths>0?'var(--red2)':'var(--text)'};min-width:36px;text-align:right">${kdv.toFixed(2)}</span> </div> </div>`;
-}).join(’’);
+  const playersHtml = tp.sort((a,b)=>kd(b)-kd(a)).map((p,i)=>{
+    const kdv=kd(p);
+    const medals=['🥇','🥈','🥉'];
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:14px;width:20px">${medals[i]||i+1}</span>
+        <span style="font-weight:600">${p.name}</span>
+      </div>
+      <div style="display:flex;gap:14px;font-size:13px">
+        <span style="color:var(--text2)">K: <b style="color:var(--text)">${p.kills}</b></span>
+        <span style="color:var(--text2)">D: <b style="color:var(--text)">${p.deaths}</b></span>
+        <span style="color:var(--text2)">A: <b style="color:var(--text)">${p.assists}</b></span>
+        <span style="font-weight:700;color:${kdv>=1.2?'var(--green)':kdv<1.0&&p.deaths>0?'var(--red2)':'var(--text)'};min-width:36px;text-align:right">${kdv.toFixed(2)}</span>
+      </div>
+    </div>`;
+  }).join('');
 
-const matchesHtml = teamMatches.map(m=>{
-const opp = teams[m.t1===teamId?m.t2:m.t1];
-const {s1,s2}=matchScore(m);
-const ts = m.t1===teamId?s1:s2, os = m.t1===teamId?s2:s1;
-const finished=isMatchFinished(m);
-const won=finished&&ts>os, lost=finished&&ts<os;
-return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)"> <div style="display:flex;align-items:center;gap:8px"> ${teamLogoHtml(opp,26,6)} <span style="font-weight:600">${opp.name}</span> </div> <div style="display:flex;align-items:center;gap:10px"> <span style="font-size:18px;font-weight:800;color:${finished?(won?'var(--green)':lost?'var(--red2)':'var(--text2)'):'var(--text3)'}">${s1+s2>0?ts+':'+os:'—'}</span> ${finished?`<span style="font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700;background:${won?'rgba(74,222,128,.15)':lost?'rgba(232,53,53,.12)':'rgba(255,255,255,.06)'};color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${won?‘WIN’:lost?‘LOSS’:‘DRAW’}</span>`:''} </div> </div>`;
-}).join(’’);
+  const matchesHtml = teamMatches.map(m=>{
+    const opp = teams[m.t1===teamId?m.t2:m.t1];
+    const {s1,s2}=matchScore(m);
+    const ts = m.t1===teamId?s1:s2, os = m.t1===teamId?s2:s1;
+    const finished=isMatchFinished(m);
+    const won=finished&&ts>os, lost=finished&&ts<os;
+    return`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)">
+      <div style="display:flex;align-items:center;gap:8px">
+        ${teamLogoHtml(opp,26,6)}
+        <span style="font-weight:600">${opp.name}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px;font-weight:800;color:${finished?(won?'var(--green)':lost?'var(--red2)':'var(--text2)'):'var(--text3)'}">${s1+s2>0?ts+':'+os:'—'}</span>
+        ${finished?`<span style="font-size:11px;padding:2px 8px;border-radius:4px;font-weight:700;background:${won?'rgba(74,222,128,.15)':lost?'rgba(232,53,53,.12)':'rgba(255,255,255,.06)'};color:${won?'var(--green)':lost?'var(--red2)':'var(--text3)'}">${won?'WIN':lost?'LOSS':'DRAW'}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
 
-document.getElementById(‘team-page-content’).innerHTML=`
-<button onclick="showSection('group',document.querySelector('.nav-btn'))" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;margin-bottom:20px;padding:0;font-family:inherit">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-Назад
-</button>
+  document.getElementById('team-page-content').innerHTML=`
+    <button onclick="showSection('group',document.querySelector('.nav-btn'))" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;margin-bottom:20px;padding:0;font-family:inherit">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Назад
+    </button>
 
-```
-<div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-  ${teamLogoHtml(t,64,12)}
-  <div>
-    <div style="font-size:22px;font-weight:800">${t.name}</div>
-    <div style="font-size:13px;color:var(--text2);margin-top:4px">${st?st.w+'В · '+st.l+'П · '+st.pts+' очков':'Статистика недоступна'}</div>
-  </div>
-</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+      ${teamLogoHtml(t,64,12)}
+      <div>
+        <div style="font-size:22px;font-weight:800">${t.name}</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px">${st?st.w+'В · '+st.l+'П · '+st.pts+' очков':'Статистика недоступна'}</div>
+      </div>
+    </div>
 
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
-  <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
-    <div style="font-size:22px;font-weight:800;color:${placeColor}">${placeLabel}</div>
-    <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Место в турнире</div>
-  </div>
-  <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
-    <div style="font-size:22px;font-weight:800;color:${mapWinPct===null?'var(--text3)':mapWinPct>=50?'var(--green)':'var(--red2)'}">${mapWinPct!==null?mapWinPct+'%':'—'}</div>
-    <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Побед на картах</div>
-  </div>
-  <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
-    ${topPlayer?`<div style="font-size:15px;font-weight:800;color:var(--gold)">⭐ ${topPlayer.name}</div><div style="font-size:18px;font-weight:800;color:var(--text);margin-top:2px">${kd(topPlayer).toFixed(2)}</div>`:
-    `<div style="font-size:22px;font-weight:800;color:var(--text3)">—</div>`}
-    <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Лучший игрок</div>
-  </div>
-</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px">
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        <div style="font-size:22px;font-weight:800;color:${placeColor}">${placeLabel}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Место в турнире</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        <div style="font-size:22px;font-weight:800;color:${mapWinPct===null?'var(--text3)':mapWinPct>=50?'var(--green)':'var(--red2)'}">${mapWinPct!==null?mapWinPct+'%':'—'}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Побед на картах</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:14px;text-align:center;backdrop-filter:blur(20px)">
+        ${topPlayer?`<div style="font-size:15px;font-weight:800;color:var(--gold)">⭐ ${topPlayer.name}</div><div style="font-size:18px;font-weight:800;color:var(--text);margin-top:2px">${kd(topPlayer).toFixed(2)}</div>`:
+        `<div style="font-size:22px;font-weight:800;color:var(--text3)">—</div>`}
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.08em">Лучший игрок</div>
+      </div>
+    </div>
 
-<div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Игроки</div>
-  ${playersHtml}
-</div>
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Игроки</div>
+      ${playersHtml}
+    </div>
 
-<div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Матчи</div>
-  ${matchesHtml||'<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>'}
-</div>
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Матчи</div>
+      ${matchesHtml||'<div style="color:var(--text3);font-size:13px;padding:12px 0">Матчи ещё не сыграны</div>'}
+    </div>
 
-<div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;backdrop-filter:blur(20px)">
-  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Карты</div>
-  ${mapsHtml}
-</div>`;
-```
+    <div style="background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;backdrop-filter:blur(20px)">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px">Карты</div>
+      ${mapsHtml}
+    </div>`;
 
-document.querySelectorAll(’.section’).forEach(s=>s.classList.remove(‘active’));
-document.querySelectorAll(’.nav-btn’).forEach(b=>b.classList.remove(‘active’));
-document.getElementById(‘sec-team’).classList.add(‘active’);
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-team').classList.add('active');
 }
 
-function showSection(name,btn){document.querySelectorAll(’.section’).forEach(s=>s.classList.remove(‘active’));document.querySelectorAll(’.nav-btn’).forEach(b=>b.classList.remove(‘active’));document.getElementById(‘sec-’+name).classList.add(‘active’);if(btn)btn.classList.add(‘active’);if(name===‘settings’)renderSettings();if(name===‘news’){renderNewsAuth();renderNewsPostArea();renderNewsFeed();}}
-function resetAll(){if(!confirm(‘Сбросить все данные? Это нельзя отменить.’))return;localStorage.clear();location.reload();}
+function showSection(name,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.getElementById('sec-'+name).classList.add('active');if(btn)btn.classList.add('active');if(name==='settings')renderSettings();if(name==='news'){renderNewsAuth();renderNewsPostArea();renderNewsFeed();}}
+function resetAll(){if(!confirm('Сбросить все данные? Это нельзя отменить.'))return;localStorage.clear();location.reload();}
 
-document.body.classList.add(‘readonly’);
+document.body.classList.add('readonly');
 (async()=>{
-// First render with localStorage data immediately
-try{
-const t=localStorage.getItem(‘ym_teams’);if(t)teams=JSON.parse(t);
-const p=localStorage.getItem(‘ym_players’);if(p)players=JSON.parse(p);
-const m=localStorage.getItem(‘ym_matches’);if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?{…o,veto:o.veto||[],resultPosted:o.resultPosted||false,maps:o.maps.map(mp=>({…emptyMap(),…mp}))}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[],resultPosted:false});}
-const h=localStorage.getItem(‘ym_hero_logo’);if(h)applyHeroLogo(h);
-}catch(e){}
-const sel=document.getElementById(‘team-filter’);
-teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel.appendChild(o);});
-renderGroup();renderMatches();renderStats();
+  // First render with localStorage data immediately
+  try{
+    const t=localStorage.getItem('ym_teams');if(t)teams=JSON.parse(t);
+    const p=localStorage.getItem('ym_players');if(p)players=JSON.parse(p);
+    const m=localStorage.getItem('ym_matches');if(m){const pr=JSON.parse(m);matches=pr.map((o,i)=>o.maps?{...o,veto:o.veto||[],resultPosted:o.resultPosted||false,maps:o.maps.map(mp=>({...emptyMap(),...mp}))}:{id:o.id??i,t1:o.t1,t2:o.t2,maps:emptyMaps(),veto:[],resultPosted:false});}
+    const h=localStorage.getItem('ym_hero_logo');if(h)applyHeroLogo(h);
+  }catch(e){}
+  const sel=document.getElementById('team-filter');
+  teams.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.name;sel.appendChild(o);});
+  renderGroup();renderMatches();renderStats();
 
-// Then load from Supabase and re-render
-try{
-await loadData();
-// Rebuild filter dropdown
-const sel2=document.getElementById(‘team-filter’);
-sel2.innerHTML=’<option value="all">Все команды</option>’;
-teams.forEach(t=>{const o=document.createElement(‘option’);o.value=t.id;o.textContent=t.name;sel2.appendChild(o);});
-renderGroup();renderMatches();renderStats();
-}catch(e){}
+  // Then load from Supabase and re-render
+  try{
+    await loadData();
+    // Rebuild filter dropdown
+    const sel2=document.getElementById('team-filter');
+    sel2.innerHTML='<option value="all">Все команды</option>';
+    teams.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=t.name;sel2.appendChild(o);});
+    renderGroup();renderMatches();renderStats();
+  }catch(e){}
 })();
 </script>
-
 </body>
 </html>
