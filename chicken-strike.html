@@ -1361,28 +1361,14 @@ window._csInit=function(){
   document.getElementById('lbMenuBtn').onclick=returnToMenu;
   lbNameIn.addEventListener('change',()=>{const v=lbNameIn.value.trim().slice(0,14);if(v){pname=v;savePname();lbSubmit().then(renderLeaderboard);}});
 
-  // ---- Yandex Games ----
-  
-  );}catch(e){adMuted=false;}
-  }
-  function initYandex(){
-    if(typeof YaGames==='undefined')return;
-    YaGames.init().then(sdk=>{
-      ysdk=sdk;
-      try{sdk.features.LoadingAPI.ready();}catch(e){}
-      sdk.getPlayer({scopes:false}).then(p=>{yp=p;loadAll();}).catch(()=>{loadAll();});
-      sdk.getLeaderboards().then(lb=>{yLB=lb;setTimeout(lbSubmit,1500);}).catch(()=>{});
-    }).catch(()=>{});
-  }
-  (function waitYa(n){if(typeof YaGames!=='undefined')return initYandex();if(n>50)return;setTimeout(()=>waitYa(n+1),100);})(0);
   document.addEventListener('visibilitychange',()=>{if(actx){if(document.hidden)actx.suspend&&actx.suspend();else actx.resume&&actx.resume();}});
 
   const ldStart=Date.now();
   function hideLoader(){const el=document.getElementById('loader');if(!el||el.classList.contains('gone'))return;
-    const wait=Math.max(0,1000-(Date.now()-ldStart));
-    setTimeout(()=>{el.classList.add('gone');setTimeout(()=>{el.style.display='none';},600);},wait);}
-  loadAll().finally(()=>{updateHUD();hideLoader();});
-  setTimeout(hideLoader,5000);
+    const wait=Math.max(0,800-(Date.now()-ldStart));
+    setTimeout(()=>{el.classList.add('gone');setTimeout(()=>{el.style.display='none';},500);},wait);}
+  loadAll().then(()=>{updateHUD();hideLoader();}).catch(()=>{updateHUD();hideLoader();});
+  setTimeout(hideLoader,3000);
   requestAnimationFrame(loop);
 })();
 
