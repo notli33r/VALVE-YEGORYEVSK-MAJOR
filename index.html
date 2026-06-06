@@ -1419,7 +1419,7 @@ function renderMapStatsBody(mi,ki){
 }
 function openGame(){
   const playerName=currentPlayer?currentPlayer.nickname:'';
-  const url='chicken-strike.html'+(playerName?'?p='+encodeURIComponent(playerName):'');
+  const url='chicken-strike.html'+(playerName?'?p='+encodeURIComponent(playerName)+'&auto=1':'');
   window.open(url,'_blank');
 }
 function hasMatchStats(mi){
