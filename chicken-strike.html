@@ -387,16 +387,23 @@ async function csLogin(){
     const r=await fetch(SB_URL+'/rest/v1/player_passwords?nickname=eq.'+encodeURIComponent(nick)+'&select=password',{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
     const d=await r.json();
     ok=d.length>0&&d[0].password===pass;
-  }catch(e){}
-  if(ok){
-    window.CS_PLAYER_NAME=nick;
-    document.getElementById('cs-auth').classList.add('gone');
-    document.getElementById('wrap').style.display='block';
-    if(window._csInit)window._csInit();
-  }else{
-    err.textContent='Неверный ник или пароль';
-    btn.textContent='🐔 В бой';btn.disabled=false;
+    if(!ok&&d.length===0) err.textContent='Ник не найден в базе';
+    else if(!ok) err.textContent='Неверный пароль';
+  }catch(e){
+    err.textContent='Ошибка подключения — попробуй ещё раз';
+    console.error(e);
   }
+  if(ok) csStartGame(nick);
+  else{btn.textContent='🐔 В бой';btn.disabled=false;}
+}
+
+function csStartGame(nick){
+  window.CS_PLAYER_NAME=nick;
+  document.getElementById('cs-auth').classList.add('gone');
+  const wrap=document.getElementById('wrap');
+  wrap.style.display='block';
+  // Small delay to let DOM update before starting game
+  setTimeout(()=>{if(window._csInit)window._csInit();},50);
 }
 
 document.getElementById('cs-pass').addEventListener('keydown',e=>{if(e.key==='Enter')csLogin();});
