@@ -411,7 +411,16 @@ document.getElementById('cs-nick').addEventListener('keydown',e=>{if(e.key==='En
 
 // Pre-fill nick from URL
 const _p=new URLSearchParams(location.search).get('p');
-if(_p){document.getElementById('cs-nick').value=_p;document.getElementById('cs-pass').focus();}
+const _auto=new URLSearchParams(location.search).get('auto');
+if(_p){
+  document.getElementById('cs-nick').value=_p;
+  if(_auto==='1'){
+    // Auto-login — already authenticated on tournament site
+    csStartGame(_p);
+  } else {
+    document.getElementById('cs-pass').focus();
+  }
+}
 </script>
 
 <script>
