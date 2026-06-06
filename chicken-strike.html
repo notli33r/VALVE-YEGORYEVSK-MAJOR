@@ -349,7 +349,7 @@
   <!-- Leaderboard -->
   <div class="screen hidden" id="lb">
     <h2>Таблица лидеров</h2>
-    <div class="lbName">Ты: <input id="lbNameIn" maxlength="14" spellcheck="false"></div>
+    <div class="lbName">Ты: <input id="lbNameIn" maxlength="14" spellcheck="false" readonly style="pointer-events:none;opacity:.7;border-color:rgba(125,255,90,.3)"></div>
     <div id="lbWrap">
       <div class="lbTable"><div class="lbCap">💰 По деньгам</div><div id="lbTotal"></div></div>
       <div class="lbTable"><div class="lbCap">🔥 Лучший раунд</div><div id="lbBest"></div></div>
@@ -1288,7 +1288,7 @@ window._csInit=function(){if(_started)return;_started=true;
     lbNameIn.value=pname;await lbSubmit();renderLeaderboard();}
   document.getElementById('lbBtn').onclick=showLeaderboard;
   document.getElementById('lbMenuBtn').onclick=returnToMenu;
-  lbNameIn.addEventListener('change',()=>{const v=lbNameIn.value.trim().slice(0,14);if(v){pname=v;savePname();lbSubmit().then(renderLeaderboard);}});
+  lbNameIn.value=pname;
 
 
   function hideLoader(){const el=document.getElementById('loader');if(!el||el.classList.contains('gone'))return;
