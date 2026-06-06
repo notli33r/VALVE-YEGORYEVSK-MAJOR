@@ -411,6 +411,9 @@ async function csLogin(){
   if(ok){
     window.CS_PLAYER_NAME=nick;
     document.getElementById('cs-auth').classList.add('hidden');
+    // Show game loader again before init
+    const gl=document.getElementById('loader');
+    if(gl){gl.style.display='';gl.classList.remove('gone');}
     document.getElementById('wrap').style.display='block';
     // init game after auth
     if(window._csInit)window._csInit();
@@ -423,11 +426,19 @@ async function csLogin(){
 document.getElementById('cs-pass').addEventListener('keydown',e=>{if(e.key==='Enter')csLogin();});
 document.getElementById('cs-nick').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('cs-pass').focus();});
 
-// Pre-fill if passed from tournament site
-if(window.CS_PLAYER_NAME_PREFILL){
+// Pre-fill if passed via URL param
+const _csUrlP=new URLSearchParams(location.search).get('p');
+if(_csUrlP){
+  document.getElementById('cs-nick').value=_csUrlP;
+  document.getElementById('cs-pass').focus();
+}else if(window.CS_PLAYER_NAME_PREFILL){
   document.getElementById('cs-nick').value=window.CS_PLAYER_NAME_PREFILL;
   document.getElementById('cs-pass').focus();
 }
+
+// Hide game's own loader until auth complete
+const _gameLoader=document.getElementById('loader');
+if(_gameLoader)_gameLoader.style.display='none';
 </script>
 
 <script>
