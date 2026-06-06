@@ -1418,42 +1418,10 @@ function renderMapStatsBody(mi,ki){
   document.getElementById('mst-body').innerHTML=teamBlock(t1)+`<div style="height:1px;background:var(--border);margin:10px 0"></div>`+teamBlock(t2)+(mvp?`<div style="margin-top:14px;display:flex;justify-content:center">${mvpBadge(mvp,'MVP карты')}</div>`:'');
 }
 function openGame(){
-  const overlay=document.getElementById('game-overlay');
-  const frame=document.getElementById('game-frame');
   const playerName=currentPlayer?currentPlayer.nickname:'';
-  frame.src='chicken-strike.html'+(playerName?'?p='+encodeURIComponent(playerName):'');
-  overlay.style.display='block';
-  document.body.style.overflow='hidden';
+  const url='chicken-strike.html'+(playerName?'?p='+encodeURIComponent(playerName):'');
+  window.open(url,'_blank');
 }
-function closeGame(){
-  document.getElementById('game-overlay').style.display='none';
-  document.getElementById('game-frame').src='about:blank';
-  document.body.style.overflow='';
-}
-function openGame(){
-  const overlay=document.getElementById('game-overlay');
-  const frame=document.getElementById('game-frame');
-  const playerName=currentPlayer?currentPlayer.nickname:'';
-  // Inject player name into game HTML
-  const html=GAME_HTML.replace('window.CS_PLAYER_NAME_PREFILL=window.CS_PLAYER_NAME_PREFILL_HOLDER','window.CS_PLAYER_NAME_PREFILL='+JSON.stringify(playerName));
-  const blob=new Blob([html],{type:'text/html'});
-  const url=URL.createObjectURL(blob);
-  frame.src=url;
-  frame.onload=()=>{
-    try{frame.contentWindow.closeGame=closeGame;}catch(e){}
-    URL.revokeObjectURL(url);
-  };
-  overlay.style.display='block';
-  document.body.style.overflow='hidden';
-}
-function closeGame(){
-  const overlay=document.getElementById('game-overlay');
-  const frame=document.getElementById('game-frame');
-  overlay.style.display='none';
-  frame.src='about:blank';
-  document.body.style.overflow='';
-}
-
 function hasMatchStats(mi){
   const m=matches[mi];
   const teamPlayers=players.filter(p=>p.team===m.t1||p.team===m.t2);
