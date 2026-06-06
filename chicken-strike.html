@@ -216,51 +216,37 @@
   .goRank b{font-weight:700;color:#c2c8d6}
   .rankup{color:var(--green);font-weight:700;letter-spacing:2px;font-size:15px;text-transform:uppercase;margin-top:3px;animation:bl 1s infinite}
 
-
-/* AUTH OVERLAY */
+/* AUTH */
 #cs-auth{position:fixed;inset:0;z-index:999;background:radial-gradient(circle at 50% 40%,#2a2113,#0d0b06 80%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:24px}
-#cs-auth.hidden{display:none}
-#cs-auth h2{font-family:'Oswald';font-weight:700;font-size:clamp(32px,8vw,64px);letter-spacing:5px;color:var(--text);text-shadow:3px 3px 0 var(--sand-d);text-align:center}
+#cs-auth.gone{display:none}
+#cs-auth h2{font-family:'Oswald';font-weight:700;font-size:clamp(32px,8vw,64px);letter-spacing:5px;color:var(--text);text-shadow:3px 3px 0 var(--sand-d);text-align:center;line-height:.9}
 #cs-auth h2 span{display:block;color:var(--hud);font-size:.55em;letter-spacing:9px}
-#cs-auth .auth-sub{font-size:13px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;text-align:center}
-#cs-auth .auth-fields{display:flex;flex-direction:column;gap:12px;width:min(320px,90vw)}
-#cs-auth input{font-family:'Oswald';font-weight:600;font-size:16px;letter-spacing:1px;background:rgba(0,0,0,.4);border:1px solid var(--dim);color:var(--text);padding:12px 16px;border-radius:6px;outline:none;width:100%;text-align:center}
-#cs-auth input:focus{border-color:var(--green)}
-#cs-auth .auth-btn{font-family:'Oswald';font-weight:700;font-size:18px;letter-spacing:4px;color:#1c1709;background:var(--green);border:none;padding:14px;cursor:pointer;border-radius:4px;width:100%;box-shadow:0 0 24px rgba(125,255,90,.5);transition:.15s}
-#cs-auth .auth-btn:hover{background:#9bff7e;transform:translateY(-1px)}
-#cs-auth .auth-err{font-size:12px;color:var(--red);letter-spacing:2px;text-transform:uppercase;min-height:18px;text-align:center}
-#cs-auth .auth-hint{font-size:11px;color:var(--dim);letter-spacing:2px;text-align:center}
-
+.auth-sub{font-size:13px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;text-align:center}
+.auth-fields{display:flex;flex-direction:column;gap:12px;width:min(320px,90vw)}
+.auth-inp{font-family:'Oswald';font-weight:600;font-size:16px;letter-spacing:1px;background:rgba(0,0,0,.4);border:1px solid var(--dim);color:var(--text);padding:12px 16px;border-radius:6px;outline:none;width:100%;text-align:center}
+.auth-inp:focus{border-color:var(--green)}
+.auth-btn{font-family:'Oswald';font-weight:700;font-size:18px;letter-spacing:4px;color:#1c1709;background:var(--green);border:none;padding:14px;cursor:pointer;border-radius:4px;width:100%;box-shadow:0 0 24px rgba(125,255,90,.5)}
+.auth-err{font-size:12px;color:var(--red);letter-spacing:2px;text-transform:uppercase;min-height:18px;text-align:center}
+.auth-hint{font-size:11px;color:var(--dim);letter-spacing:1px;text-align:center}
 /* JOYSTICK */
-#joystick{position:fixed;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(125,255,90,.3);z-index:20;pointer-events:none;opacity:0;transition:opacity .15s;display:flex;align-items:center;justify-content:center}
-#joy-knob{width:56px;height:56px;border-radius:50%;background:rgba(125,255,90,.4);border:2px solid rgba(125,255,90,.7);box-shadow:0 0 20px rgba(125,255,90,.4);transition:transform .05s}
-
-/* Close button */
-#cs-close{position:fixed;top:16px;right:16px;z-index:200;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
-#cs-close:hover{background:rgba(232,53,53,.3);border-color:var(--red);color:white}
+#joystick{position:fixed;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(125,255,90,.3);z-index:20;pointer-events:none;opacity:0;transition:opacity .15s;display:flex;align-items:center;justify-content:center;transform:translate(0,0)}
+#joy-knob{width:56px;height:56px;border-radius:50%;background:rgba(125,255,90,.35);border:2px solid rgba(125,255,90,.6);box-shadow:0 0 20px rgba(125,255,90,.3)}
 </style>
 </head>
 <body>
-
-<!-- AUTH OVERLAY -->
 <div id="cs-auth">
   <h2>CHICKEN<span>STRIKE</span></h2>
   <div class="auth-sub">Только для игроков турнира</div>
   <div class="auth-fields">
-    <input type="text" id="cs-nick" placeholder="Введи свой ник" autocomplete="off" autocorrect="off" spellcheck="false">
-    <input type="password" id="cs-pass" placeholder="Пароль">
+    <input class="auth-inp" type="text" id="cs-nick" placeholder="Ник" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="auth-inp" type="password" id="cs-pass" placeholder="Пароль">
     <div class="auth-err" id="cs-err"></div>
-    <button class="auth-btn" onclick="csLogin()">🐔 В бой</button>
+    <button class="auth-btn" id="cs-login-btn" onclick="csLogin()">🐔 В бой</button>
   </div>
-  <div class="auth-hint">Используй тот же ник и пароль что для новостей</div>
+  <div class="auth-hint">Тот же ник и пароль что для новостей</div>
 </div>
 
-<!-- GAME WRAP -->
-<div id="wrap" style="display:none">
-  <button id="cs-close" onclick="window.closeGame&&window.closeGame()" title="Закрыть">✕</button>
-  <div id="joystick"><div id="joy-knob"></div></div>
-
-  <div id="wrap">
+<div id="wrap">
   <canvas id="c"></canvas>
 
   <div id="hud">
@@ -383,70 +369,48 @@
     <div class="ldTxt">Загрузка</div>
   </div>
 </div>
-</div>
+<div id="joystick"><div id="joy-knob"></div></div>
 
 <script>
-// ── AUTH ──────────────────────────────────────────────
 const SB_URL='https://mprcejmgqrzfxzmyruaj.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wcmNlam1ncXJ6Znh6bXlydWFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MTY4ODIsImV4cCI6MjA5NDE5Mjg4Mn0.vbcH-mOpOu0ccUCUmATyu1HFe0FeHArKZbAgQYsYTxY';
-
-async function checkPlayerPassword(nick, pass){
-  try{
-    const r=await fetch(`${SB_URL}/rest/v1/player_passwords?nickname=eq.${encodeURIComponent(nick)}&select=password`,{
-      headers:{'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`}
-    });
-    const d=await r.json();
-    return d.length>0&&d[0].password===pass;
-  }catch(e){return false;}
-}
 
 async function csLogin(){
   const nick=document.getElementById('cs-nick').value.trim();
   const pass=document.getElementById('cs-pass').value;
   const err=document.getElementById('cs-err');
   if(!nick||!pass){err.textContent='Введи ник и пароль';return;}
-  const btn=document.querySelector('#cs-auth .auth-btn');
+  const btn=document.getElementById('cs-login-btn');
   btn.textContent='Проверяем...';btn.disabled=true;
-  const ok=await checkPlayerPassword(nick,pass);
+  let ok=false;
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/player_passwords?nickname=eq.'+encodeURIComponent(nick)+'&select=password',{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+    const d=await r.json();
+    ok=d.length>0&&d[0].password===pass;
+  }catch(e){}
   if(ok){
     window.CS_PLAYER_NAME=nick;
-    document.getElementById('cs-auth').classList.add('hidden');
-    // Show game loader again before init
-    const gl=document.getElementById('loader');
-    if(gl){gl.style.display='';gl.classList.remove('gone');}
+    document.getElementById('cs-auth').classList.add('gone');
     document.getElementById('wrap').style.display='block';
-    // init game after auth
     if(window._csInit)window._csInit();
   }else{
     err.textContent='Неверный ник или пароль';
+    btn.textContent='🐔 В бой';btn.disabled=false;
   }
-  btn.textContent='🐔 В бой';btn.disabled=false;
 }
 
 document.getElementById('cs-pass').addEventListener('keydown',e=>{if(e.key==='Enter')csLogin();});
 document.getElementById('cs-nick').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('cs-pass').focus();});
 
-// Pre-fill if passed via URL param
-const _csUrlP=new URLSearchParams(location.search).get('p');
-if(_csUrlP){
-  document.getElementById('cs-nick').value=_csUrlP;
-  document.getElementById('cs-pass').focus();
-}else if(window.CS_PLAYER_NAME_PREFILL){
-  document.getElementById('cs-nick').value=window.CS_PLAYER_NAME_PREFILL;
-  document.getElementById('cs-pass').focus();
-}
-
-// Hide game's own loader until auth complete
-const _gameLoader=document.getElementById('loader');
-if(_gameLoader)_gameLoader.style.display='none';
+// Pre-fill nick from URL
+const _p=new URLSearchParams(location.search).get('p');
+if(_p){document.getElementById('cs-nick').value=_p;document.getElementById('cs-pass').focus();}
 </script>
 
 <script>
-// ── GAME (init deferred until auth) ──────────────────
-let _csGameStarted=false;
-window._csInit=function(){
-  if(_csGameStarted)return;_csGameStarted=true;
-  
+let _started=false;
+window._csInit=function(){if(_started)return;_started=true;
+
 (()=>{
   const cv=document.getElementById('c'), ctx=cv.getContext('2d');
   const wrap=document.getElementById('wrap');
@@ -456,62 +420,33 @@ window._csInit=function(){
     cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
   addEventListener('resize',resize);resize();
 
-  // input — joystick on mobile, mouse on desktop
+  // input
   const pointer={x:innerWidth/2*dpr,y:innerHeight/2*dpr};
-  const isMobile=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-  // Joystick state
-  let joyActive=false, joyStartX=0, joyStartY=0, joyDX=0, joyDY=0;
-  const JOY_MAX=60; // max joystick radius px
-  
-  // Mouse
-  addEventListener('mousemove',e=>{if(!isMobile){pointer.x=e.clientX*dpr;pointer.y=e.clientY*dpr;}});
+  addEventListener('mousemove',e=>{pointer.x=e.clientX*dpr;pointer.y=e.clientY*dpr;});
   addEventListener('keydown',e=>{if(e.key==='Escape')exitToMenu();});
-  
-  // Touch joystick - moves crosshair relative to touch delta
-  const joyEl=document.getElementById('joystick');
-  const joyKnobEl=document.getElementById('joy-knob');
-  
-  function joyStart(cx,cy){
-    joyActive=true;joyStartX=cx;joyStartY=cy;joyDX=0;joyDY=0;
-    if(joyEl){joyEl.style.left=(cx-70)+'px';joyEl.style.top=(cy-70)+'px';joyEl.style.opacity='1';}
-  }
-  function joyMove(cx,cy){
-    if(!joyActive)return;
-    const dx=cx-joyStartX,dy=cy-joyStartY;
-    const dist=Math.hypot(dx,dy);
-    const clamped=Math.min(dist,JOY_MAX);
-    const nx=dist>0?dx/dist:0,ny=dist>0?dy/dist:0;
-    joyDX=nx*clamped;joyDY=ny*clamped;
-    if(joyKnobEl){joyKnobEl.style.transform='translate('+joyDX+'px,'+joyDY+'px)';}
-    // move pointer
-    pointer.x=Math.max(0,Math.min(cv.width,pointer.x+nx*(clamped/JOY_MAX)*12*dpr));
-    pointer.y=Math.max(0,Math.min(cv.height,pointer.y+ny*(clamped/JOY_MAX)*12*dpr));
-  }
-  function joyEnd(){
-    joyActive=false;joyDX=0;joyDY=0;
-    if(joyEl)joyEl.style.opacity='0';
-    if(joyKnobEl)joyKnobEl.style.transform='translate(0,0)';
-  }
-  
-  cv.addEventListener('touchstart',e=>{
-    if(state!==1)return;
-    e.preventDefault();
-    const t=e.changedTouches[0];
-    joyStart(t.clientX,t.clientY);
+  // Touch joystick
+  let _joyId=-1,_joyX=0,_joyY=0;
+  const joyEl=document.getElementById('joystick'),joyKnob=document.getElementById('joy-knob');
+  const JR=65;
+  function joyShow(x,y){if(joyEl){joyEl.style.left=(x-70)+'px';joyEl.style.top=(y-70)+'px';joyEl.style.opacity='1';}}
+  function joyHide(){if(joyEl)joyEl.style.opacity='0';if(joyKnob)joyKnob.style.transform='translate(0,0)';}
+  cv.addEventListener('touchstart',e=>{if(state!==1)return;e.preventDefault();
+    const t=e.changedTouches[0];_joyId=t.identifier;_joyX=t.clientX;_joyY=t.clientY;joyShow(_joyX,_joyY);
   },{passive:false});
-  cv.addEventListener('touchmove',e=>{
-    if(state!==1)return;
-    e.preventDefault();
-    const t=e.changedTouches[0];
-    joyMove(t.clientX,t.clientY);
+  cv.addEventListener('touchmove',e=>{if(state!==1)return;e.preventDefault();
+    for(const t of e.changedTouches){if(t.identifier!==_joyId)continue;
+      const dx=t.clientX-_joyX,dy=t.clientY-_joyY,d=Math.hypot(dx,dy)||1;
+      const cl=Math.min(d,JR),nx=dx/d,ny=dy/d;
+      if(joyKnob)joyKnob.style.transform='translate('+(nx*cl)+'px,'+(ny*cl)+'px)';
+      const spd=(cl/JR)*14*dpr;
+      pointer.x=Math.max(0,Math.min(cv.width,pointer.x+nx*spd));
+      pointer.y=Math.max(0,Math.min(cv.height,pointer.y+ny*spd));
+    }
   },{passive:false});
-  cv.addEventListener('touchend',e=>{
-    if(state!==1)return;
-    joyEnd();
-  },{passive:false});
+  cv.addEventListener('touchend',e=>{for(const t of e.changedTouches)if(t.identifier===_joyId){_joyId=-1;joyHide();}},{passive:false});
 
   // audio
-  let actx=null,muted=false;
+  let actx=null,muted=false,adMuted=false;
   const AC=()=>actx||(actx=new (window.AudioContext||window.webkitAudioContext)());
   function tone(freq,dur,type='square',vol=0.16,slide=0){if(muted)return;
     const a=AC(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(freq,a.currentTime);
@@ -634,14 +569,10 @@ window._csInit=function(){
     return s;
   }
   async function sGet(key){
-    
-
     try{const v=localStorage.getItem(key);if(v!=null)return v;}catch(e){}
     return null;
   }
   async function sSet(key,val){
-    
-
     try{localStorage.setItem(key,val);}catch(e){}
   }
   async function loadAll(){
@@ -774,10 +705,9 @@ window._csInit=function(){
   async function lbLoad(){try{const v=localStorage.getItem('cs_lb');return v?JSON.parse(v):{};}catch(e){return {};}}
   async function lbSave(m){try{const arr=Object.entries(m).sort((a,b)=>(b[1].total||0)-(a[1].total||0)).slice(0,200);const out={};for(const[k,v]of arr)out[k]=v;localStorage.setItem('cs_lb',JSON.stringify(out));}catch(e){}}
   async function lbSubmit(){
-    
     const m=await lbLoad();if(m===null)return;const cur=m[pid]||{};
     m[pid]={name:pname,total:Math.max(totalEarned,cur.total||0),best:Math.max(best,cur.best||0)};await lbSave(m);}
-  }
+
   async function lbList(){const m=await lbLoad();
     if(m===null||!Object.keys(m).length)return [{id:pid,name:pname,total:totalEarned,best:best}];
     if(!m[pid])m[pid]={name:pname,total:totalEarned,best:best};
@@ -1217,8 +1147,8 @@ window._csInit=function(){
   const show=e=>e.classList.remove('hidden'),hide=e=>e.classList.add('hidden');
   function hideAll(){hide(startS);hide(overS);hide(roadS);hide(setS);hide(shopS);hide(document.getElementById('lb'));overS.style.pointerEvents='';}
 
-  
-  
+
+
   function begin(){if(actx&&actx.state==='suspended')actx.resume();startMusic();banked=false;reset();state=S.PLAY;
     hideAll();wrap.classList.add('playing');updateHUD();}
   function gameOver(src){state=S.OVER;wrap.classList.remove('playing');invuln=0;
@@ -1234,7 +1164,7 @@ window._csInit=function(){
     if(newRank>prevRank)ru.textContent='★ повышение: '+RANKS[newRank][0]+' ★';
     updateHUD();overS.style.pointerEvents='none';
     setTimeout(()=>{show(overS);setTimeout(()=>{overS.style.pointerEvents='auto';},480);},400);
-    }
+  }
   function bankRound(){if(banked)return;banked=true;if(money>0){totalEarned+=money;wallet+=money;saveTotal();saveWallet();updateRankUI();}}
   function returnToMenu(){state=S.START;wrap.classList.remove('playing');clearEntities();
     money=0;streak=1;updateHUD();updateRankUI();hideAll();show(startS);}
@@ -1340,41 +1270,28 @@ window._csInit=function(){
     const myIdx=sorted.findIndex(e=>e.id===pid);
     if(myIdx>=200){h+='<div class="lbGap">···</div>'+lbRowHTML(myIdx+1,sorted[myIdx].name,sorted[myIdx][key],true);}
     return h;}
-  function yRows(res){
-    if(!res||!res.entries||!res.entries.length)return '<div class="lbEmpty">Пока пусто — сыграй раунд!</div>';
-    let h='',prev=0;
-    res.entries.slice(0,201).forEach(e=>{if(prev&&e.rank>prev+1)h+='<div class="lbGap">···</div>';prev=e.rank;
-      const nm=(e.player&&e.player.publicName)?e.player.publicName:'Аноним';
-      h+=lbRowHTML(e.rank,nm,e.score,e.rank===res.userRank);});
-    return h;}
   async function renderLeaderboard(){
     document.getElementById('lbTotal').innerHTML='<div class="lbEmpty">Загрузка…</div>';
     document.getElementById('lbBest').innerHTML='';
-    
+
     const list=await lbList();
     document.getElementById('lbTotal').innerHTML=lbRows(list,'total');
     document.getElementById('lbBest').innerHTML=lbRows(list,'best');}
   async function showLeaderboard(){state=S.START;wrap.classList.remove('playing');hideAll();show(lbS);
-    
     lbNameIn.value=pname;await lbSubmit();renderLeaderboard();}
   document.getElementById('lbBtn').onclick=showLeaderboard;
   document.getElementById('lbMenuBtn').onclick=returnToMenu;
   lbNameIn.addEventListener('change',()=>{const v=lbNameIn.value.trim().slice(0,14);if(v){pname=v;savePname();lbSubmit().then(renderLeaderboard);}});
 
-  document.addEventListener('visibilitychange',()=>{if(actx){if(document.hidden)actx.suspend&&actx.suspend();else actx.resume&&actx.resume();}});
 
-  const ldStart=Date.now();
   function hideLoader(){const el=document.getElementById('loader');if(!el||el.classList.contains('gone'))return;
-    const wait=Math.max(0,800-(Date.now()-ldStart));
-    setTimeout(()=>{el.classList.add('gone');setTimeout(()=>{el.style.display='none';},500);},wait);}
+    el.classList.add('gone');setTimeout(()=>{if(el)el.style.display='none';},500);}
   loadAll().then(()=>{updateHUD();hideLoader();}).catch(()=>{updateHUD();hideLoader();});
-  setTimeout(hideLoader,3000);
+  setTimeout(hideLoader,2000);
   requestAnimationFrame(loop);
 })();
 
 };
-// Auto-start if already authenticated (e.g. dev mode)
-// window._csInit();
 </script>
 </body>
 </html>
